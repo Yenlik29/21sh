@@ -22,10 +22,22 @@ void			sighandler(int signum)
 	}
 }
 
+t_shell 		*init_shell(t_shell *shell)
+{
+	shell = (t_shell *)malloc(sizeof(t_shell));
+	shell->history = (t_history *)malloc(sizeof(t_history));
+	shell->history->record = NULL;
+	shell->history->next = NULL;
+	shell->history->prev = NULL;
+	return (shell);
+}
+
 void			loop(char **env)
 {
+	t_shell *shell;
 	char	**w_splited;
 
+	shell = init_shell(shell);
 	while (42)
 	{
 		w_splited = NULL;

@@ -46,6 +46,8 @@ int			terminal_init();
 int			terminal_define(void);
 int			re_putchar(int ch);
 
+t_shell 		*init_shell(t_shell *shell);
+
 int			ft_find(char **envp, char *word);
 char		*ft_join_f(char *s1, char *s2);
 char		*ft_join_f2(char *s1, char *s2);
