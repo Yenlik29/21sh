@@ -80,8 +80,8 @@ char			**read_line(char **env, char **w_splited)
 	i = 0;
 	ret = 0;
 	word = ft_strnew(4096);
-	while ((ret = read(0, &ch, 1) && ch != '\n') > 0)
-		word = ft_strncat(word, &ch, 1);
+	while ((ret = read(0, &ch, 6) && ch != '\n') > 0)
+		word = ft_strncat(word, &ch, 6);
 	if (word[0] == 27 && word[1] == 91 && word[2] == 65)
 		printf("UP\n");
 	if (word[0] == 27 && word[1] == 91 && word[2] == 66)
@@ -94,6 +94,16 @@ char			**read_line(char **env, char **w_splited)
 		printf("ALT+LEFT\n");
 	if (word[0] == 27 && word[1] == 102)
 		printf("ALT+RIGHT\n");
+	if (word[0] == 27 && word[1] == 65)
+		printf("ALT+UP\n");
+	if (word[0] == 27 && word[1] == 91 && word[2] == 72)
+		printf("HOME\n");
+	if (word[0] == 27 && word[1] == 91 && word[2] == 70)
+		printf("END\n");
+	if (word[0] == 27 && word[1] == 91 && word[2] == 49 && word[3] == 59 && word[4] == 50 && word[5] == 68)
+		printf("1 COL UP\n");
+	if (word[0] == 27 && word[1] == 91 && word[2] == 49 && word[3] == 59 && word[4] == 50 && word[5] == 67)
+		printf("1 COL DOWN\n");
 	// w_splited = split_word(word);
 	// w_splited = parsed_word(w_splited, env);
 	// ft_bzero(word, ft_strlen(word));
