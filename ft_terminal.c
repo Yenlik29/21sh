@@ -12,6 +12,11 @@
 
 #include "ft_21sh.h"
 
+int				re_putchar(int ch)
+{
+	return (write(0, &ch, 1));
+}
+
 int				terminal_init()
 {
 	char	*termtype;
@@ -49,9 +54,6 @@ int				terminal_define(void)
 	{
 		copy = original;
 		copy.c_lflag &= ~ICANON;
-		copy.c_lflag &= ~ECHO;
-		copy.c_cc[VTIME] = 0;
-		copy.c_cc[VMIN] = 1;
 		if (tcsetattr(0, TCSANOW, &copy) != 0)
 		{
 			ft_error_tcsetattr();
@@ -59,6 +61,6 @@ int				terminal_define(void)
 		}
 	}
 	tputs(tgetstr("ti", NULL), 1, re_putchar);
-	tputs(tgetstr("vi", NULL), 1, re_putchar);
+	// tputs(tgetstr("vi", NULL), 1, re_putchar);
 	return (1);
 }

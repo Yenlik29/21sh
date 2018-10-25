@@ -29,9 +29,22 @@
 # include <termios.h>
 # define IS_QUOTE(x) (x == '"' || x == '\'')
 
+typedef struct 		s_history
+{
+	char 	*record;
+	struct s_history *next;
+	struct s_history *prev;
+}					t_history;
+
+typedef struct 		s_shell
+{
+	t_history		history;
+}					t_shell;
+
 void		loop(char **env);
 int			terminal_init();
 int			terminal_define(void);
+int			re_putchar(int ch);
 
 int			ft_find(char **envp, char *word);
 char		*ft_join_f(char *s1, char *s2);
@@ -135,6 +148,8 @@ void		ft_error_termdef(char *termtype);
 void		ft_error_term_access(void);
 void		ft_error_noterm(void);
 void		ft_error_isatty(void);
+
+void		ft_error_tcsetattr(void);
 
 char		**ft_new_envp1(char **new_envp, char **envp, char *w_splited);
 char		**ft_unsetenv_work(char *w_splited, char **envp);
