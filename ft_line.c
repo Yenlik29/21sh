@@ -82,9 +82,21 @@ char			**read_line(char **env, char **w_splited)
 	word = ft_strnew(4096);
 	while ((ret = read(0, &ch, 1) && ch != '\n') > 0)
 		word = ft_strncat(word, &ch, 1);
-	w_splited = split_word(word);
-	w_splited = parsed_word(w_splited, env);
-	ft_bzero(word, ft_strlen(word));
-	(word != NULL) ? free(word) : NULL;
+	if (word[0] == 27 && word[1] == 91 && word[2] == 65)
+		printf("UP\n");
+	if (word[0] == 27 && word[1] == 91 && word[2] == 66)
+		printf("DOWN\n");
+	if (word[0] == 27 && word[1] == 91 && word[2] == 67)
+		printf("RIGHT\n");
+	if (word[0] == 27 && word[1] == 91 && word[2] == 68)
+		printf("LEFT\n");
+	if (word[0] == 27 && word[1] == 98)
+		printf("ALT+LEFT\n");
+	if (word[0] == 27 && word[1] == 102)
+		printf("ALT+RIGHT\n");
+	// w_splited = split_word(word);
+	// w_splited = parsed_word(w_splited, env);
+	// ft_bzero(word, ft_strlen(word));
+	// (word != NULL) ? free(word) : NULL;
 	return (w_splited);
 }

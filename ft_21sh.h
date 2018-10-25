@@ -38,7 +38,7 @@ typedef struct 		s_history
 
 typedef struct 		s_shell
 {
-	t_history		history;
+	t_history		*history;
 }					t_shell;
 
 void		loop(char **env);
