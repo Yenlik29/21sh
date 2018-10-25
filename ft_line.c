@@ -104,6 +104,8 @@ char			**read_line(char **env, char **w_splited)
 		printf("1 COL UP\n");
 	if (word[0] == 27 && word[1] == 91 && word[2] == 49 && word[3] == 59 && word[4] == 50 && word[5] == 67)
 		printf("1 COL DOWN\n");
+	if (word[0] == 4)
+		printf("EOF\n");
 	// w_splited = split_word(word);
 	// w_splited = parsed_word(w_splited, env);
 	// ft_bzero(word, ft_strlen(word));
