@@ -89,6 +89,7 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 		//PROVERKI NA KEYS;
 	}
 	write(0, "\n", 1);
+	printf("%d\n", shell->position);
 	// w_splited = split_word(word);
 	// w_splited = parsed_word(w_splited, env);
 	// ft_bzero(word, ft_strlen(word));
