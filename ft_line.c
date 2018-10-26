@@ -89,7 +89,8 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 		//PROVERKI NA KEYS;
 		// word = ft_strncat(word, &ch, 6);
 	}
-	printf("%d:%d\n", shell->length, shell->position);
+	// printf("%s\n", "\033[6n");
+	// printf("[%d]:[%d]\n", shell->length, shell->position);
 	write(0, "\n", 1);
 		// if (word[i] )
 		// else

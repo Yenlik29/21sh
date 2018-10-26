@@ -52,7 +52,9 @@ int			re_putchar(int ch);
 t_shell 	*init_shell(t_shell *shell);
 t_shell		*shell_reset(t_shell *shell);
 
+void		enter_ch(t_shell *shell, uint64_t ch);
 void 		left_key(t_shell *shell);
+void 		right_key(t_shell *shell);
 
 int			ft_find(char **envp, char *word);
 char		*ft_join_f(char *s1, char *s2);

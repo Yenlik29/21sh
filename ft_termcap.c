@@ -17,23 +17,15 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 	if (ch == 127)
 		tputs(tgetstr("ec", NULL), 1, re_putchar);
 	else if (ch >= 32 && ch < 127)
-	{
-		shell->unparsed_com[shell->length] = ch;
-		write(0, &(shell->unparsed_com[shell->length]), 1);
-		shell->length++;
-		shell->position++;
-	}
+		enter_ch(shell, ch);
 	else if (ch == 4283163)
 		printf("UP\n");
 	else if (ch == 4348699)
 		printf("DOWN\n");
 	else if (ch == 4414235)
-		printf("RIGHT\n");
+		right_key(shell);
 	else if (ch == 4479771)
-	{
 		left_key(shell);
-		// printf("LEFT\n");
-	}
 	else if (ch == 25115)
 		printf("ALT+LEFT\n");
 	else if (ch == 26139)
