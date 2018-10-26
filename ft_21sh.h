@@ -39,6 +39,9 @@ typedef struct 		s_history
 typedef struct 		s_shell
 {
 	t_history		*history;
+	char 			*unparsed_com;
+	int 			length;
+	int 			position;
 }					t_shell;
 
 void		loop(char **env);
@@ -46,13 +49,18 @@ int			terminal_init();
 int			terminal_define(void);
 int			re_putchar(int ch);
 
-t_shell 		*init_shell(t_shell *shell);
+t_shell 	*init_shell(t_shell *shell);
+t_shell		*shell_reset(t_shell *shell);
+
+void 		left_key(t_shell *shell);
 
 int			ft_find(char **envp, char *word);
 char		*ft_join_f(char *s1, char *s2);
 char		*ft_join_f2(char *s1, char *s2);
 int			len_env(char **envp);
 size_t		word_count(char const *s, char c);
+
+int			key_hooker(uint64_t ch, int ret, t_shell *shell);
 
 void		ft_env(char **w_splited, char **envp);
 void		ft_putnstr(char *str, int n);
@@ -128,7 +136,7 @@ char		**ft_word(char **word, char **env);
 char		**parsed_word(char **word, char **env);
 char		**str_split(char *s, char c);
 char		**split_word(char *word);
-char		**read_line(char **env, char **w_splited);
+char		**read_line(char **env, char **w_splited, t_shell *shell);
 
 char		**ft_path(char **env);
 int			ft_if_path(char **command);

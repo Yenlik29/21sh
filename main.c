@@ -29,6 +29,9 @@ t_shell 		*init_shell(t_shell *shell)
 	shell->history->record = NULL;
 	shell->history->next = NULL;
 	shell->history->prev = NULL;
+	shell->unparsed_com = (char *)malloc(sizeof(char) * 4089);
+	shell->length = 0;
+	shell->position = 0;
 	return (shell);
 }
 
@@ -43,7 +46,8 @@ void			loop(char **env)
 		w_splited = NULL;
 		display_prompt();
 		signal(SIGINT, sighandler);
-		w_splited = read_line(env, w_splited);
+		w_splited = read_line(env, w_splited, shell);
+		shell = shell_reset(shell);
 		// if (w_splited[0] != NULL)
 		// 	env = ft_core(w_splited, env);
 		// free_2darray(&w_splited);
@@ -53,7 +57,6 @@ void			loop(char **env)
 int				main(int argc, char **argv, char **envp)
 {
 	char	**env;
-	
 
 	env = (char **)malloc(sizeof(char *) * 1024);
 	env = envp_create(env, envp);

@@ -70,42 +70,59 @@ char			**split_word(char *word)
 	return (command);
 }
 
-char			**read_line(char **env, char **w_splited)
+char			**read_line(char **env, char **w_splited, t_shell *shell)
 {
-	char			ch;
+	uint64_t		ch;
 	ssize_t			ret;
 	char			*word;
 	int				i;
 
 	i = 0;
 	ret = 0;
+	ch = 0;
 	word = ft_strnew(4096);
 	while ((ret = read(0, &ch, 6) && ch != '\n') > 0)
-		word = ft_strncat(word, &ch, 6);
-	if (word[0] == 27 && word[1] == 91 && word[2] == 65)
-		printf("UP\n");
-	if (word[0] == 27 && word[1] == 91 && word[2] == 66)
-		printf("DOWN\n");
-	if (word[0] == 27 && word[1] == 91 && word[2] == 67)
-		printf("RIGHT\n");
-	if (word[0] == 27 && word[1] == 91 && word[2] == 68)
-		printf("LEFT\n");
-	if (word[0] == 27 && word[1] == 98)
-		printf("ALT+LEFT\n");
-	if (word[0] == 27 && word[1] == 102)
-		printf("ALT+RIGHT\n");
-	if (word[0] == 27 && word[1] == 65)
-		printf("ALT+UP\n");
-	if (word[0] == 27 && word[1] == 91 && word[2] == 72)
-		printf("HOME\n");
-	if (word[0] == 27 && word[1] == 91 && word[2] == 70)
-		printf("END\n");
-	if (word[0] == 27 && word[1] == 91 && word[2] == 49 && word[3] == 59 && word[4] == 50 && word[5] == 68)
-		printf("1 COL UP\n");
-	if (word[0] == 27 && word[1] == 91 && word[2] == 49 && word[3] == 59 && word[4] == 50 && word[5] == 67)
-		printf("1 COL DOWN\n");
-	if (word[0] == 4)
-		printf("EOF\n");
+	{
+		if (key_hooker(ch, ret, shell) == 0)
+			break ;
+		ch = 0;
+		//PROVERKI NA KEYS;
+		// word = ft_strncat(word, &ch, 6);
+	}
+	printf("%d:%d\n", shell->length, shell->position);
+	write(0, "\n", 1);
+		// if (word[i] )
+		// else
+		// 	break ;
+	// }
+	// if (word[0] == 127)
+	// 	printf("BACKSPACE\n");
+	// if (word[0] == 27 && word[1] == 91 && word[2] == 65)
+	// 	printf("UP\n");
+	// if (word[0] == 27 && word[1] == 91 && word[2] == 66)
+	// 	printf("DOWN\n");
+	// if (word[0] == 27 && word[1] == 91 && word[2] == 67)
+	// 	printf("RIGHT\n");
+	// if (word[0] == 27 && word[1] == 91 && word[2] == 68)
+	// 	printf("LEFT\n");
+	// if (word[0] == 27 && word[1] == 98)
+	// 	printf("ALT+LEFT\n");
+	// if (word[0] == 27 && word[1] == 102)
+	// 	printf("ALT+RIGHT\n");
+	// if (word[0] == 27 && word[1] == 65)
+	// 	printf("ALT+UP\n");
+	// if (word[0] == 27 && word[1] == 91 && word[2] == 72)
+	// 	printf("HOME\n");
+	// if (word[0] == 27 && word[1] == 91 && word[2] == 70)
+	// 	printf("END\n");
+	// if (word[0] == 27 && word[1] == 91 && word[2] == 49 && word[3] == 59 && word[4] == 50 && word[5] == 68)
+	// 	printf("1 COL UP\n");
+	// if (word[0] == 27 && word[1] == 91 && word[2] == 49 && word[3] == 59 && word[4] == 50 && word[5] == 67)
+	// 	printf("1 COL DOWN\n");
+	// if (word[0] == 4)
+	// 	printf("EOF\n");
+
+
 	// w_splited = split_word(word);
 	// w_splited = parsed_word(w_splited, env);
 	// ft_bzero(word, ft_strlen(word));

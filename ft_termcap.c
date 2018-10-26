@@ -1,0 +1,52 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_termcap.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ybokina <ybokina@student.unit.ua>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/10/26 13:20:08 by ybokina           #+#    #+#             */
+/*   Updated: 2018/10/26 13:20:08 by ybokina          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "ft_21sh.h"
+
+int					key_hooker(uint64_t ch, int ret, t_shell *shell)
+{
+	if (ch == 127)
+		tputs(tgetstr("ec", NULL), 1, re_putchar);
+	else if (ch >= 32 && ch < 127)
+	{
+		shell->unparsed_com[shell->length] = ch;
+		write(0, &(shell->unparsed_com[shell->length]), 1);
+		shell->length++;
+		shell->position++;
+	}
+	else if (ch == 4283163)
+		printf("UP\n");
+	else if (ch == 4348699)
+		printf("DOWN\n");
+	else if (ch == 4414235)
+		printf("RIGHT\n");
+	else if (ch == 4479771)
+	{
+		left_key(shell);
+		// printf("LEFT\n");
+	}
+	else if (ch == 25115)
+		printf("ALT+LEFT\n");
+	else if (ch == 26139)
+		printf("ALT+RIGHT\n");
+	else if (ch == 4741915)
+		printf("HOME\n");
+	else if (ch == 4610843)
+		printf("END\n");
+	else if (ch == 74982532143899)
+		printf("1 COL UP\n");
+	else if (ch == 73883020516123)
+		printf("1 COL DOWN\n");
+	else
+		return (0);
+	return (1);
+}

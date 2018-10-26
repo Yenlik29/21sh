@@ -17,6 +17,14 @@ int				re_putchar(int ch)
 	return (write(0, &ch, 1));
 }
 
+t_shell			*shell_reset(t_shell *shell)
+{
+	ft_strclr(shell->unparsed_com);
+	shell->length = 0;
+	shell->position = 0;
+	return (shell);
+}
+
 int				terminal_init()
 {
 	char	*termtype;
@@ -53,6 +61,7 @@ int				terminal_define(void)
 	else
 	{
 		copy = original;
+		copy.c_lflag &= ~ECHO;
 		copy.c_lflag &= ~ICANON;
 		if (tcsetattr(0, TCSANOW, &copy) != 0)
 		{
