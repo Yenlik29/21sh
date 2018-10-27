@@ -18,6 +18,8 @@ void				enter_ch(t_shell *shell, uint64_t ch)
 
 	if (shell->position == 0 && shell->length)
 		begin_cursor(shell, ch);
+	else if (shell->position > 0 && shell->position < shell->length)
+		middle_cursor(shell, ch);
 	else
 	{
 		shell->unparsed_com[shell->length] = ch;
