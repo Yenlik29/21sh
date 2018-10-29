@@ -48,6 +48,7 @@ void		loop(char **env);
 int			terminal_init();
 int			terminal_define(void);
 int			re_putchar(int ch);
+t_shell		*shell_set_settings(t_shell *shell, char *begin);
 
 t_shell 	*init_shell(t_shell *shell);
 t_shell		*shell_reset(t_shell *shell);
@@ -55,6 +56,12 @@ t_shell		*shell_reset(t_shell *shell);
 void		enter_ch(t_shell *shell, uint64_t ch);
 void 		left_key(t_shell *shell);
 void 		right_key(t_shell *shell);
+
+char 		*find_end(char *end, t_shell *shell);
+void		string_clear(t_shell *shell, int del);
+char 		*char_record(char ch, char *tmp);
+char 		*begin_record(char *begin, t_shell *shell);
+char 		*end_record(char *end, t_shell *shell);
 
 void		begin_cursor(t_shell *shell, uint64_t ch);
 void		middle_cursor(t_shell *shell, uint64_t ch);

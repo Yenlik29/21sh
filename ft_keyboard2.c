@@ -12,61 +12,29 @@
 
 #include "ft_21sh.h"
 
-char 				*find_end(char *end, t_shell *shell)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < shell->position)
-		i++;
-	while (shell->unparsed_com[i])
-	{
-		end[j] = shell->unparsed_com[i];
-		j++;
-		i++;
-	}
-	end[j] = '\0';
-	return (end);
-}
-
 void				middle_cursor(t_shell *shell, uint64_t ch)
 {
 	char *tmp;
-	int  count;
 	char *begin;
 	char *end;
-	int  i;
+	int  del;
+	int  cursor;
 
-	tmp = (char *)malloc(sizeof(char) * 2048);
-	ft_strclr(tmp);
-	tmp[0] = ch;
-	begin = (char *)malloc(sizeof(char) * 2048);
-	ft_strncat(begin, shell->unparsed_com, shell->position);
-	// printf("[s->p%d:%d]\n", shell->position, shell->length);
-	// printf("[%s]\n", begin);
-	count = shell->length;
-	while (count--)
-		tputs(tgetstr("dc", NULL), 1, re_putchar);
-	// end = (char *)malloc(sizeof(char) * 2048);
-	// end = find_end(end, shell);
-	// count = ft_strlen(end);
-	// ft_strclr(shell->unparsed_com);
-	// ft_strncat(shell->unparsed_com, begin, ft_strlen(begin));
-	// ft_strncat(shell->unparsed_com, tmp, ft_strlen(tmp));
-	// i = ft_strlen(shell->unparsed_com);
-	// ft_strncat(shell->unparsed_com, end, ft_strlen(end));
-	// shell->length = ft_strlen(shell->unparsed_com);
-	// while (--i)
-	// 	tputs(tgetstr("dc", NULL), 1, re_putchar);
-	// // while (count--)
-	// // 	tputs(tgetstr("dc", NULL), 1, re_putchar);
-	// shell->length = ft_strlen(shell->unparsed_com);
-
-	// printf("[%d]\n", count);
-	// ft_putstr(shell->unparsed_com);
+	tmp = char_record(ch, tmp);
+	begin = begin_record(begin, shell);
+	del = ft_strlen(begin);
+	ft_strncat(begin, tmp, ft_strlen(tmp));
+	end = end_record(end, shell);
+	cursor = ft_strlen(end);
+	ft_strncat(begin, end, ft_strlen(end));
+	shell = shell_set_settings(shell, begin);
+	string_clear(shell, del);
+	ft_putstr(shell->unparsed_com);
+	while (cursor--)
+		tputs(tgetstr("le", NULL), 1, re_putchar);
 	free(tmp);
+	free(begin);
+	free(end);
 }
 
 void				begin_cursor(t_shell *shell, uint64_t ch)

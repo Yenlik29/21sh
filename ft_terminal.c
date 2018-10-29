@@ -12,6 +12,15 @@
 
 #include "ft_21sh.h"
 
+t_shell			*shell_set_settings(t_shell *shell, char *begin)
+{
+	ft_strclr(shell->unparsed_com);
+	ft_strncat(shell->unparsed_com, begin, ft_strlen(begin));
+	shell->length = ft_strlen(shell->unparsed_com);
+	shell->position += 1;
+	return (shell);
+}
+
 int				re_putchar(int ch)
 {
 	return (write(0, &ch, 1));
