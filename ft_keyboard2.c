@@ -12,6 +12,28 @@
 
 #include "ft_21sh.h"
 
+t_shell				*symbol_remove(t_shell *shell)
+{
+	int 	i;
+	char 	*tmp;
+
+	i = 0;
+	tmp = (char *)malloc(sizeof(char) * 2048);
+	ft_strclr(tmp);
+	while (i < shell->length - 1)
+	{
+		tmp[i] = shell->unparsed_com[i];
+		i++;
+	}
+	tmp[i] = '\0';
+	ft_strclr(shell->unparsed_com);
+	ft_strncat(shell->unparsed_com, tmp, ft_strlen(tmp));
+	shell->length = ft_strlen(shell->unparsed_com);
+	shell->position = ft_strlen(shell->unparsed_com);
+	free(tmp);
+	return (shell);
+}
+
 void				middle_cursor(t_shell *shell, uint64_t ch)
 {
 	char *tmp;

@@ -15,7 +15,7 @@
 int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 {
 	if (ch == 127)
-		tputs(tgetstr("ec", NULL), 1, re_putchar);
+		symbol_del(shell);
 	else if (ch >= 32 && ch < 127)
 		enter_ch(shell, ch);
 	else if (ch == 4283163)

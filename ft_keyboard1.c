@@ -12,6 +12,35 @@
 
 #include "ft_21sh.h"
 
+void				symbol_del(t_shell *shell)
+{
+	int count;
+	int del;
+
+	count = shell->length;
+	while (count--)
+		tputs(tgetstr("dc", NULL), 1, re_putchar);
+	// count = shell->length;
+	// 	tputs(tgetstr("le", NULL), 1, re_putchar);
+	// del = ft_strlen(shell->unparsed_com);
+	// count = ft_strlen(shell->unparsed_com);
+	// while (del--)
+	// 	tputs(tgetstr("dc", NULL), 1, re_putchar);
+	shell = symbol_remove(shell);
+	// printf("[%d]\n", del);
+	// while (count--)
+	// 	tputs(tgetstr("le", NULL), 1, re_putchar);
+	// printf("[%s]:[%d]\n", shell->unparsed_com, count);
+	// printf("[%d]\n", del);
+	// count = ft_strlen(shell->unparsed_com);
+	// while (count--)
+	// 	tputs(tgetstr("nd", NULL), 1, re_putchar);
+	// ft_putstr(shell->unparsed_com);
+	// tputs(tgetstr("rc", NULL), 0, re_putchar);
+	shell->length = ft_strlen(shell->unparsed_com);
+	shell->position = ft_strlen(shell->unparsed_com);
+}
+
 void				enter_ch(t_shell *shell, uint64_t ch)
 {
 	if (shell->position == 0 && shell->length)

@@ -56,6 +56,7 @@ t_shell		*shell_reset(t_shell *shell);
 void		enter_ch(t_shell *shell, uint64_t ch);
 void 		left_key(t_shell *shell);
 void 		right_key(t_shell *shell);
+void		symbol_del(t_shell *shell);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);
@@ -65,6 +66,7 @@ char 		*end_record(char *end, t_shell *shell);
 
 void		begin_cursor(t_shell *shell, uint64_t ch);
 void		middle_cursor(t_shell *shell, uint64_t ch);
+t_shell		*symbol_remove(t_shell *shell);
 
 int			ft_find(char **envp, char *word);
 char		*ft_join_f(char *s1, char *s2);
