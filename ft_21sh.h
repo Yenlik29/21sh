@@ -28,6 +28,12 @@
 # include <fcntl.h>
 # include <termios.h>
 # define IS_QUOTE(x) (x == '"' || x == '\'')
+# define ACT_CHAR shell->unparsed_com[shell->position]
+# define PRE_CHAR shell->unparsed_com[shell->position - 1]
+# define AFT_CHAR shell->unparsed_com[shell->position + 1]
+# define MINUS_CHAR shell->unparsed_com[shell->position]--
+# define MINUS_LENGTH shell->length--
+# define MINUS_POS shell->position--
 
 typedef struct 		s_history
 {
@@ -57,6 +63,13 @@ void		enter_ch(t_shell *shell, uint64_t ch);
 void 		left_key(t_shell *shell);
 void 		right_key(t_shell *shell);
 void		symbol_del(t_shell *shell);
+void		alt_left_key(t_shell *shell);
+
+void		default_left_shift(t_shell *shell);
+void		middle_left_shift(t_shell *shell);
+void		begin_left_shift(t_shell *shell);
+
+void		alt_right_key(t_shell *shell);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);

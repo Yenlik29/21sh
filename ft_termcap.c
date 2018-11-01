@@ -27,9 +27,9 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 	else if (ch == 4479771)
 		left_key(shell);
 	else if (ch == 25115)
-		printf("ALT+LEFT\n");
+		alt_left_key(shell);
 	else if (ch == 26139)
-		printf("ALT+RIGHT\n");
+		alt_right_key(shell);
 	else if (ch == 4741915)
 		printf("HOME\n");
 	else if (ch == 4610843)

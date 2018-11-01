@@ -28,8 +28,6 @@ t_shell				*symbol_remove(t_shell *shell)
 	tmp[i] = '\0';
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, tmp, ft_strlen(tmp));
-	shell->length = ft_strlen(shell->unparsed_com);
-	shell->position = ft_strlen(shell->unparsed_com);
 	free(tmp);
 	return (shell);
 }

@@ -12,16 +12,35 @@
 
 #include "ft_21sh.h"
 
+void				alt_left_key(t_shell *shell)
+{
+	if (shell->position)
+	{
+		if (ACT_CHAR == '\0' && PRE_CHAR > 32 && PRE_CHAR < 127)
+			default_left_shift(shell);
+		else if (ACT_CHAR > 32 && ACT_CHAR < 127 && PRE_CHAR > 32 && PRE_CHAR < 127)
+			middle_left_shift(shell);
+		else if (ACT_CHAR > 32 && ACT_CHAR < 127 && PRE_CHAR == ' ')
+			begin_left_shift(shell);
+		else if (ACT_CHAR == ' ' && ((AFT_CHAR > 32 && PRE_CHAR > 32) && (AFT_CHAR < 127 && PRE_CHAR < 127)))
+			begin_left_shift(shell);
+		else if (ACT_CHAR == ' ' && (PRE_CHAR > 32 && PRE_CHAR < 127) && AFT_CHAR == '\0')
+			begin_left_shift(shell);
+		else if (AFT_CHAR == '\0' && PRE_CHAR == ' ')
+			begin_left_shift(shell);
+	}
+}
+
 void				symbol_del(t_shell *shell)
 {
 	if (shell->position)
 	{
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		tputs(tgetstr("dc", NULL), 1, re_putchar);
+		shell = symbol_remove(shell);
+		shell->length--;
+		shell->position--;
 	}
-	shell = symbol_remove(shell);
-	shell->length = ft_strlen(shell->unparsed_com);
-	shell->position = ft_strlen(shell->unparsed_com);
 }
 
 void				enter_ch(t_shell *shell, uint64_t ch)
