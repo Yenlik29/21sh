@@ -34,6 +34,11 @@
 # define MINUS_CHAR shell->unparsed_com[shell->position]--
 # define MINUS_LENGTH shell->length--
 # define MINUS_POS shell->position--
+# define PLUS_LENGTH shell->length++
+# define PLUS_POS shell->position++
+# define C_CHAR shell->unparsed_com[shell->position] > 32 && shell->unparsed_com[shell->position] < 127
+# define P_CHAR shell->unparsed_com[shell->position - 1] > 32 && shell->unparsed_com[shell->position - 1] < 127
+# define A_CHAR shell->unparsed_com[shell->position + 1] > 32 && shell->unparsed_com[shell->position + 1] < 127
 
 typedef struct 		s_history
 {
@@ -68,8 +73,15 @@ void		alt_left_key(t_shell *shell);
 void		default_left_shift(t_shell *shell);
 void		middle_left_shift(t_shell *shell);
 void		begin_left_shift(t_shell *shell);
+void		top_left_shift(t_shell *shell);
+void		single_left_shift(t_shell *shell);
 
 void		alt_right_key(t_shell *shell);
+void		default_right_shift(t_shell *shell);
+void		middle_right_shift(t_shell *shell);
+void		till_char_right_shift(t_shell *shell);
+void		char_right_shift(t_shell *shell);
+void		next_char_right_shift(t_shell *shell);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);

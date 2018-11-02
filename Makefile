@@ -6,7 +6,7 @@
 #    By: ybokina <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/23 12:12:47 by ybokina           #+#    #+#              #
-#    Updated: 2018/11/01 20:35:17 by ybokina          ###   ########.fr        #
+#    Updated: 2018/11/02 13:05:03 by ybokina          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -14,7 +14,7 @@ NAME := 21sh
 
 FLAGS := -Wall -Wextra -Werror
 
-SOURCES := main.c ft_env1.c ft_display.c ft_line.c ft_symbols.c ft_actions.c ft_error1.c ft_error2.c ft_core.c ft_free.c ft_build_in.c ft_cd.c ft_path.c ft_execution.c ft_cd2.c ft_error3.c ft_cd3.c ft_setenv.c ft_env2.c ft_unsetenv.c ft_error4.c ft_error5.c ft_terminal.c ft_error6.c ft_termcap.c ft_keyboard1.c ft_keyboard2.c ft_keyboard_source.c ft_keyboard3.c ft_keyboard4.c
+SOURCES := main.c ft_env1.c ft_display.c ft_line.c ft_symbols.c ft_actions.c ft_error1.c ft_error2.c ft_core.c ft_free.c ft_build_in.c ft_cd.c ft_path.c ft_execution.c ft_cd2.c ft_error3.c ft_cd3.c ft_setenv.c ft_env2.c ft_unsetenv.c ft_error4.c ft_error5.c ft_terminal.c ft_error6.c ft_termcap.c ft_keyboard1.c ft_keyboard2.c ft_keyboard_source.c ft_keyboard3.c ft_keyboard4.c ft_keyboard5.c
 
 OBJ := $(SOURCES:.c=.o)
 

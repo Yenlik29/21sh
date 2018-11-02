@@ -36,7 +36,47 @@ void				begin_left_shift(t_shell *shell)
 {
 	tputs(tgetstr("le", NULL), 1, re_putchar);
 	MINUS_POS;
+	while (ACT_CHAR == ' ')
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		MINUS_POS;
+	}
 	middle_left_shift(shell);
 }
 
+void				single_left_shift(t_shell *shell)
+{
+	while (ACT_CHAR > 32 && ACT_CHAR < 127)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		MINUS_POS;
+	}
+	while (ACT_CHAR == ' ' && shell->position)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		MINUS_POS;
+	}
+	while (C_CHAR)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		MINUS_POS;
+	}
+	tputs(tgetstr("nd", NULL), 1, re_putchar);
+	PLUS_POS;
+}
 
+void				top_left_shift(t_shell *shell)
+{
+	while (ACT_CHAR == ' ')
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		MINUS_POS;
+	}
+	while (C_CHAR)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		MINUS_POS;
+	}
+	tputs(tgetstr("nd", NULL), 1, re_putchar);
+	PLUS_POS;
+}

@@ -18,16 +18,20 @@ void				alt_left_key(t_shell *shell)
 	{
 		if (ACT_CHAR == '\0' && PRE_CHAR > 32 && PRE_CHAR < 127)
 			default_left_shift(shell);
-		else if (ACT_CHAR > 32 && ACT_CHAR < 127 && PRE_CHAR > 32 && PRE_CHAR < 127)
+		else if (C_CHAR && P_CHAR && A_CHAR)
 			middle_left_shift(shell);
-		else if (ACT_CHAR > 32 && ACT_CHAR < 127 && PRE_CHAR == ' ')
+		else if (C_CHAR && PRE_CHAR == ' ' && AFT_CHAR == ' ')
+			single_left_shift(shell);
+		else if (C_CHAR && PRE_CHAR == ' ')
 			begin_left_shift(shell);
-		else if (ACT_CHAR == ' ' && ((AFT_CHAR > 32 && PRE_CHAR > 32) && (AFT_CHAR < 127 && PRE_CHAR < 127)))
+		else if (ACT_CHAR == ' ' && P_CHAR && A_CHAR)
 			begin_left_shift(shell);
-		else if (ACT_CHAR == ' ' && (PRE_CHAR > 32 && PRE_CHAR < 127) && AFT_CHAR == '\0')
+		else if (ACT_CHAR == ' ')
+			top_left_shift(shell);
+		else if (ACT_CHAR == '\0')
 			begin_left_shift(shell);
-		else if (AFT_CHAR == '\0' && PRE_CHAR == ' ')
-			begin_left_shift(shell);
+		else if (C_CHAR && P_CHAR)
+			middle_left_shift(shell);
 	}
 }
 
