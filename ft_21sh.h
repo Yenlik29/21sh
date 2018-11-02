@@ -75,6 +75,7 @@ void		middle_left_shift(t_shell *shell);
 void		begin_left_shift(t_shell *shell);
 void		top_left_shift(t_shell *shell);
 void		single_left_shift(t_shell *shell);
+void		word_left_shift(t_shell *shell);
 
 void		alt_right_key(t_shell *shell);
 void		default_right_shift(t_shell *shell);

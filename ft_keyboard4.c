@@ -12,6 +12,25 @@
 
 #include "ft_21sh.h"
 
+void				word_left_shift(t_shell *shell)
+{
+	while (ACT_CHAR > 32 && ACT_CHAR < 127)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		MINUS_POS;
+	}
+	while (ACT_CHAR == ' ' && shell->position)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		MINUS_POS;
+	}
+	while (C_CHAR)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		MINUS_POS;
+	}
+}
+
 void				alt_right_key(t_shell *shell)
 {
 	if (shell->position != shell->length)
