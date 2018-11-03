@@ -25,8 +25,8 @@ void			sighandler(int signum)
 t_shell 		*init_shell(t_shell *shell)
 {
 	shell = (t_shell *)malloc(sizeof(t_shell));
-	shell->history = (t_history *)malloc(sizeof(t_history));
-	shell->history->record = NULL;
+	if (!(shell->history = (t_history *)malloc(sizeof(t_history))))
+		return (NULL);
 	shell->history->next = NULL;
 	shell->history->prev = NULL;
 	shell->unparsed_com = (char *)malloc(sizeof(char) * 4089);
@@ -41,6 +41,7 @@ void			loop(char **env)
 	char	**w_splited;
 
 	shell = init_shell(shell);
+	new_history(shell);
 	while (42)
 	{
 		w_splited = NULL;

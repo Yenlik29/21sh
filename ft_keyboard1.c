@@ -24,6 +24,8 @@ void				alt_left_key(t_shell *shell)
 			single_left_shift(shell);
 		else if (C_CHAR && PRE_CHAR == ' ' && A_CHAR)
 			word_left_shift(shell);
+		else if (C_CHAR && PRE_CHAR == ' ' && AFT_CHAR == '\0')
+			single_left_shift(shell);
 		else if (ACT_CHAR == ' ' && P_CHAR && A_CHAR)
 			begin_left_shift(shell);
 		else if (ACT_CHAR == ' ')

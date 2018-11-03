@@ -19,7 +19,7 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 	else if (ch >= 32 && ch < 127)
 		enter_ch(shell, ch);
 	else if (ch == 4283163)
-		printf("UP\n");
+		history_up(shell);
 	else if (ch == 4348699)
 		printf("DOWN\n");
 	else if (ch == 4414235)

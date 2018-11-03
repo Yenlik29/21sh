@@ -86,11 +86,12 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 		if (key_hooker(ch, ret, shell) == 0)
 			break ;
 		ch = 0;
-		//PROVERKI NA KEYS;
 	}
-	// printf("[%d]\n", shell->position);
+	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
+	printf("\n[%s]\n", shell->history->record);
+	shell = add_history(shell);
+	shell->history = shell->history->next;
 	write(0, "\n", 1);
-	// printf("%d\n", shell->position);
 	// w_splited = split_word(word);
 	// w_splited = parsed_word(w_splited, env);
 	// ft_bzero(word, ft_strlen(word));

@@ -94,6 +94,10 @@ void		begin_cursor(t_shell *shell, uint64_t ch);
 void		middle_cursor(t_shell *shell, uint64_t ch);
 t_shell		*symbol_remove(t_shell *shell);
 
+void		new_history(t_shell *shell);
+t_shell		*add_history(t_shell *shell);
+void		history_up(t_shell *shell);
+
 int			ft_find(char **envp, char *word);
 char		*ft_join_f(char *s1, char *s2);
 char		*ft_join_f2(char *s1, char *s2);

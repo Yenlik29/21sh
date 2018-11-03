@@ -29,7 +29,7 @@ void				word_left_shift(t_shell *shell)
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		MINUS_POS;
 	}
-	if (ACT_CHAR == ' ' && shell->unparsed_com[0] != ' ')
+	if (ACT_CHAR == ' ' && shell->position != 0)
 	{
 		tputs(tgetstr("nd", NULL), 1, re_putchar);
 		PLUS_POS;
