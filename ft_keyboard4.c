@@ -14,7 +14,7 @@
 
 void				word_left_shift(t_shell *shell)
 {
-	while (ACT_CHAR > 32 && ACT_CHAR < 127)
+	while (ACT_CHAR > 32 && ACT_CHAR < 127 && shell->position != 0)
 	{
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		MINUS_POS;
@@ -24,10 +24,15 @@ void				word_left_shift(t_shell *shell)
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		MINUS_POS;
 	}
-	while (C_CHAR)
+	while (C_CHAR && shell->position != 0)
 	{
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		MINUS_POS;
+	}
+	if (ACT_CHAR == ' ' && shell->unparsed_com[0] != ' ')
+	{
+		tputs(tgetstr("nd", NULL), 1, re_putchar);
+		PLUS_POS;
 	}
 }
 
