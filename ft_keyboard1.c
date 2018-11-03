@@ -51,16 +51,23 @@ void				symbol_del(t_shell *shell)
 
 void				enter_ch(t_shell *shell, uint64_t ch)
 {
-	if (shell->position == 0 && shell->length)
-		begin_cursor(shell, ch);
-	else if (shell->position > 0 && shell->position < shell->length)
-		middle_cursor(shell, ch);
+	if (shell->history->record)
+	{
+
+	}
 	else
 	{
-		shell->unparsed_com[shell->length] = ch;
-		write(0, &(shell->unparsed_com[shell->length]), 1);
-		shell->length++;
-		shell->position++;
+		if (shell->position == 0 && shell->length)
+			begin_cursor(shell, ch);
+		else if (shell->position > 0 && shell->position < shell->length)
+			middle_cursor(shell, ch);
+		else
+		{
+			shell->unparsed_com[shell->length] = ch;
+			write(0, &(shell->unparsed_com[shell->length]), 1);
+			shell->length++;
+			shell->position++;
+		}
 	}
 }
 
