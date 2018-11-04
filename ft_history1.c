@@ -30,7 +30,7 @@ void				history_up(t_shell *shell)
 	}
 	shell->history = shell->history->prev;
 	count = 0;
-	while (count < ft_strlen(shell->history->record))
+	while ((size_t)count < ft_strlen(shell->history->record))
 	{
 		write(0, &shell->history->record[count], 1);
 		shell->position++;

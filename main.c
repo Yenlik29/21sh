@@ -40,6 +40,7 @@ void			loop(char **env)
 	t_shell *shell;
 	char	**w_splited;
 
+	shell = NULL;
 	shell = init_shell(shell);
 	new_history(shell);
 	while (42)

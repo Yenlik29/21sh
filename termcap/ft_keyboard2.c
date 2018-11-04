@@ -40,6 +40,9 @@ void				middle_cursor(t_shell *shell, uint64_t ch)
 	int  del;
 	int  cursor;
 
+	tmp = NULL;/////////////////////
+	begin = NULL;/////////////////////////
+	end = NULL;//////////////////////////////
 	tmp = char_record(ch, tmp);
 	begin = begin_record(begin, shell);
 	del = ft_strlen(begin);

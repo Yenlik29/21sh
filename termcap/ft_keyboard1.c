@@ -51,12 +51,12 @@ void				symbol_del(t_shell *shell)
 
 void				enter_ch(t_shell *shell, uint64_t ch)
 {
-	if (shell->history->record)
-	{
+	// if (shell->history->record)
+	// {
 
-	}
-	else
-	{
+	// }
+	// else
+	// {
 		if (shell->position == 0 && shell->length)
 			begin_cursor(shell, ch);
 		else if (shell->position > 0 && shell->position < shell->length)
@@ -68,7 +68,7 @@ void				enter_ch(t_shell *shell, uint64_t ch)
 			shell->length++;
 			shell->position++;
 		}
-	}
+	// }
 }
 
 void 				left_key(t_shell *shell)
