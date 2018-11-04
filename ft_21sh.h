@@ -106,6 +106,23 @@ size_t		word_count(char const *s, char c);
 
 int			key_hooker(uint64_t ch, int ret, t_shell *shell);
 
+void		add_history_line(t_shell *shell, uint64_t ch);
+void		begin_history_add(t_shell *shell, uint64_t ch);
+void		print_line(t_shell *shell);
+void		set_cursor(t_shell *shell);
+void		left_n_clean_shell(t_shell *shell);
+
+void		middle_history_add(t_shell *shell, uint64_t ch);
+char 		*begin_history_record(char *begin, t_shell *shell);
+char 		*end_history_record(char *end, t_shell *shell);
+char 		*find_history_end(char *end, t_shell *shell);
+void		place_cursor(t_shell *shell);
+
+void		clear_till_begin(t_shell *shell);
+void		put_cursor(t_shell *shell);
+
+void		end_history_add(t_shell *shell, uint64_t ch);
+
 void		ft_env(char **w_splited, char **envp);
 void		ft_putnstr(char *str, int n);
 void		echo(char **str, int pos);

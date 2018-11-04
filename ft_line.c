@@ -88,7 +88,9 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 		ch = 0;
 	}
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
-	printf("\n[%s]\n", shell->history->record);
+	// printf("\n[%s]\n", shell->history->record);
+	// printf("\n[%d]\n", shell->position);
+	// printf("\n[%d]\n", shell->length);
 	shell = add_history(shell);
 	shell->history = shell->history->next;
 	write(0, "\n", 1);

@@ -51,12 +51,12 @@ void				symbol_del(t_shell *shell)
 
 void				enter_ch(t_shell *shell, uint64_t ch)
 {
-	// if (shell->history->record)
-	// {
-
-	// }
-	// else
-	// {
+	if (shell->history->record[0])
+	{
+		add_history_line(shell, ch);
+	}
+	else
+	{
 		if (shell->position == 0 && shell->length)
 			begin_cursor(shell, ch);
 		else if (shell->position > 0 && shell->position < shell->length)
@@ -64,11 +64,12 @@ void				enter_ch(t_shell *shell, uint64_t ch)
 		else
 		{
 			shell->unparsed_com[shell->length] = ch;
+			shell->unparsed_com[shell->length + 1] = '\0';
 			write(0, &(shell->unparsed_com[shell->length]), 1);
-			shell->length++;
+			shell->length = ft_strlen(shell->unparsed_com);
 			shell->position++;
 		}
-	// }
+	}
 }
 
 void 				left_key(t_shell *shell)
