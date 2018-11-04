@@ -21,7 +21,7 @@ $(NAME): $(LIBFT) $(OBJ)
 	@printf "\r\033[38;5;117m✓ $(NAME) created\033[0m\033[K\n"
 
 $(OBJS_DIR_BASE)/%.o: %.c $(HEADER)
-	@printf "\033[2KCompiling: $(@)\r"
+	@printf "\033[38;5;117m\033[2KCompiling: $(@)\033[0m\033\r"
 	@$(CC) -c $< -o $@ $(FLAGS) $(HEADER_FLAGS) -I.
 
 $(LIBFT):
