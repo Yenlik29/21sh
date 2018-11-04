@@ -6,7 +6,7 @@
 #    By: ybokina <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/08/23 12:12:47 by ybokina           #+#    #+#              #
-#    Updated: 2018/11/04 09:29:15 by ybokina          ###   ########.fr        #
+#    Updated: 2018/11/04 09:38:40 by ybokina          ###   ########.fr        #
 #                                                                              #
 #******************************************************************************#
 
@@ -30,11 +30,11 @@ $(LIBFT):
 $(OBJ): |$(OBJS_DIR)
 
 $(OBJS_DIR):
-	mkdir $@
+	@mkdir $@
 
 clean:
 	@make -C libft clean
-	@rm -f $(OBJ)
+	@rm -rf $(OBJS_DIR_BASE)
 
 fclean: clean
 	@make -C libft fclean

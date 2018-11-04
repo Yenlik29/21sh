@@ -6,7 +6,7 @@
 #    By: ybokina <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/04 09:23:53 by ybokina           #+#    #+#              #
-#    Updated: 2018/11/04 09:25:42 by ybokina          ###   ########.fr        #
+#    Updated: 2018/11/04 09:39:32 by ybokina          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,6 +68,6 @@ SOURCES 		:= $(SRCF) $(ERRORS_SRCF:%=$(ERRORS_DIR)/%)\
 
 OBJ				:= $(SOURCES:%.c=$(OBJS_DIR_BASE)/%.o)
 HEADER			:= ft_21sh.h
-LIBFT			:= $(LIBFT_DIR)libft.a
 LIBFT_DIR		:= libft/
+LIBFT			:= $(LIBFT_DIR)libft.a
 HEADER_FLAGS	:= -I $(LIBFT_DIR)

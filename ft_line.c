@@ -92,7 +92,7 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	shell = add_history(shell);
 	shell->history = shell->history->next;
 	write(0, "\n", 1);
-	env = NULL;
+	env = NULL; ///////////////////////////////////////////////////////////
 	// w_splited = split_word(word);
 	// w_splited = parsed_word(w_splited, env);
 	// ft_bzero(word, ft_strlen(word));
