@@ -33,7 +33,8 @@ SRCF			:= main.c					\
 				   ft_free.c				\
 				   ft_execution.c			\
 				   ft_terminal.c			\
-				   ft_history1.c
+				   ft_history1.c 			\
+				   ft_history2.c
 
 ERRORS_SRCF	   := ft_error1.c				\
                   ft_error2.c   			\
