@@ -92,6 +92,7 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	// printf("\n[%d]\n", shell->position);
 	// printf("\n[%d]\n", shell->length);
 	shell = add_history(shell);
+	shell->length = ft_strlen(shell->history->record);
 	shell->history = shell->history->next;
 	write(0, "\n", 1);
 	env = NULL; ///////////////////////////////////////////////////////////

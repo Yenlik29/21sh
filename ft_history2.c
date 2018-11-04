@@ -18,8 +18,10 @@ void				history_down(t_shell *shell)
 
 	if (shell->history->next)
 	{
-		shell->history = shell->history->next;
+		shell->length = ft_strlen(shell->history->record);
+		shell->position = shell->length;
 		position = shell->position;
+		shell->history = shell->history->next;
 		while (position--)
 		{
 			tputs(tgetstr("le", NULL), 1, re_putchar);
