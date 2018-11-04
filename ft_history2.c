@@ -29,5 +29,6 @@ void				history_down(t_shell *shell)
 			shell->position--;
 		}
 		print_line(shell);
+		// printf("[%s]\n", shell->history->record);
 	}
 }
