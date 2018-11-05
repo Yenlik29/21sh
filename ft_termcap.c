@@ -21,7 +21,7 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 	else if (ch == 4283163)
 		history_up(shell);
 	else if (ch == 4348699)
-		printf("DOWN\n");
+		history_down(shell);
 	else if (ch == 4414235)
 		right_key(shell);
 	else if (ch == 4479771)

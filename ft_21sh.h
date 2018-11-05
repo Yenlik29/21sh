@@ -98,6 +98,9 @@ void		new_history(t_shell *shell);
 t_shell		*add_history(t_shell *shell);
 void		history_up(t_shell *shell);
 
+void		history_cursor_edition(t_shell *shell);
+void		history_cursor_done(t_shell *shell);
+
 void		history_down(t_shell *shell);
 
 int			ft_find(char **envp, char *word);

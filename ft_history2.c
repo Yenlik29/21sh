@@ -29,6 +29,7 @@ void				history_down(t_shell *shell)
 			shell->position--;
 		}
 		print_line(shell);
-		// printf("[%s]\n", shell->history->record);
+		shell->length = ft_strlen(shell->history->record);
+		shell->position = shell->length;
 	}
 }
