@@ -14,29 +14,18 @@
 
 void				history_cursor_edition(t_shell *shell)
 {
-	char *tmp;
 	int count;
 
-	// printf("[%d]\n", shell->position);
 	count = ft_strlen(shell->unparsed_com);
-	while (count--)
+	while (count && shell->position)
 	{
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		tputs(tgetstr("dc", NULL), 1, re_putchar);
+		count--;
 		shell->position--;
 	}
-	tmp = ft_strdup(shell->unparsed_com);
-	// tmp = ft_strdup(shell->history->record);
-	// ft_strclr(shell->history->record);
 	ft_strclr(shell->history->record);
-	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
-	// count = ft_strlen(shell->history->record);
-	// while (count--)
-	// {
-	// 	tputs(tgetstr("le", NULL), 1, re_putchar);
-	// 	tputs(tgetstr("dc", NULL), 1, re_putchar);
-	// 	shell->position--;
-	// }
+	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	shell->history = shell->history->prev;
 	count = 0;
 	while ((size_t)count < ft_strlen(shell->history->record))
@@ -46,16 +35,15 @@ void				history_cursor_edition(t_shell *shell)
 		count++;
 	}
 	shell->length = ft_strlen(shell->history->record);
-	free(tmp);
 }
 
 void				history_cursor_done(t_shell *shell)
 {
 	int count;
 
-	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
+	// printf("*\n");
 	count = ft_strlen(shell->history->record);
-	while (count--)
+	while (count-- && shell->position)
 	{
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		tputs(tgetstr("dc", NULL), 1, re_putchar);
@@ -69,14 +57,19 @@ void				history_cursor_done(t_shell *shell)
 		shell->position++;
 		count++;
 	}
+	// ft_strclr(shell->unparsed_com);
+	// ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 	shell->length = ft_strlen(shell->history->record);
 }
 
 void				history_up(t_shell *shell)
 {
+	// printf("+\n");
+	// printf("!%s->%s!\n", shell->history->record, shell->history->prev->record);
 	if (!(shell->history->prev))
-		return ;
-	// printf("!%s->%s!\n", shell->history->record, shell->unparsed_com);
+	{	
+		// printf("?\n");
+		return ;}
 	// if (shell->history->record[0])
 	if (shell->unparsed_com[0])
 		history_cursor_edition(shell);
@@ -107,6 +100,7 @@ t_shell				*add_history(t_shell *shell)
 		return (NULL);
 	}
 	new_node->record = (char *)malloc(sizeof(char) * 2048);
+	ft_strclr(new_node->record);
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new_node;

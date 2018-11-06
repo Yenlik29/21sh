@@ -14,22 +14,28 @@
 
 void				history_down(t_shell *shell)
 {
-	int position;
+	int count;
 
+	// printf("[%s->%s]\n", shell->history->record, shell->history->next->record);
+	// if (!(shell->history->next))
 	if (shell->history->next)
 	{
-		shell->length = ft_strlen(shell->history->record);
-		shell->position = shell->length;
-		position = shell->position;
-		shell->history = shell->history->next;
-		while (position--)
+		// printf("[%s:%s]\n", shell->unparsed_com, shell->history->record);
+		count = ft_strlen(shell->history->record);
+		while (count)
 		{
 			tputs(tgetstr("le", NULL), 1, re_putchar);
 			tputs(tgetstr("dc", NULL), 1, re_putchar);
+			count--;
 			shell->position--;
 		}
+		shell->history = shell->history->next;
 		print_line(shell);
 		shell->length = ft_strlen(shell->history->record);
-		shell->position = shell->length;
+		shell->position = ft_strlen(shell->history->record);
 	}
+	// else
+	// {
+	// 	printf("!\n");
+	// }
 }
