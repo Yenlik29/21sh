@@ -103,6 +103,8 @@ void		history_cursor_done(t_shell *shell);
 void		history_cursor_middle(t_shell *shell);
 
 void		history_down(t_shell *shell);
+void		history_down_cursor_end(t_shell *shell);
+void		history_down_cursor_middle(t_shell *shell);
 
 int			ft_find(char **envp, char *word);
 char		*ft_join_f(char *s1, char *s2);
