@@ -20,7 +20,6 @@ void				history_down(t_shell *shell)
 	// if (!(shell->history->next))
 	if (shell->history->next)
 	{
-		// printf("[%s:%s]\n", shell->unparsed_com, shell->history->record);
 		count = ft_strlen(shell->history->record);
 		while (count)
 		{
@@ -31,8 +30,12 @@ void				history_down(t_shell *shell)
 		}
 		shell->history = shell->history->next;
 		print_line(shell);
+		// printf("[%s:%s]\n", shell->unparsed_com, shell->history->record);
 		shell->length = ft_strlen(shell->history->record);
 		shell->position = ft_strlen(shell->history->record);
+		ft_strclr(shell->unparsed_com);
+		ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
+		// printf("[%s]\n", shell->history->record);
 	}
 	// else
 	// {
