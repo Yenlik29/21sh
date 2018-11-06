@@ -12,6 +12,34 @@
 
 #include "ft_21sh.h"
 
+void				history_cursor_middle(t_shell *shell)
+{
+	int count;
+
+	if (!(shell->history->prev))
+		return ;
+	ft_strclr(shell->history->record);
+	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
+	while (shell->position != shell->length)
+	{
+		tputs(tgetstr("nd", NULL), 1, re_putchar);
+		shell->position++;
+	}
+	shell->position = shell->length;
+	count = shell->length;
+	while (count && shell->position)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		tputs(tgetstr("dc", NULL), 1, re_putchar);
+		shell->position--;
+		count--;
+	}
+	shell->history = shell->history->prev;
+	print_line(shell);
+	shell->length = ft_strlen(shell->history->record);
+	shell->position = shell->length;
+}
+
 void				history_down(t_shell *shell)
 {
 	int count;

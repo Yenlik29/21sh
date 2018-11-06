@@ -100,6 +100,7 @@ void		history_up(t_shell *shell);
 
 void		history_cursor_edition(t_shell *shell);
 void		history_cursor_done(t_shell *shell);
+void		history_cursor_middle(t_shell *shell);
 
 void		history_down(t_shell *shell);
 
