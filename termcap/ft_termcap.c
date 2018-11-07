@@ -36,7 +36,7 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 	else if (ch == 4610843)
 		end_key(shell);
 	else if (ch == 74982532143899)
-		printf("1 COL UP\n");
+		shift_left(shell);
 	else if (ch == 73883020516123)
 		printf("1 COL DOWN\n");
 	else

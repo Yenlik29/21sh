@@ -12,6 +12,33 @@
 
 #include "ft_21sh.h"
 
+void				shift_left(t_shell *shell)
+{
+	int position;
+
+	position = shell->position;
+	if (!(shell->history->prev))
+		return ;
+	ft_strclr(shell->history->record);
+	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
+	while (shell->position != shell->length)
+	{
+		tputs(tgetstr("nd", NULL), 1, re_putchar);
+		shell->position++;
+	}
+	clear_till_begin(shell);
+	shell->history = shell->history->prev;
+	print_line(shell);
+	shell->position = ft_strlen(shell->history->record);
+	while (shell->position != position)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		shell->position--;
+	}
+	// shell->position = ft_strlen;
+	// printf("[%s|%s->%d:%d]\n", shell->unparsed_com, shell->history->record, shell->position, shell->length);
+}
+
 void				end_key(t_shell *shell)
 {
 	if (shell->position == shell->length)
