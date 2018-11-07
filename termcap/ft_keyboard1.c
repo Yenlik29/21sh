@@ -52,9 +52,7 @@ void				symbol_del(t_shell *shell)
 void				enter_ch(t_shell *shell, uint64_t ch)
 {
 	if (shell->history->record[0])
-	{
 		add_history_line(shell, ch);
-	}
 	else
 	{
 		if (shell->position == 0 && shell->length)

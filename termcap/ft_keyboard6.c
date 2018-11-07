@@ -47,6 +47,7 @@ void				begin_history_add(t_shell *shell, uint64_t ch)
 
 	hey = (char *)malloc(sizeof(char) * 2048);
 	hey[0] = ch;
+	hey[1] = '\0';
 	tmp = ft_strdup(shell->history->record);
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, hey, ft_strlen(hey));

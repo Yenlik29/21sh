@@ -71,6 +71,7 @@ void				middle_history_add(t_shell *shell, uint64_t ch)
 
 	ch_t = (char *)malloc(sizeof(char) * 2048);
 	ch_t[0] = ch;
+	ch_t[1] = '\0';
 	end = NULL;
 	begin = NULL;
 	begin = begin_history_record(begin, shell);

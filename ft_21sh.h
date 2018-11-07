@@ -106,6 +106,9 @@ void		history_down(t_shell *shell);
 void		history_down_cursor_end(t_shell *shell);
 void		history_down_cursor_middle(t_shell *shell);
 
+void		home_key(t_shell *shell);
+void		end_key(t_shell *shell);
+
 int			ft_find(char **envp, char *word);
 char		*ft_join_f(char *s1, char *s2);
 char		*ft_join_f2(char *s1, char *s2);

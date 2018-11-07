@@ -87,26 +87,15 @@ void				history_down_cursor_middle(t_shell *shell)
 	shell->position = shell->length;
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
-	// printf("[%s]\n", shell->unparsed_com);
-	///////////// ТУТ ЕСТЬ БАГ!!!!!/////////////////////
 }
 
 void				history_down(t_shell *shell)
 {
-	
-
-	// printf("[%s->%s]\n", shell->history->record, shell->history->next->record);
-	// if (!(shell->history->next))
 	if (shell->history->next)
 	{
 		if (shell->position == shell->length)
 			history_down_cursor_end(shell);
 		else if (shell->position < shell->length)
 			history_down_cursor_middle(shell);
-		// printf("[%s->%s]\n", shell->unparsed_com, shell->history->record);
 	}
-	// else
-	// {
-	// 	printf("!\n");
-	// }
 }

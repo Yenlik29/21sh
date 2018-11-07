@@ -14,7 +14,7 @@
 
 int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 {
-	ret = 0; //////////////////////////////////////
+	ret = 0;
 	if (ch == 127)
 		symbol_del(shell);
 	else if (ch >= 32 && ch < 127)
@@ -32,9 +32,9 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 	else if (ch == 26139)
 		alt_right_key(shell);
 	else if (ch == 4741915)
-		printf("HOME\n");
+		home_key(shell);
 	else if (ch == 4610843)
-		printf("END\n");
+		end_key(shell);
 	else if (ch == 74982532143899)
 		printf("1 COL UP\n");
 	else if (ch == 73883020516123)
