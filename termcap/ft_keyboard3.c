@@ -56,13 +56,11 @@ void				single_left_shift(t_shell *shell)
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		MINUS_POS;
 	}
-	while (C_CHAR)
+	while (C_CHAR && shell->position)
 	{
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		MINUS_POS;
 	}
-	tputs(tgetstr("nd", NULL), 1, re_putchar);
-	PLUS_POS;
 }
 
 void				top_left_shift(t_shell *shell)
