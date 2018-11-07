@@ -53,7 +53,8 @@ TERMCAP_SRCF   := ft_termcap.c  			\
                   ft_keyboard6.c 			\
                   ft_keyboard7.c 			\
                   ft_keyboard8.c 			\
-                  ft_keyboard9.c
+                  ft_keyboard9.c 			\
+                  ft_keyboard10.c
 
 BUILT_INS_SRCF := ft_actions.c				\
 				  ft_build_in.c 			\
