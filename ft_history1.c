@@ -70,9 +70,15 @@ void				history_up(t_shell *shell)
 	if (!(shell->history->prev))
 		return ;
 	if (shell->position < shell->length)
+	{
+		printf("*\n");
 		history_cursor_middle(shell);
+	}
 	else if (shell->unparsed_com[0])
+	{
+		printf("!\n");
 		history_cursor_edition(shell);
+	}
 	else if (shell->position == shell->length)
 		history_cursor_done(shell);
 }

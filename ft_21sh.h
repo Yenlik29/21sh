@@ -51,6 +51,7 @@ typedef struct 		s_shell
 {
 	t_history		*history;
 	char 			*unparsed_com;
+	char 			*upgrade_com;
 	int 			length;
 	int 			position;
 }					t_shell;
