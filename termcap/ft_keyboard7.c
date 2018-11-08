@@ -83,4 +83,6 @@ void				middle_history_add(t_shell *shell, uint64_t ch)
 	place_cursor(shell);
 	print_line(shell);
 	put_cursor(shell);
+	ft_strclr(shell->unparsed_com);
+	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 }

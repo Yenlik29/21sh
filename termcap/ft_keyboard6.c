@@ -63,6 +63,8 @@ void				begin_history_add(t_shell *shell, uint64_t ch)
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		shell->position--;
 	}
+	ft_strclr(shell->unparsed_com);
+	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 	free(tmp);
 	free(hey);
 }

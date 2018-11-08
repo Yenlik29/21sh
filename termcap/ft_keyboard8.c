@@ -44,4 +44,6 @@ void				end_history_add(t_shell *shell, uint64_t ch)
 	write(0, &(shell->history->record[shell->length]), 1);
 	shell->length = ft_strlen(shell->history->record);
 	shell->position++;
+	ft_strclr(shell->unparsed_com);
+	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 }
