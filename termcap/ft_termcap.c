@@ -41,5 +41,12 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 		shift_right(shell);
 	else
 		return (0);
+	// printf("[");
+	// if (shell->history->prev)
+	// 	printf("%s->", shell->history->prev->record);
+	// if (shell->history)
+	// 	printf(" %s->", shell->history->record);
+	// if (shell->history->next)
+	// 	printf(" %s]\n", shell->history->next->record);
 	return (1);
 }

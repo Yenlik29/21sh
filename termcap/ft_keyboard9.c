@@ -14,8 +14,11 @@
 
 void				shift_left_end(t_shell *shell)
 {
+	char *tmp;
+
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
+	tmp = ft_strdup(shell->history->record);
 	shell->length = ft_strlen(shell->history->record);
 	while (shell->position != shell->length)
 	{
@@ -25,6 +28,8 @@ void				shift_left_end(t_shell *shell)
 	clear_till_begin(shell);
 	shell->position = 0;
 	shell->history = shell->history->prev;
+	ft_strclr(shell->history->next->record);
+	ft_strncat(shell->history->next->record, tmp, ft_strlen(tmp));
 	print_line(shell);
 	shell->length = ft_strlen(shell->history->record);
 	shell->position = shell->length;
@@ -32,11 +37,13 @@ void				shift_left_end(t_shell *shell)
 
 void				shift_left_norm(t_shell *shell)
 {
+	char *tmp;
 	int position;
 
 	position = shell->position;
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
+	tmp = ft_strdup(shell->history->record);
 	while (shell->position != shell->length)
 	{
 		tputs(tgetstr("nd", NULL), 1, re_putchar);
@@ -44,6 +51,8 @@ void				shift_left_norm(t_shell *shell)
 	}
 	clear_till_begin(shell);
 	shell->history = shell->history->prev;
+	ft_strclr(shell->history->next->record);
+	ft_strncat(shell->history->next->record, tmp, ft_strlen(tmp));
 	print_line(shell);
 	shell->position = ft_strlen(shell->history->record);
 	while (shell->position != position)
@@ -62,6 +71,8 @@ void				shift_left(t_shell *shell)
 		shift_left_end(shell);
 	else
 		shift_left_norm(shell);
+	ft_strclr(shell->unparsed_com);
+	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 }
 
 void				end_key(t_shell *shell)
