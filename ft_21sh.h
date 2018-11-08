@@ -112,6 +112,9 @@ void		shift_left(t_shell *shell);
 void		shift_left_end(t_shell *shell);
 void		shift_left_norm(t_shell *shell);
 
+void		shift_right(t_shell *shell);
+void		shift_right_end(t_shell *shell);
+
 int			ft_find(char **envp, char *word);
 char		*ft_join_f(char *s1, char *s2);
 char		*ft_join_f2(char *s1, char *s2);
