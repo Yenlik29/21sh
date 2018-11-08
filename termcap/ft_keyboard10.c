@@ -52,10 +52,8 @@ void				shift_right(t_shell *shell)
 {
 	if (!(shell->history->next))
 		return ;
-	// printf("[%s->%s]\n", shell->unparsed_com, shell->history->next->record);
 	if (shell->position > (int)ft_strlen(shell->history->next->record))
 		shift_right_end(shell);
 	else
 		shift_right_norm(shell);
-	// printf("[%d]\n", shell->position);
 }

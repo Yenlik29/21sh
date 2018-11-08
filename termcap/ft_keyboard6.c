@@ -77,8 +77,5 @@ void				add_history_line(t_shell *shell, uint64_t ch)
 		middle_history_add(shell, ch);
 	else if (shell->position == shell->length)
 		end_history_add(shell, ch);
-	// printf("\n[%s]\n", shell->history->record);
-	// printf("\n[%d]\n", shell->position);
-	// printf("\n[%d]\n", shell->length);
 	ch = 0;
 }

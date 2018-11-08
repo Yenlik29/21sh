@@ -30,7 +30,6 @@ t_shell 		*init_shell(t_shell *shell)
 	shell->history->next = NULL;
 	shell->history->prev = NULL;
 	shell->unparsed_com = (char *)malloc(sizeof(char) * 4089);
-	shell->upgrade_com = (char *)malloc(sizeof(char) * 4089);
 	shell->length = 0;
 	shell->position = 0;
 	return (shell);

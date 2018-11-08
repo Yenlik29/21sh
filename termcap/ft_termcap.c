@@ -41,8 +41,5 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 		shift_right(shell);
 	else
 		return (0);
-	// ft_strclr(shell->upgrade_com);
-	// ft_strncat(shell->upgrade_com, shell->unparsed_com, ft_strlen(shell->unparsed_com));
-	// printf("[%s]\n", shell->upgrade_com);
 	return (1);
 }
