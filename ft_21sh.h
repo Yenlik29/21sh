@@ -95,6 +95,7 @@ void		begin_cursor(t_shell *shell, uint64_t ch);
 void		middle_cursor(t_shell *shell, uint64_t ch);
 t_shell		*symbol_remove(t_shell *shell);
 void		symbol_middle_remove(t_shell *shell);
+void		go_cursor_end(t_shell *shell);
 
 void		new_history(t_shell *shell);
 t_shell		*add_history(t_shell *shell);
