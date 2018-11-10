@@ -12,6 +12,43 @@
 
 #include "ft_21sh.h"
 
+void				symbol_middle_remove(t_shell *shell)
+{
+	char *begin;
+	char *end;
+	int  position;
+
+	position = shell->position - 1;
+	begin = ft_strsub(shell->unparsed_com, 0, shell->position -1);
+	end = ft_strsub(shell->unparsed_com, shell->position, shell->length - shell->position);
+	while (shell->position != shell->length)
+	{
+		tputs(tgetstr("nd", NULL), 1, re_putchar);
+		shell->position++;
+	}
+	while (shell->position)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		tputs(tgetstr("dc", NULL), 1, re_putchar);
+		shell->position--;
+	}
+	ft_strclr(shell->history->record);
+	ft_strncat(shell->history->record, begin, ft_strlen(begin));
+	ft_strncat(shell->history->record, end, ft_strlen(end));
+	print_line(shell);
+	set_cursor(shell);
+	while (shell->position != position)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		shell->position--;
+	}
+	ft_strclr(shell->unparsed_com);
+	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
+	free(begin);
+	free(end);
+	// printf("[%s]\n", begin);
+}
+
 t_shell				*symbol_remove(t_shell *shell)
 {
 	int 	i;

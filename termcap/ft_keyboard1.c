@@ -41,11 +41,16 @@ void				symbol_del(t_shell *shell)
 {
 	if (shell->position)
 	{
-		tputs(tgetstr("le", NULL), 1, re_putchar);
-		tputs(tgetstr("dc", NULL), 1, re_putchar);
-		shell = symbol_remove(shell);
-		shell->length--;
-		shell->position--;
+		if (shell->position == shell->length)
+		{
+			tputs(tgetstr("le", NULL), 1, re_putchar);
+			tputs(tgetstr("dc", NULL), 1, re_putchar);
+			shell = symbol_remove(shell);
+			shell->length--;
+			shell->position--;
+		}
+		else
+			symbol_middle_remove(shell);
 	}
 }
 
