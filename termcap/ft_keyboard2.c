@@ -66,13 +66,17 @@ void				begin_cursor(t_shell *shell, uint64_t ch)
 {
 	char *tmp;
 	int  count;
-	
+
 	tmp = (char *)malloc(sizeof(char) * 2048);
 	ft_strclr(tmp);
 	tmp = ft_strncat(tmp, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	ft_strclr(shell->unparsed_com);
 	shell->unparsed_com[0] = ch;
 	shell->unparsed_com = ft_strncat(shell->unparsed_com, tmp, ft_strlen(tmp));
+	/////////
+	// ft_strclr(shell->history->record);
+	// ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->history->record));
+	/////////
 	count = shell->length;
 	while (count--)
 		tputs(tgetstr("dc", NULL), 1, re_putchar);
