@@ -49,6 +49,7 @@ typedef struct 		s_history
 
 typedef struct 		s_shell
 {
+	char 			*tmp;
 	t_history		*history;
 	char 			*unparsed_com;
 	int 			length;

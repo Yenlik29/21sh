@@ -41,6 +41,8 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 		shift_right(shell);
 	else
 		return (0);
+	ft_strclr(shell->tmp);
+	ft_strncat(shell->tmp, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	// printf("[");
 	// if (shell->history->prev)
 	// 	printf("%s->", shell->history->prev->record);

@@ -46,6 +46,7 @@ void				history_cursor_done(t_shell *shell)
 	int count;
 
 	// printf("*\n");
+	// printf("[%s]\n", shell->history->prev->record);
 	// printf("[%s->%s]\n", shell->unparsed_com, shell->history->record);
 	count = ft_strlen(shell->history->record);
 	while (count-- && shell->position)

@@ -47,7 +47,6 @@ void				history_down_cursor_end(t_shell *shell)
 
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
-	// printf("[%s->%s]\n", shell->unparsed_com, shell->history->record);
 	count = ft_strlen(shell->history->record);
 	while (count)
 	{
