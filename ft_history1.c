@@ -109,7 +109,6 @@ t_shell				*add_history(t_shell *shell)
 		return (NULL);
 	}
 	new_node->record = (char *)malloc(sizeof(char) * 2048);
-	// ft_strclr(new_node->record);
 	while (tmp->next != NULL)
 		tmp = tmp->next;
 	tmp->next = new_node;

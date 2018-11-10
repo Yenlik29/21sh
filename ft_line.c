@@ -77,35 +77,24 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	char			*word;
 	int				i;
 
-
-	// t_history		*tmp;
-
 	i = 0;
 	ret = 0;
 	ch = 0;
 	word = ft_strnew(4096);
-	// ft_strclr(shell->unparsed_com);
 	while ((ret = read(0, &ch, 6) && ch != '\n') > 0)
 	{
 		if (key_hooker(ch, ret, shell) == 0)
 			break ;
 		ch = 0;
 	}
-	// printf("[%s]\n", shell->tmp);
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	ft_strclr(shell->unparsed_com);
-	// printf("\n[%s->%s]\n", shell->unparsed_com, shell->history->record);
-	// printf("\n[%d]\n", shell->position);
-	// printf("\n[%d]\n", shell->length);
 	while (shell->history->next != NULL)
 			shell->history = shell->history->next;
 	shell = add_history(shell);
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->tmp, ft_strlen(shell->tmp));
-	// printf("[%s]\n", shell->history->record);
-	// if (shell->history->next)
-	// 	printf("[%s->%s]\n", shell->history->record, shell->history->next->record);
 	shell->length = ft_strlen(shell->history->record);
 	shell->history = shell->history->next;
 	write(0, "\n", 1);
