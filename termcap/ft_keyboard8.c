@@ -39,6 +39,7 @@ void				put_cursor(t_shell *shell)
 
 void				end_history_add(t_shell *shell, uint64_t ch)
 {
+	// printf("*\n");
 	shell->history->record[shell->length] = ch;
 	shell->history->record[shell->length + 1] = '\0';
 	write(0, &(shell->history->record[shell->length]), 1);

@@ -45,6 +45,7 @@ void				begin_history_add(t_shell *shell, uint64_t ch)
 	char *tmp;
 	char *hey;
 
+	// printf("*\n");
 	hey = (char *)malloc(sizeof(char) * 2048);
 	hey[0] = ch;
 	hey[1] = '\0';
@@ -71,11 +72,15 @@ void				begin_history_add(t_shell *shell, uint64_t ch)
 
 void				add_history_line(t_shell *shell, uint64_t ch)
 {
+	// printf("!\n");
 	if (shell->position == 0)
 		begin_history_add(shell, ch);
 	else if (shell->position > 0 && shell->position < shell->length)
-		middle_history_add(shell, ch);
+	{
+		// printf("!\n");
+		middle_history_add(shell, ch);}
 	else if (shell->position == shell->length)
-		end_history_add(shell, ch);
-	ch = 0;
+	{
+		// printf("+\n");
+		end_history_add(shell, ch);}
 }

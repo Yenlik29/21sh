@@ -138,6 +138,8 @@ char 		*end_history_record(char *end, t_shell *shell);
 char 		*find_history_end(char *end, t_shell *shell);
 void		place_cursor(t_shell *shell);
 
+void		norm_edition(t_shell *shell, uint64_t ch);
+
 void		clear_till_begin(t_shell *shell);
 void		put_cursor(t_shell *shell);
 

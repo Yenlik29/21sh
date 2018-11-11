@@ -48,6 +48,7 @@ char 				*find_history_end(char *end, t_shell *shell)
 
 char 				*end_history_record(char *end, t_shell *shell)
 {
+	// printf("*\n");
 	end = (char *)malloc(sizeof(char) * 2048);
 	ft_strclr(end);
 	end = find_history_end(end, shell);
@@ -69,6 +70,7 @@ void				middle_history_add(t_shell *shell, uint64_t ch)
 	char *tmp;
 	char *ch_t;
 
+	// printf("*\n");
 	ch_t = (char *)malloc(sizeof(char) * 2048);
 	ch_t[0] = ch;
 	ch_t[1] = '\0';
