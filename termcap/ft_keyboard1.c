@@ -61,17 +61,17 @@ void				enter_ch(t_shell *shell, uint64_t ch)
 	ioctl(0, TIOCGWINSZ, &sz);
 	if (shell->history->record[0])
 	{
-		if (shell->length + 4 > sz.ws_col)
-			printf("AU\n");
-		else
+		// if (shell->length + 4 > sz.ws_col)
+		// 	printf("AU\n");
+		// else
 			add_history_line(shell, ch);}
 	else
 	{
-		if (shell->length + 4 > sz.ws_col)
-		{
-			printf("AU\n");
-		}
-		else
+		// if (shell->length + 4 > sz.ws_col)
+		// {
+		// 	printf("AU\n");
+		// }
+		// else
 			norm_edition(shell, ch);
 	}
 	// printf("[%d->%d]\n", sz.ws_col, shell->length + 3);
