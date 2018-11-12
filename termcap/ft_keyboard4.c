@@ -12,6 +12,29 @@
 
 #include "ft_21sh.h"
 
+void				multi_left(t_shell *shell)
+{
+	int 			row;
+	struct winsize 	sz;
+
+	ioctl(0, TIOCGWINSZ, &sz);
+	if (((shell->length + 3) % sz.ws_col) != 0)
+		row = ((shell->length + 3) / sz.ws_col) + 1;
+	else
+		row = (shell->length + 3) / sz.ws_col;
+}
+
+int					check_cursor(t_shell *shell)
+{
+	struct winsize sz;
+
+	ioctl(0, TIOCGWINSZ, &sz);
+	if (shell->length + 3 > sz.ws_col)
+		return (0);
+	else
+		return (1);
+}
+
 void				word_left_shift(t_shell *shell)
 {
 	while (ACT_CHAR > 32 && ACT_CHAR < 127 && shell->position != 0)

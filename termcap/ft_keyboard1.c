@@ -81,8 +81,13 @@ void 				left_key(t_shell *shell)
 {
 	if (shell->position)
 	{
-		tputs(tgetstr("le", NULL), 1, re_putchar);
-		(shell->position)--;
+		if (check_cursor(shell) == 0)
+			multi_left(shell);
+		else
+		{
+			tputs(tgetstr("le", NULL), 1, re_putchar);
+			(shell->position)--;
+		}
 	}
 }
 
