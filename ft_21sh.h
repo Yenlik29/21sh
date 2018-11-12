@@ -129,6 +129,12 @@ int			key_hooker(uint64_t ch, int ret, t_shell *shell);
 int			check_cursor(t_shell *shell);
 void		multi_left(t_shell *shell);
 int 		row_find(int row, t_shell *shell);
+void		in_line_left(t_shell *shell);
+void		out_line_left(t_shell *shell);
+
+void		multi_right(t_shell *shell);
+void		in_line_right(t_shell *shell);
+void		out_line_right(t_shell *shell);
 
 void		add_history_line(t_shell *shell, uint64_t ch);
 void		begin_history_add(t_shell *shell, uint64_t ch);

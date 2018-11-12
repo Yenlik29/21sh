@@ -95,8 +95,13 @@ void 				right_key(t_shell *shell)
 {
 	if (shell->position != shell->length)
 	{
-		tputs(tgetstr("nd", NULL), 1, re_putchar);
-		shell->position++;
+		if (check_cursor(shell) == 0)
+			multi_right(shell);
+		else
+		{
+			tputs(tgetstr("nd", NULL), 1, re_putchar);
+			shell->position++;
+		}
 	}
 }
 

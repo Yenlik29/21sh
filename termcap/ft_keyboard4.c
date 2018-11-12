@@ -23,8 +23,8 @@ int 				row_find(int row, t_shell *shell)
 		row = (shell->length + 3) / sz.ws_col;
 	while (row)
 	{
-		if ((row - 1) * sz.ws_col < shell->position < row *sz.ws_col)
-			break;
+		if ((row - 1) * sz.ws_col <= shell->position + 3 && shell->position + 3 <= row *sz.ws_col)
+			return (row);
 		else
 			row--;
 	}
@@ -34,10 +34,15 @@ int 				row_find(int row, t_shell *shell)
 void				multi_left(t_shell *shell)
 {
 	int 			row;
+	struct winsize 	sz;
 
 	row = 0;
+	ioctl(0, TIOCGWINSZ, &sz);
 	row = row_find(row, shell);
-	// printf("[%d]\n", row);
+	if (((sz.ws_col * (row - 1)) + 1) <= shell->position + 3 && shell->position + 3 <= (sz.ws_col * row))
+		in_line_left(shell);
+	else
+		out_line_left(shell);
 }
 
 int					check_cursor(t_shell *shell)

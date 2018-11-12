@@ -12,6 +12,28 @@
 
 #include "ft_21sh.h"
 
+void				in_line_left(t_shell *shell)
+{
+	tputs(tgetstr("le", NULL), 1, re_putchar);
+	shell->position--;
+}
+
+void				out_line_left(t_shell *shell)
+{
+	int position;
+	struct winsize sz;
+
+	ioctl(0, TIOCGWINSZ, &sz);
+	position = shell->position - sz.ws_col;
+	tputs(tgetstr("up", NULL), 1, re_putchar);
+	shell->position--;
+	while (position != shell->position)
+	{
+		tputs(tgetstr("nd", NULL), 1, re_putchar);
+		position++;
+	}
+}
+
 void				clear_till_begin(t_shell *shell)
 {
 	while (shell->position--)

@@ -12,6 +12,47 @@
 
 #include "ft_21sh.h"
 
+void			in_line_right(t_shell *shell)
+{
+	// printf("*\n");
+	tputs(tgetstr("nd", NULL), 1, re_putchar);
+	shell->position++;
+}
+
+void			out_line_right(t_shell *shell)
+{
+	int 			row;
+	int 			position;
+	struct winsize	sz;
+
+	row = 0;
+	row = row_find(row, shell);
+	ioctl(0, TIOCGWINSZ, &sz);
+	position = shell->position + sz.ws_col;
+	shell->position++;
+	while (position != shell->position)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		position--;
+	}
+	tputs(tgetstr("do", NULL), 1, re_putchar);
+}
+
+void			multi_right(t_shell *shell)
+{
+	int				row;
+	struct winsize	sz;
+
+	row = 0;
+	ioctl(0, TIOCGWINSZ, &sz);
+	row = row_find(row, shell);
+	// printf("[%d->%d]\n", shell->position + 4, sz.ws_col * row);
+	if (shell->position + 4 == sz.ws_col * row)
+		out_line_right(shell);
+	else
+		in_line_right(shell);
+}
+
 void			norm_edition(t_shell *shell, uint64_t ch)
 {
 	if (shell->position == 0 && shell->length)
