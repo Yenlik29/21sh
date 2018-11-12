@@ -12,9 +12,8 @@
 
 #include "ft_21sh.h"
 
-void				multi_left(t_shell *shell)
+int 				row_find(int row, t_shell *shell)
 {
-	int 			row;
 	struct winsize 	sz;
 
 	ioctl(0, TIOCGWINSZ, &sz);
@@ -22,6 +21,23 @@ void				multi_left(t_shell *shell)
 		row = ((shell->length + 3) / sz.ws_col) + 1;
 	else
 		row = (shell->length + 3) / sz.ws_col;
+	while (row)
+	{
+		if ((row - 1) * sz.ws_col < shell->position < row *sz.ws_col)
+			break;
+		else
+			row--;
+	}
+	return (row);
+}
+
+void				multi_left(t_shell *shell)
+{
+	int 			row;
+
+	row = 0;
+	row = row_find(row, shell);
+	// printf("[%d]\n", row);
 }
 
 int					check_cursor(t_shell *shell)
