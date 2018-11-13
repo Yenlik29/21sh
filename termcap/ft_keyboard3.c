@@ -25,7 +25,7 @@ void				default_left_shift(t_shell *shell)
 
 void				middle_left_shift(t_shell *shell)
 {
-	while (PRE_CHAR > 32 && PRE_CHAR < 127)
+	while (PRE_CHAR > 32 && PRE_CHAR < 127 && shell->position)
 	{
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		MINUS_POS;

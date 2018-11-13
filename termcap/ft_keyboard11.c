@@ -20,7 +20,8 @@ void			end_alt_left(t_shell *shell)
 	row = 0;
 	row = row_find(row, shell);
 	ioctl(0, TIOCGWINSZ, &sz);
-	if (PRE_CHAR == ' ' && shell->position)
+	in_line_left(shell);
+	if (PRE_CHAR == ' ')
 	{
 		(L_L) ? go_up(shell, sz) : in_line_left(shell);
 		while (ACT_CHAR == ' ' && shell->position)
