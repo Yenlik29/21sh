@@ -39,8 +39,11 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 		shift_left(shell);
 	else if (ch == 73883020516123)
 		shift_right(shell);
+	// else if (ch == 4479771)
+	// 	go_up_inline(shell);
 	else
 		return (0);
+	// printf("[%lld]\n", ch);
 	ft_strclr(shell->tmp);
 	ft_strncat(shell->tmp, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	return (1);
