@@ -14,6 +14,8 @@
 
 void				in_line_left(t_shell *shell)
 {
+	if (!(shell->position))
+		return ;
 	tputs(tgetstr("le", NULL), 1, re_putchar);
 	shell->position--;
 }

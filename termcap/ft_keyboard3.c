@@ -36,7 +36,7 @@ void				begin_left_shift(t_shell *shell)
 {
 	tputs(tgetstr("le", NULL), 1, re_putchar);
 	MINUS_POS;
-	while (ACT_CHAR == ' ')
+	while (ACT_CHAR == ' ' && shell->position)
 	{
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		MINUS_POS;

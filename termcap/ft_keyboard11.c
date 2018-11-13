@@ -12,9 +12,30 @@
 
 #include "ft_21sh.h"
 
+void			end_alt_left(t_shell *shell)
+{
+	int 			row;
+	struct winsize 	sz;
+
+	row = 0;
+	row = row_find(row, shell);
+	ioctl(0, TIOCGWINSZ, &sz);
+	if (PRE_CHAR == ' ' && shell->position)
+	{
+		(L_L) ? go_up(shell, sz) : in_line_left(shell);
+		while (ACT_CHAR == ' ' && shell->position)
+			(L_L) ? go_up(shell, sz) : in_line_left(shell);
+	}
+	while (C_CHAR && shell->position)
+	{
+		if (PRE_CHAR == ' ')
+			break ;
+		(L_L) ? go_up(shell, sz) : in_line_left(shell);
+	}
+}
+
 void			in_line_right(t_shell *shell)
 {
-	// printf("*\n");
 	tputs(tgetstr("nd", NULL), 1, re_putchar);
 	shell->position++;
 }

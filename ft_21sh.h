@@ -39,6 +39,7 @@
 # define C_CHAR shell->unparsed_com[shell->position] > 32 && shell->unparsed_com[shell->position] < 127
 # define P_CHAR shell->unparsed_com[shell->position - 1] > 32 && shell->unparsed_com[shell->position - 1] < 127
 # define A_CHAR shell->unparsed_com[shell->position + 1] > 32 && shell->unparsed_com[shell->position + 1] < 127
+# define L_L shell->position + 4 == ((sz.ws_col * (row - 1)) + 1)
 
 typedef struct 		s_history
 {
@@ -70,6 +71,14 @@ void 		left_key(t_shell *shell);
 void 		right_key(t_shell *shell);
 void		symbol_del(t_shell *shell);
 void		alt_left_key(t_shell *shell);
+
+void		go_up(t_shell *shell, struct winsize sz);
+void		norm_alt_left(t_shell *shell);
+void		multi_alt_left(t_shell *shell);
+void		default_alt_left(t_shell *shell);
+void		space_alt_left(t_shell *shell);
+
+void		end_alt_left(t_shell *shell);
 
 void		default_left_shift(t_shell *shell);
 void		middle_left_shift(t_shell *shell);
