@@ -81,8 +81,10 @@ void				end_key(t_shell *shell)
 		return ;
 	while (shell->position != shell->length)
 	{
-		tputs(tgetstr("nd", NULL), 1, re_putchar);
-		shell->position++;
+		if (check_cursor(shell) == 0)
+			multi_end_key(shell);
+		else
+			norm_end_key(shell);
 	}
 }
 
@@ -92,10 +94,9 @@ void				home_key(t_shell *shell)
 		return ;
 	else if (shell->position <= shell->length)
 	{
-		while (shell->position)
-		{
-			tputs(tgetstr("le", NULL), 1, re_putchar);
-			shell->position--;
-		}
+		if (check_cursor(shell) == 0)
+			multi_home_key(shell);
+		else
+			norm_home_key(shell);
 	}
 }

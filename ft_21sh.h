@@ -97,6 +97,7 @@ void		next_char_right_shift(t_shell *shell);
 void		norm_alt_right(t_shell *shell);
 void		multi_alt_right(t_shell *shell);
 void		space_alt_right(t_shell *shell);
+void		default_alt_right(t_shell *shell);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);
@@ -127,6 +128,11 @@ void		end_key(t_shell *shell);
 void		shift_left(t_shell *shell);
 void		shift_left_end(t_shell *shell);
 void		shift_left_norm(t_shell *shell);
+
+void		norm_home_key(t_shell *shell);
+void		multi_home_key(t_shell *shell);
+void		norm_end_key(t_shell *shell);
+void		multi_end_key(t_shell *shell);
 
 void		shift_right(t_shell *shell);
 void		shift_right_end(t_shell *shell);
