@@ -149,6 +149,8 @@ int			len_env(char **envp);
 size_t		word_count(char const *s, char c);
 
 int			key_hooker(uint64_t ch, int ret, t_shell *shell);
+void		norm_begin_history_add(t_shell *shell, uint64_t ch);
+void		multi_begin_history_add(t_shell *shell, uint64_t ch);
 
 int			check_cursor(t_shell *shell);
 void		multi_left(t_shell *shell);

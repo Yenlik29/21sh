@@ -42,39 +42,18 @@ void				left_n_clean_shell(t_shell *shell)
 
 void				begin_history_add(t_shell *shell, uint64_t ch)
 {
-	char *tmp;
-	char *hey;
-
-	// printf("*\n");
-	hey = (char *)malloc(sizeof(char) * 2048);
-	hey[0] = ch;
-	hey[1] = '\0';
-	tmp = ft_strdup(shell->history->record);
-	ft_strclr(shell->history->record);
-	ft_strncat(shell->history->record, hey, ft_strlen(hey));
-	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
-	set_cursor(shell);
-	while (--shell->length)
-		tputs(tgetstr("nd", NULL), 1, re_putchar);
-	left_n_clean_shell(shell);
-	set_cursor(shell);
-	print_line(shell);
-	while (shell->position != 1)
-	{
-		tputs(tgetstr("le", NULL), 1, re_putchar);
-		shell->position--;
-	}
-	ft_strclr(shell->unparsed_com);
-	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
-	free(tmp);
-	free(hey);
+	if (check_cursor(shell) == 0)
+		multi_begin_history_add(shell, ch);
+	else
+		norm_begin_history_add(shell, ch);
 }
 
 void				add_history_line(t_shell *shell, uint64_t ch)
 {
-	// printf("!\n");
 	if (shell->position == 0)
+	{
 		begin_history_add(shell, ch);
+	}
 	else if (shell->position > 0 && shell->position < shell->length)
 	{
 		// printf("!\n");
