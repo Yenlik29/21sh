@@ -14,13 +14,27 @@
 
 void				multi_shift_right(t_shell *shell)
 {
-	struct winsize sz;
+	int 			count;
+	int				row;
+	int 			position;
+	struct winsize 	sz;
 
+	row = 0;
+	row = row_find(row, shell);
 	ioctl(0, TIOCGWINSZ, &sz);
 	if (shell->position + sz.ws_col <= shell->length)
 	{
+		position = (row * sz.ws_col) - (shell->position + 3);
+		position = sz.ws_col - position;
 		tputs(tgetstr("do", NULL), 1, re_putchar);
-		printf("[%d->%d->%d]\n", shell->length, shell->position + 3, sz.ws_col);
+		count = 0;
+		while (count != position)
+		{
+			tputs(tgetstr("nd", NULL), 1, re_putchar);
+			count++;
+		}
+		shell->position = shell->position + sz.ws_col;
+		// printf("\n[%d->%d->%d]\n", shell->length + 3, shell->position + 3, sz.ws_col);
 		// shell->position = shell->position + sz.ws_col;
 	}
 	else
