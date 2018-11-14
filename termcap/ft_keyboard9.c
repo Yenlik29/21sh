@@ -65,12 +65,17 @@ void				shift_left_norm(t_shell *shell)
 
 void				shift_left(t_shell *shell)
 {
-	if (!(shell->history->prev))
-		return ;
-	if (shell->position > (int)ft_strlen(shell->history->prev->record))
-		shift_left_end(shell);
+	if (check_cursor(shell) == 0)
+		multi_shift_left(shell);
 	else
-		shift_left_norm(shell);
+	{
+		if (!(shell->history->prev))
+			return ;
+		if (shell->position > (int)ft_strlen(shell->history->prev->record))
+			shift_left_end(shell);
+		else
+			shift_left_norm(shell);
+	}
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 }

@@ -12,10 +12,16 @@
 
 #include "ft_21sh.h"
 
-void				go_up_inline(t_shell *shell)
+void				multi_shift_left(t_shell *shell)
 {
-	if (check_cursor(shell) == 0)
-			printf("Multi\n");
-		else
-			printf("Alone\n");
+	struct winsize sz;
+
+	ioctl(0, TIOCGWINSZ, &sz);
+	if (shell->position - sz.ws_col >= 0)
+	{
+		shell->position = shell->position - sz.ws_col;
+		tputs(tgetstr("up", NULL), 1, re_putchar);
+	}
+	else
+		home_key(shell);
 }
