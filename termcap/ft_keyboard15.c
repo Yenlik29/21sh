@@ -12,6 +12,21 @@
 
 #include "ft_21sh.h"
 
+void				multi_shift_right(t_shell *shell)
+{
+	struct winsize sz;
+
+	ioctl(0, TIOCGWINSZ, &sz);
+	if (shell->position + sz.ws_col <= shell->length)
+	{
+		tputs(tgetstr("do", NULL), 1, re_putchar);
+		printf("[%d->%d->%d]\n", shell->length, shell->position + 3, sz.ws_col);
+		// shell->position = shell->position + sz.ws_col;
+	}
+	else
+		end_key(shell);
+}
+
 void				multi_shift_left(t_shell *shell)
 {
 	struct winsize sz;

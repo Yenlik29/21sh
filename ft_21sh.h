@@ -130,6 +130,7 @@ void		shift_left_end(t_shell *shell);
 void		shift_left_norm(t_shell *shell);
 
 void		multi_shift_left(t_shell *shell);
+void		multi_shift_right(t_shell *shell);
 
 void		norm_home_key(t_shell *shell);
 void		multi_home_key(t_shell *shell);

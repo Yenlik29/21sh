@@ -52,14 +52,15 @@ void				shift_right_norm(t_shell *shell)
 
 void				shift_right(t_shell *shell)
 {
-	if (!(shell->history->next))
-		return ;
-	// printf("[%s->%s]\n", shell->history->record, shell->history->next->record);
-	// printf("[%s->%s]\n", shell->unparsed_com, shell->history->record);
-	// shell->length = ft_strlen(shell->history->record);
-	if (shell->position > (int)ft_strlen(shell->history->next->record))
-		shift_right_end(shell);
+	if (check_cursor(shell) == 0)
+		multi_shift_right(shell);
 	else
-		shift_right_norm(shell);
-	// printf("[%s->%s]\n", shell->unparsed_com, shell->history->record);
+	{
+		if (!(shell->history->next))
+			return ;
+		if (shell->position > (int)ft_strlen(shell->history->next->record))
+			shift_right_end(shell);
+		else
+			shift_right_norm(shell);
+	}
 }
