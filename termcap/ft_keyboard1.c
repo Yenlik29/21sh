@@ -25,19 +25,33 @@ void				alt_left_key(t_shell *shell)
 
 void				symbol_del(t_shell *shell)
 {
-	if (shell->position)
+	int 			row;
+	struct winsize 	sz;
+
+	row = 0;
+	row = row_find(row, shell);
+	ioctl(0, TIOCGWINSZ, &sz);
+	if (!(shell->position))
+		return ;
+	if (shell->position == shell->length)
 	{
-		if (shell->position == shell->length)
+		if (shell->position + 3 == sz.ws_col)
+		{
+			go_up(shell, sz);
+			tputs(tgetstr("nd", NULL), 1, re_putchar);
+			tputs(tgetstr("dc", NULL), 1, re_putchar);
+		}
+		else
 		{
 			tputs(tgetstr("le", NULL), 1, re_putchar);
 			tputs(tgetstr("dc", NULL), 1, re_putchar);
 			shell = symbol_remove(shell);
-			shell->length--;
 			shell->position--;
 		}
-		else
-			symbol_middle_remove(shell);
+		shell->length--;
 	}
+	else
+		symbol_middle_remove(shell);
 }
 
 void				enter_ch(t_shell *shell, uint64_t ch)

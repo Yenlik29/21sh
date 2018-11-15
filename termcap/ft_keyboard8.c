@@ -63,12 +63,20 @@ void				put_cursor(t_shell *shell)
 
 void				end_history_add(t_shell *shell, uint64_t ch)
 {
-	// printf("*\n");
+	int 			row;
+	struct winsize sz;
+
+	row = 0;
+	row = row_find(row, shell);
+	ioctl(0, TIOCGWINSZ, &sz);
 	shell->history->record[shell->length] = ch;
 	shell->history->record[shell->length + 1] = '\0';
 	write(0, &(shell->history->record[shell->length]), 1);
+	if (R_L)
+		out_line_right(shell);
+	else
+		shell->position++;
 	shell->length = ft_strlen(shell->history->record);
-	shell->position++;
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 }

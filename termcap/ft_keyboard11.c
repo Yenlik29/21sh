@@ -68,7 +68,6 @@ void			multi_right(t_shell *shell)
 	row = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
 	row = row_find(row, shell);
-	// printf("[%d->%d]\n", shell->position + 4, sz.ws_col * row);
 	if (shell->position + 4 == sz.ws_col * row)
 		out_line_right(shell);
 	else
@@ -83,7 +82,6 @@ void			norm_edition(t_shell *shell, uint64_t ch)
 		middle_cursor(shell, ch);
 	else
 	{
-		// printf("*\n");
 		shell->unparsed_com[shell->length] = ch;
 		shell->unparsed_com[shell->length + 1] = '\0';
 		write(0, &(shell->unparsed_com[shell->length]), 1);
@@ -91,6 +89,5 @@ void			norm_edition(t_shell *shell, uint64_t ch)
 		shell->position++;
 		ft_strclr(shell->history->record);
 		ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
-		// printf("[%s->%s:%d->%d]\n", shell->unparsed_com, shell->history->record, shell->position, shell->length);
 	}
 }

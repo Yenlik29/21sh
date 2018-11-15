@@ -114,6 +114,7 @@ void		go_cursor_end(t_shell *shell);
 void		new_history(t_shell *shell);
 t_shell		*add_history(t_shell *shell);
 void		history_up(t_shell *shell);
+void		multi_clear_till_begin(t_shell *shell);
 
 void		history_cursor_edition(t_shell *shell);
 void		history_cursor_done(t_shell *shell);

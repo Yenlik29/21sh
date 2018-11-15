@@ -14,11 +14,21 @@
 
 void				print_line(t_shell *shell)
 {
-	size_t count;
+	int 			row;
+	struct winsize 	sz;
+	size_t 			count;
 
+	row = 0;
+	ioctl(0, TIOCGWINSZ, &sz);
+	row = row_find(row, shell);
 	count = 0;
 	while (count < ft_strlen(shell->history->record))
 	{
+		// if (R_L)
+		// {
+		// 	// printf("[%d,%d]\n", shell->position + 4, sz.ws_col);
+		// 	out_line_right(shell);
+		// }
 		write(0, &shell->history->record[count], 1);
 		count++;
 	}
@@ -61,5 +71,6 @@ void				add_history_line(t_shell *shell, uint64_t ch)
 	else if (shell->position == shell->length)
 	{
 		// printf("+\n");
-		end_history_add(shell, ch);}
+		end_history_add(shell, ch);
+	}
 }

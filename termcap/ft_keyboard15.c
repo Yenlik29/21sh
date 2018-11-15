@@ -33,15 +33,17 @@ void				multi_clear_till_begin(t_shell *shell)
 			tputs(tgetstr("dc", NULL), 1, re_putchar);
 		}
 	}
-	shell->position = 0;
-	shell->length = ft_strlen(shell->history->record);
+	// shell->position = 0;
+	// shell->length = ft_strlen(shell->history->record);
 }
 
 void				multi_begin_history_add(t_shell *shell, uint64_t ch)
 {
 	char *tmp;
 	char *hey;
+	struct winsize 	sz;
 
+	ioctl(0, TIOCGWINSZ, &sz);
 	hey = (char *)malloc(sizeof(char) * 2048);
 	hey[0] = ch;
 	hey[1] = '\0';
@@ -49,21 +51,27 @@ void				multi_begin_history_add(t_shell *shell, uint64_t ch)
 	end_key(shell);
 	set_cursor(shell);
 	multi_clear_till_begin(shell);
-	ft_strclr(shell->history->record);
-	ft_strncat(shell->history->record, hey, ft_strlen(hey));
-	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
-	print_line(shell);
-	set_cursor(shell);
-	while (shell->position != 1)
-	{
-		tputs(tgetstr("le", NULL), 1, re_putchar);
-		shell->position--;
-	}
-	shell->length = ft_strlen(shell->history->record);
-	ft_strclr(shell->unparsed_com);
-	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
-	free(tmp);
-	free(hey);
+	// ft_strclr(shell->history->record);
+	// ft_strncat(shell->history->record, hey, ft_strlen(hey));
+	// ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
+	// print_line(shell);
+	// set_cursor(shell);
+	// while (shell->position != 1)
+	// {
+	// 	tputs(tgetstr("le", NULL), 1, re_putchar);
+	// 	shell->position--;
+	// }
+	// if ((shell->length + 3) % sz.ws_col == 0)
+	// {
+	// 	tputs(tgetstr("nd", NULL), 1, re_putchar);
+	// }
+	// shell->length = ft_strlen(shell->history->record);
+	// ft_strclr(shell->unparsed_com);
+	// ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
+	// free(tmp);
+	// free(hey);
+	// printf(s"[%d]\n", shell->position);
+	// exit(0);
 }
 
 void				norm_begin_history_add(t_shell *shell, uint64_t ch)
