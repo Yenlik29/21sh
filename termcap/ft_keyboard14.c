@@ -25,8 +25,19 @@ void				multi_end_key(t_shell *shell)
 
 void				norm_end_key(t_shell *shell)
 {
-	tputs(tgetstr("nd", NULL), 1, re_putchar);
-	shell->position++;
+	int 			row;
+	struct winsize 	sz;
+
+	row = 0;
+	ioctl(0, TIOCGWINSZ, &sz);
+	row = row_find(row, shell);
+	if (R_L)
+		out_line_right(shell);
+	else
+	{
+		tputs(tgetstr("nd", NULL), 1, re_putchar);
+		shell->position++;
+	}
 }
 
 void				multi_home_key(t_shell *shell)

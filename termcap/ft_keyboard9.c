@@ -87,9 +87,13 @@ void				end_key(t_shell *shell)
 	while (shell->position != shell->length)
 	{
 		if (check_cursor(shell) == 0)
-			multi_end_key(shell);
+		{
+			// printf("*\n");
+			multi_end_key(shell);}
 		else
-			norm_end_key(shell);
+		{
+			// printf("!\n");
+			norm_end_key(shell);}
 	}
 }
 
