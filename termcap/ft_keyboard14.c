@@ -37,7 +37,6 @@ void				multi_home_key(t_shell *shell)
 	row = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
 	row = row_find(row, shell);
-	// shell->position++;
 	while (shell->position != -1)
 	{
 		row = row_find(row, shell);
@@ -45,8 +44,6 @@ void				multi_home_key(t_shell *shell)
 			go_up(shell, sz);
 		else
 			in_line_left(shell);
-		// printf("[%d,%d->%d]\n", shell->position + 5, row, ((sz.ws_col * (row - 1)) + 1));
-		// exit(0);
 	}
 	shell->position = 0;
 }

@@ -22,17 +22,18 @@ void				multi_clear_till_begin(t_shell *shell)
 	while (shell->position)
 	{
 		row = row_find(row, shell);
-		if (L_L)
+		if (shell->position + 4 == row_find(row, shell) * sz.ws_col + 1)
 		{
 			go_up(shell, sz);
-			tputs(tgetstr("dc", NULL), 1, re_putchar);
+			// tputs(tgetstr("dc", NULL), 1, re_putchar);
 		}
 		else
 		{
 			in_line_left(shell);
-			tputs(tgetstr("dc", NULL), 1, re_putchar);
+			// tputs(tgetstr("dc", NULL), 1, re_putchar);
 		}
 	}
+	// printf("[%d]\n", shell->position);
 	// shell->position = 0;
 	// shell->length = ft_strlen(shell->history->record);
 }
@@ -50,28 +51,26 @@ void				multi_begin_history_add(t_shell *shell, uint64_t ch)
 	tmp = ft_strdup(shell->history->record);
 	end_key(shell);
 	set_cursor(shell);
-	multi_clear_till_begin(shell);
-	// ft_strclr(shell->history->record);
-	// ft_strncat(shell->history->record, hey, ft_strlen(hey));
-	// ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
-	// print_line(shell);
-	// set_cursor(shell);
-	// while (shell->position != 1)
-	// {
-	// 	tputs(tgetstr("le", NULL), 1, re_putchar);
-	// 	shell->position--;
-	// }
-	// if ((shell->length + 3) % sz.ws_col == 0)
-	// {
-	// 	tputs(tgetstr("nd", NULL), 1, re_putchar);
-	// }
-	// shell->length = ft_strlen(shell->history->record);
-	// ft_strclr(shell->unparsed_com);
-	// ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
-	// free(tmp);
-	// free(hey);
-	// printf(s"[%d]\n", shell->position);
-	// exit(0);
+	while (shell->position)
+		symbol_del(shell);
+	ft_strclr(shell->history->record);
+	ft_strncat(shell->history->record, hey, ft_strlen(hey));
+	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
+	print_line(shell);
+	set_cursor(shell);
+	while (shell->position != 1)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		shell->position--;
+	}
+	if ((shell->length + 3) % sz.ws_col == 0)
+		tputs(tgetstr("nd", NULL), 1, re_putchar);
+	shell->position = 1;
+	shell->length = ft_strlen(shell->history->record);
+	ft_strclr(shell->unparsed_com);
+	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
+	free(tmp);
+	free(hey);
 }
 
 void				norm_begin_history_add(t_shell *shell, uint64_t ch)

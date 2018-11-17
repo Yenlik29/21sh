@@ -24,11 +24,6 @@ void				print_line(t_shell *shell)
 	count = 0;
 	while (count < ft_strlen(shell->history->record))
 	{
-		// if (R_L)
-		// {
-		// 	// printf("[%d,%d]\n", shell->position + 4, sz.ws_col);
-		// 	out_line_right(shell);
-		// }
 		write(0, &shell->history->record[count], 1);
 		count++;
 	}
@@ -62,6 +57,7 @@ void				add_history_line(t_shell *shell, uint64_t ch)
 {
 	if (shell->position == 0)
 	{
+		// printf("*\n");
 		begin_history_add(shell, ch);
 	}
 	else if (shell->position > 0 && shell->position < shell->length)

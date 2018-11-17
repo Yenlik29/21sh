@@ -24,11 +24,6 @@ void				go_up(t_shell *shell, struct winsize sz)
 		position--;
 	}
 	shell->position--;
-	// shell->position--;
-	// tputs(tgetstr("le", NULL), 1, re_putchar);
-	// shell->position = shell->position;
-	// printf("[%d]\n", shell->position + 4);
-	// exit(0);
 }
 
 void				space_alt_left(t_shell *shell)
