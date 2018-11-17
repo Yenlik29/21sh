@@ -12,32 +12,6 @@
 
 #include "ft_21sh.h"
 
-void				multi_clear_till_begin(t_shell *shell)
-{
-	int 			row;
-	struct winsize 	sz;
-
-	ioctl(0, TIOCGWINSZ, &sz);
-	row = 0;
-	while (shell->position)
-	{
-		row = row_find(row, shell);
-		if (shell->position + 4 == row_find(row, shell) * sz.ws_col + 1)
-		{
-			go_up(shell, sz);
-			// tputs(tgetstr("dc", NULL), 1, re_putchar);
-		}
-		else
-		{
-			in_line_left(shell);
-			// tputs(tgetstr("dc", NULL), 1, re_putchar);
-		}
-	}
-	// printf("[%d]\n", shell->position);
-	// shell->position = 0;
-	// shell->length = ft_strlen(shell->history->record);
-}
-
 void				multi_begin_history_add(t_shell *shell, uint64_t ch)
 {
 	char *tmp;
