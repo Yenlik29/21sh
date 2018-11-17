@@ -48,9 +48,11 @@ void				left_n_clean_shell(t_shell *shell)
 void				begin_history_add(t_shell *shell, uint64_t ch)
 {
 	if (check_cursor(shell) == 0)
-		multi_begin_history_add(shell, ch);
+	{
+		multi_begin_history_add(shell, ch);}
 	else
-		norm_begin_history_add(shell, ch);
+	{
+		norm_begin_history_add(shell, ch);}
 }
 
 void				add_history_line(t_shell *shell, uint64_t ch)
