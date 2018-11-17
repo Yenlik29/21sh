@@ -35,7 +35,7 @@ void				symbol_del(t_shell *shell)
 		return ;
 	if (shell->position == shell->length)
 	{
-		if (shell->position + 3 == sz.ws_col)
+		if (shell->position + 4 == row * sz.ws_col + 1)
 		{
 			go_up(shell, sz);
 			tputs(tgetstr("nd", NULL), 1, re_putchar);
