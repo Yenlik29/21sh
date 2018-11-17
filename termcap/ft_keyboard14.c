@@ -37,15 +37,38 @@ void				multi_home_key(t_shell *shell)
 	row = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
 	row = row_find(row, shell);
-	while (shell->position)
-		(L_L) ? go_up(shell, sz) : in_line_left(shell);
+	// shell->position++;
+	while (shell->position != -1)
+	{
+		row = row_find(row, shell);
+		if (R_L)
+			go_up(shell, sz);
+		else
+			in_line_left(shell);
+		// printf("[%d,%d->%d]\n", shell->position + 5, row, ((sz.ws_col * (row - 1)) + 1));
+		// exit(0);
+	}
+	shell->position = 0;
 }
 
 void				norm_home_key(t_shell *shell)
 {
+	int 			row;
+	struct winsize 	sz;
+
+	row = 0;
+	ioctl(0, TIOCGWINSZ, &sz);
+	row = row_find(row, shell);
 	while (shell->position)
 	{
-		tputs(tgetstr("le", NULL), 1, re_putchar);
-		shell->position--;
+		if (shell->position + 4 == ((sz.ws_col * row) + 1))
+		{
+			go_up(shell, sz);
+		}
+		else
+		{
+			tputs(tgetstr("le", NULL), 1, re_putchar);
+			shell->position--;
+		}
 	}
 }

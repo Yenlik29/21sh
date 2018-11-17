@@ -102,6 +102,8 @@ void				home_key(t_shell *shell)
 		if (check_cursor(shell) == 0)
 			multi_home_key(shell);
 		else
-			norm_home_key(shell);
+		{
+			// printf("*\n");
+			norm_home_key(shell);}
 	}
 }

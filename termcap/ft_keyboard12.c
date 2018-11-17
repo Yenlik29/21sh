@@ -16,14 +16,19 @@ void				go_up(t_shell *shell, struct winsize sz)
 {
 	int position;
 
-	position = shell->position - sz.ws_col;
-	shell->position--;
+	position = sz.ws_col - 1;
 	tputs(tgetstr("up", NULL), 1, re_putchar);
-	while (position != shell->position)
+	while (position)
 	{
 		tputs(tgetstr("nd", NULL), 1, re_putchar);
-		position++;
+		position--;
 	}
+	shell->position--;
+	// shell->position--;
+	// tputs(tgetstr("le", NULL), 1, re_putchar);
+	// shell->position = shell->position;
+	// printf("[%d]\n", shell->position + 4);
+	// exit(0);
 }
 
 void				space_alt_left(t_shell *shell)

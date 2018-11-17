@@ -126,8 +126,6 @@ void				multi_shift_right(t_shell *shell)
 		}
 		shell->position = shell->position + sz.ws_col;
 	}
-	else
-		end_key(shell);
 }
 
 void				multi_shift_left(t_shell *shell)
@@ -140,6 +138,4 @@ void				multi_shift_left(t_shell *shell)
 		shell->position = shell->position - sz.ws_col;
 		tputs(tgetstr("up", NULL), 1, re_putchar);
 	}
-	else
-		home_key(shell);
 }
