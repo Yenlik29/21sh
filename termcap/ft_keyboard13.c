@@ -21,12 +21,22 @@ void				default_alt_right(t_shell *shell)
 	ioctl(0, TIOCGWINSZ, &sz);
 	row = row_find(row, shell);
 	while (C_CHAR && shell->position != shell->length)
-		(R_L) ? out_line_right(shell) : default_right_shift(shell);
+	{
+		row = row_find(row, shell);
+		if (shell->position + 4 == sz.ws_col * row)
+			out_line_right(shell);
+		else
+			default_right_shift(shell);
+	}
 	while (ACT_CHAR == ' ')
 	{
+		row = row_find(row, shell);
+		if (shell->position + 4 == sz.ws_col * row)
+			out_line_right(shell);
+		else
+			default_right_shift(shell);
 		if (C_CHAR)
 			break ;
-		(R_L) ? out_line_right(shell) : default_right_shift(shell);
 	}
 }
 
@@ -39,7 +49,13 @@ void				space_alt_right(t_shell *shell)
 	ioctl(0, TIOCGWINSZ, &sz);
 	row = row_find(row, shell);
 	while (ACT_CHAR == ' ' && shell->position != shell->length)
-		(R_L) ? out_line_right(shell) : default_right_shift(shell);
+	{
+		row = row_find(row, shell);
+		if (shell->position + 4 == sz.ws_col * row)
+			out_line_right(shell);
+		else
+			default_right_shift(shell);
+	}
 }
 
 void				multi_alt_right(t_shell *shell)
