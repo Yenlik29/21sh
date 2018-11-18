@@ -52,7 +52,6 @@ void				symbol_del(t_shell *shell)
 	}
 	else
 		symbol_middle_remove(shell);
-	// shell->length = ft_strlen(shell->history->record);
 }
 
 void				enter_ch(t_shell *shell, uint64_t ch)

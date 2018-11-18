@@ -26,12 +26,16 @@ void				symbol_middle_remove(t_shell *shell)
 	char *begin;
 	char *end;
 	int  position;
+	struct winsize sz;
 
+	ioctl(0, TIOCGWINSZ, &sz);
 	position = shell->position - 1;
 	begin = ft_strsub(shell->unparsed_com, 0, shell->position -1);
 	end = ft_strsub(shell->unparsed_com, shell->position, shell->length - shell->position);
-	go_cursor_end(shell);
-	clear_till_begin(shell);
+	while (shell->position != shell->length)
+		multi_end_key(shell);
+	while (shell->position)
+		symbol_del(shell);
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, begin, ft_strlen(begin));
 	ft_strncat(shell->history->record, end, ft_strlen(end));
@@ -42,6 +46,10 @@ void				symbol_middle_remove(t_shell *shell)
 		tputs(tgetstr("le", NULL), 1, re_putchar);
 		shell->position--;
 	}
+	if ((shell->length + 3) % sz.ws_col == 0)
+		tputs(tgetstr("nd", NULL), 1, re_putchar);
+	shell->position = position;
+	shell->length = ft_strlen(shell->history->record);
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 	free(begin);
