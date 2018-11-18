@@ -23,15 +23,38 @@ void			end_alt_left(t_shell *shell)
 	in_line_left(shell);
 	if (PRE_CHAR == ' ')
 	{
-		(L_L) ? go_up(shell, sz) : in_line_left(shell);
+		row = row_find(row, shell);
+		if (R_L)
+		{
+			go_up(shell, sz);
+			tputs(tgetstr("le", NULL), 1, re_putchar);
+		}
+		else
+			in_line_left(shell);
 		while (ACT_CHAR == ' ' && shell->position)
-			(L_L) ? go_up(shell, sz) : in_line_left(shell);
+		{
+			row = row_find(row, shell);
+			if (R_L)
+			{
+				go_up(shell, sz);
+				tputs(tgetstr("le", NULL), 1, re_putchar);
+			}
+			else
+				in_line_left(shell);
+		}
 	}
 	while (C_CHAR && shell->position)
 	{
 		if (PRE_CHAR == ' ')
 			break ;
-		(L_L) ? go_up(shell, sz) : in_line_left(shell);
+		row = row_find(row, shell);
+		if (R_L)
+		{
+			go_up(shell, sz);
+			tputs(tgetstr("le", NULL), 1, re_putchar);
+		}
+		else
+			in_line_left(shell);
 	}
 }
 

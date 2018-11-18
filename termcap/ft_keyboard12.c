@@ -35,12 +35,28 @@ void				space_alt_left(t_shell *shell)
 	ioctl(0, TIOCGWINSZ, &sz);
 	row = row_find(row, shell);
 	while (ACT_CHAR == ' ' && shell->position)
-		(L_L) ? go_up(shell, sz) : in_line_left(shell);
+	{
+		row = row_find(row, shell);
+		if (R_L)
+		{
+			go_up(shell, sz);
+			tputs(tgetstr("le", NULL), 1, re_putchar);
+		}
+		else
+			in_line_left(shell);
+	}
 	while (C_CHAR && shell->position)
 	{
 		if (PRE_CHAR == ' ')
 			break ;
-		(L_L) ? go_up(shell, sz) : in_line_left(shell);
+		row = row_find(row, shell);
+		if (R_L)
+		{
+			go_up(shell, sz);
+			tputs(tgetstr("le", NULL), 1, re_putchar);
+		}
+		else
+			in_line_left(shell);
 	}
 }
 
@@ -54,20 +70,44 @@ void				default_alt_left(t_shell *shell)
 	row = row_find(row, shell);
 	if (PRE_CHAR == ' ')
 	{
-		(L_L) ? go_up(shell, sz) : in_line_left(shell);
+		row = row_find(row, shell);
+		if (R_L)
+		{
+			go_up(shell, sz);
+			tputs(tgetstr("le", NULL), 1, re_putchar);
+		}
+		else
+			in_line_left(shell);
 		while (ACT_CHAR == ' ' && shell->position)
-			(L_L) ? go_up(shell, sz) : in_line_left(shell);
+		{
+			row = row_find(row, shell);
+			if (R_L)
+			{
+				go_up(shell, sz);
+				tputs(tgetstr("le", NULL), 1, re_putchar);
+			}
+			else
+				in_line_left(shell);
+		}
 	}
 	while (C_CHAR && shell->position)
 	{
+		row = row_find(row, shell);
+		if (R_L)
+		{
+			go_up(shell, sz);
+			tputs(tgetstr("le", NULL), 1, re_putchar);
+		}
+		else
+			in_line_left(shell);
 		if (PRE_CHAR == ' ')
 			break ;
-		(L_L) ? go_up(shell, sz) : in_line_left(shell);
 	}
 }
 
 void				multi_alt_left(t_shell *shell)
 {
+	// printf("*\n");
 	if (C_CHAR)
 		default_alt_left(shell);
 	else if (ACT_CHAR == ' ')
