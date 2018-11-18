@@ -69,22 +69,37 @@ void				middle_history_add(t_shell *shell, uint64_t ch)
 	char *end;
 	char *tmp;
 	char *ch_t;
+	int position;
+	struct winsize sz;
 
-	// printf("*\n");
+	ioctl(0, TIOCGWINSZ, &sz);
 	ch_t = (char *)malloc(sizeof(char) * 2048);
 	ch_t[0] = ch;
 	ch_t[1] = '\0';
 	end = NULL;
 	begin = NULL;
+	position = shell->position + 1;
 	begin = begin_history_record(begin, shell);
 	end = end_history_record(end, shell);
 	tmp = ft_strncat(begin, ch_t, ft_strlen(ch_t));
 	tmp = ft_strncat(tmp, end, ft_strlen(end));
+	while (shell->position != shell->length)
+		multi_end_key(shell);
+	while (shell->position)
+		symbol_del(shell);
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
-	place_cursor(shell);
 	print_line(shell);
-	put_cursor(shell);
+	set_cursor(shell);
+	while (shell->position != position)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		shell->position--;
+	}
+	if ((shell->length + 3) % sz.ws_col == 0)
+		tputs(tgetstr("nd", NULL), 1, re_putchar);
+	shell->position = position;
+	shell->length = ft_strlen(shell->history->record);
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 }
