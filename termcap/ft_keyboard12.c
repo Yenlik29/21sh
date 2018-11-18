@@ -28,78 +28,27 @@ void				go_up(t_shell *shell, struct winsize sz)
 
 void				space_alt_left(t_shell *shell)
 {
-	int 			row;
-	struct winsize 	sz;
-
-	row = 0;
-	ioctl(0, TIOCGWINSZ, &sz);
-	row = row_find(row, shell);
 	while (ACT_CHAR == ' ' && shell->position)
-	{
-		row = row_find(row, shell);
-		if (R_L)
-		{
-			go_up(shell, sz);
-			tputs(tgetstr("le", NULL), 1, re_putchar);
-		}
-		else
-			in_line_left(shell);
-	}
+		up_side(shell);
 	while (C_CHAR && shell->position)
 	{
 		if (PRE_CHAR == ' ')
 			break ;
-		row = row_find(row, shell);
-		if (R_L)
-		{
-			go_up(shell, sz);
-			tputs(tgetstr("le", NULL), 1, re_putchar);
-		}
-		else
-			in_line_left(shell);
+		up_side(shell);
 	}
 }
 
 void				default_alt_left(t_shell *shell)
 {
-	int 			row;
-	struct winsize 	sz;
-
-	row = 0;
-	ioctl(0, TIOCGWINSZ, &sz);
-	row = row_find(row, shell);
 	if (PRE_CHAR == ' ')
 	{
-		row = row_find(row, shell);
-		if (R_L)
-		{
-			go_up(shell, sz);
-			tputs(tgetstr("le", NULL), 1, re_putchar);
-		}
-		else
-			in_line_left(shell);
+		up_side(shell);
 		while (ACT_CHAR == ' ' && shell->position)
-		{
-			row = row_find(row, shell);
-			if (R_L)
-			{
-				go_up(shell, sz);
-				tputs(tgetstr("le", NULL), 1, re_putchar);
-			}
-			else
-				in_line_left(shell);
-		}
+			up_side(shell);
 	}
 	while (C_CHAR && shell->position)
 	{
-		row = row_find(row, shell);
-		if (R_L)
-		{
-			go_up(shell, sz);
-			tputs(tgetstr("le", NULL), 1, re_putchar);
-		}
-		else
-			in_line_left(shell);
+		up_side(shell);
 		if (PRE_CHAR == ' ')
 			break ;
 	}

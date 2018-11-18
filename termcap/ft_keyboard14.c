@@ -42,23 +42,8 @@ void				norm_end_key(t_shell *shell)
 
 void				multi_home_key(t_shell *shell)
 {
-	int 			row;
-	struct winsize 	sz;
-
-	row = 0;
-	ioctl(0, TIOCGWINSZ, &sz);
-	row = row_find(row, shell);
 	while (shell->position)
-	{
-		row = row_find(row, shell);
-		if (R_L)
-		{	
-			go_up(shell, sz);
-			tputs(tgetstr("le", NULL), 1, re_putchar);
-		}
-		else
-			in_line_left(shell);
-	}
+		up_side(shell);
 	shell->position = 0;
 }
 
@@ -73,9 +58,7 @@ void				norm_home_key(t_shell *shell)
 	while (shell->position)
 	{
 		if (shell->position + 4 == ((sz.ws_col * row) + 1))
-		{
 			go_up(shell, sz);
-		}
 		else
 		{
 			tputs(tgetstr("le", NULL), 1, re_putchar);

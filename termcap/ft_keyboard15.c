@@ -12,6 +12,23 @@
 
 #include "ft_21sh.h"
 
+void				up_side(t_shell *shell)
+{
+	int 			row;
+	struct winsize 	sz;
+
+	row = 0;
+	ioctl(0, TIOCGWINSZ, &sz);
+	row = row_find(row, shell);
+	if (R_L)
+	{
+		go_up(shell, sz);
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+	}
+	else
+		in_line_left(shell);
+}
+
 void				multi_begin_history_add(t_shell *shell, uint64_t ch)
 {
 	char *tmp;

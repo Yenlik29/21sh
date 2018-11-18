@@ -99,6 +99,8 @@ void		multi_alt_right(t_shell *shell);
 void		space_alt_right(t_shell *shell);
 void		default_alt_right(t_shell *shell);
 
+void		up_side(t_shell *shell);
+
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);
 char 		*char_record(char ch, char *tmp);
