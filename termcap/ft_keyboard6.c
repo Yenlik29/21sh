@@ -52,6 +52,7 @@ void				begin_history_add(t_shell *shell, uint64_t ch)
 		multi_begin_history_add(shell, ch);}
 	else
 	{
+		// printf("*\n");
 		norm_begin_history_add(shell, ch);}
 }
 
