@@ -14,57 +14,40 @@
 
 void				history_cursor_edition(t_shell *shell)
 {
-	int count;
+	char *tmp;
 
-	// printf("[%s->%d]\n", shell->unparsed_com, shell->length);
-	count = ft_strlen(shell->unparsed_com);
-	while (count && shell->position)
-	{
-		tputs(tgetstr("le", NULL), 1, re_putchar);
-		tputs(tgetstr("dc", NULL), 1, re_putchar);
-		count--;
-		shell->position--;
-	}
+	tmp = ft_strdup(shell->unparsed_com);
 	ft_strclr(shell->history->record);
-	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
+	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
+	while (shell->position)
+		symbol_del(shell);
+	ft_strclr(shell->history->record);
+	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
 	shell->history = shell->history->prev;
-	count = 0;
-	while ((size_t)count < ft_strlen(shell->history->record))
-	{
-		write(0, &shell->history->record[count], 1);
-		shell->position++;
-		count++;
-	}
+	print_line(shell);
 	shell->length = ft_strlen(shell->history->record);
 	shell->position = shell->length;
-	// printf("[%s->%s]\n", shell->unparsed_com, shell->history->record);
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
+	free(tmp);
 }
 
 void				history_cursor_done(t_shell *shell)
 {
-	int count;
+	char *tmp;
 
-	count = ft_strlen(shell->history->record);
-	while (count-- && shell->position)
-	{
-		tputs(tgetstr("le", NULL), 1, re_putchar);
-		tputs(tgetstr("dc", NULL), 1, re_putchar);
-		shell->position--;
-	}
+	tmp = ft_strdup(shell->history->record);
+	while (shell->position)
+		symbol_del(shell);
+	ft_strclr(shell->history->record);
+	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
 	shell->history = shell->history->prev;
-	count = 0;
-	while ((size_t)count < ft_strlen(shell->history->record))
-	{
-		write(0, &shell->history->record[count], 1);
-		shell->position++;
-		count++;
-	}
+	print_line(shell);
 	shell->length = ft_strlen(shell->history->record);
 	shell->position = shell->length;
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
+	free(tmp);
 }
 
 void				history_up(t_shell *shell)
@@ -82,7 +65,7 @@ void				history_up(t_shell *shell)
 	}
 	else if (shell->position == shell->length)
 	{
-		// printf("!\n");
+		// printf("?\n");
 		history_cursor_done(shell);}
 }
 
