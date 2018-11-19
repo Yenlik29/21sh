@@ -14,7 +14,7 @@
 
 void				ft_quote_error(int q)
 {
-	ft_putstr_fd("minishell: quote error: ", 2);
+	ft_putstr_fd("21sh: quote error: ", 2);
 	ft_putnbr_fd(q, 2);
 	ft_putstr_fd(" quantity\n", 2);
 }

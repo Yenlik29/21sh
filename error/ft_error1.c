@@ -29,7 +29,7 @@ void				ft_opt_require_arg(char c)
 
 void				ft_parse_error(void)
 {
-	ft_putstr_fd("minishell: parse error \\n\n", 2);
+	ft_putstr_fd("21sh: parse error \\n\n", 2);
 }
 
 void				ft_wrong_quantity_env(void)
@@ -39,7 +39,7 @@ void				ft_wrong_quantity_env(void)
 
 void				ft_command_not_found(char *command)
 {
-	ft_putstr_fd("minishell: command not found: ", 2);
+	ft_putstr_fd("21sh: command not found: ", 2);
 	ft_putstr_fd(command, 2);
 	ft_putchar_fd('\n', 2);
 }

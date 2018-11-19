@@ -14,7 +14,7 @@
 
 void				ft_not_set(char *word)
 {
-	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd("21sh: ", 2);
 	ft_putstr_fd(word, 2);
 	ft_putstr_fd(" not set\n", 2);
 }
