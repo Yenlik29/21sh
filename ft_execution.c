@@ -44,7 +44,7 @@ void		ft_exec_sys(char **path, char **command, char **envp)
 	{
 		if (execve(command[0], command, envp) == -1)
 		{
-			ft_putstr_fd("minishell: permission denied: ", 2);
+			ft_putstr_fd("21sh: permission denied: ", 2);
 			ft_putstr_fd(command[0], 2);
 			ft_putchar_fd('\n', 2);
 		}
