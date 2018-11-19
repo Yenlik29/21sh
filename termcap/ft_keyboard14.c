@@ -48,8 +48,6 @@ void				multi_home_key(t_shell *shell)
 	row = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
 	row = row_find(row, shell);
-	// multi_end_key(shell);
-	// set_cursor(shell);
 	while (shell->position)
 	{
 		row = row_find(row, shell);
