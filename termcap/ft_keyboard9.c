@@ -104,10 +104,12 @@ void				home_key(t_shell *shell)
 	else if (shell->position <= shell->length)
 	{
 		if (check_cursor(shell) == 0)
-			multi_home_key(shell);
-		else
 		{
 			// printf("*\n");
+			multi_home_key(shell);}
+		else
+		{
+			// printf("!\n");
 			norm_home_key(shell);}
 	}
 }

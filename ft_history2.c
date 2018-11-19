@@ -14,31 +14,25 @@
 
 void				history_cursor_middle(t_shell *shell)
 {
-	int count;
+	char *tmp;
 
 	if (!(shell->history->prev))
 		return ;
+	tmp = ft_strdup(shell->unparsed_com);
 	ft_strclr(shell->history->record);
-	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
-	while (shell->position != shell->length)
-	{
-		tputs(tgetstr("nd", NULL), 1, re_putchar);
-		shell->position++;
-	}
-	shell->position = shell->length;
-	count = shell->length;
-	while (count && shell->position)
-	{
-		tputs(tgetstr("le", NULL), 1, re_putchar);
-		tputs(tgetstr("dc", NULL), 1, re_putchar);
-		shell->position--;
-		count--;
-	}
+	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
+	end_key(shell);
+	set_cursor(shell);
+	while (shell->position)
+		symbol_del(shell);
+	ft_strclr(shell->history->record);
+	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
 	shell->history = shell->history->prev;
 	print_line(shell);
 	set_cursor(shell);
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
+	free(tmp);
 }
 
 void				history_down_cursor_end(t_shell *shell)
@@ -65,29 +59,23 @@ void				history_down_cursor_end(t_shell *shell)
 
 void				history_down_cursor_middle(t_shell *shell)
 {
-	int count;
+	char *tmp;
 
 	if (!(shell->history->next))
 		return ;
-	while (shell->position != shell->length)
-	{
-		tputs(tgetstr("nd", NULL), 1, re_putchar);
-		shell->position++;
-	}
-	count = shell->length;
-	while (count && shell->position)
-	{
-		tputs(tgetstr("le", NULL), 1, re_putchar);
-		tputs(tgetstr("dc", NULL), 1, re_putchar);
-		shell->position--;
-		count--;
-	}
+	tmp = ft_strdup(shell->unparsed_com);
+	end_key(shell);
+	set_cursor(shell);
+	while (shell->position)
+		symbol_del(shell);
+	ft_strclr(shell->history->record);
+	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
 	shell->history = shell->history->next;
 	print_line(shell);
-	shell->length = ft_strlen(shell->history->record);
-	shell->position = shell->length;
+	set_cursor(shell);
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
+	free(tmp);
 }
 
 void				history_down(t_shell *shell)

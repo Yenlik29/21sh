@@ -66,7 +66,8 @@ void				history_up(t_shell *shell)
 	else if (shell->position == shell->length)
 	{
 		// printf("?\n");
-		history_cursor_done(shell);}
+		history_cursor_done(shell);
+	}
 }
 
 void				new_history(t_shell *shell)

@@ -97,7 +97,16 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	ft_strncat(shell->history->record, shell->tmp, ft_strlen(shell->tmp));
 	shell->length = ft_strlen(shell->history->record);
 	shell->history = shell->history->next;
-	write(0, "\n", 1);
+	// printf("[%d]\n", shell->position);
+	// printf("\n[%d,%d->%d]\n", shell->position, shell->position + 4, shell->length);
+	if (shell->position == shell->length)
+		write(0, "\n", 1);
+	else
+	{
+		end_key(shell);
+		set_cursor(shell);
+		write(0, "\n", 1);
+	}
 	env = NULL; ///////////////////////////////////////////////////////////
 	// w_splited = split_word(word);
 	// w_splited = parsed_word(w_splited, env);
