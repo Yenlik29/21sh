@@ -39,6 +39,12 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 		shift_left(shell);
 	else if (ch == 73883020516123)
 		shift_right(shell);
+	else if (ch == 23)
+		printf("Cut!!\n");
+	else if (ch == 27)
+		left_selection(shell);
+	else if (ch == 29)
+		right_selection(shell);
 	else
 		return (0);
 	// printf("[%lld]\n", ch);

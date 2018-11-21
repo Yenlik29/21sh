@@ -29,6 +29,7 @@ t_shell 		*init_shell(t_shell *shell)
 		return (NULL);
 	shell->history->next = NULL;
 	shell->history->prev = NULL;
+	shell->buf = (char *)malloc(sizeof(char) * 2048);
 	shell->tmp = (char *)malloc(sizeof(char) * 2048);
 	shell->unparsed_com = (char *)malloc(sizeof(char) * 4089);
 	shell->length = 0;

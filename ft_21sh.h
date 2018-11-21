@@ -51,6 +51,9 @@ typedef struct 		s_history
 
 typedef struct 		s_shell
 {
+	static int 			start;
+	static int 			end;
+	char 			*buf;
 	char 			*tmp;
 	t_history		*history;
 	char 			*unparsed_com;
@@ -100,6 +103,9 @@ void		space_alt_right(t_shell *shell);
 void		default_alt_right(t_shell *shell);
 
 void		up_side(t_shell *shell);
+
+void		left_selection(t_shell *shell);
+void		right_selection(t_shell *shell);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);
