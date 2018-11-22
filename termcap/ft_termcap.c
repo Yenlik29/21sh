@@ -50,5 +50,6 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 	// printf("[%lld]\n", ch);
 	ft_strclr(shell->tmp);
 	ft_strncat(shell->tmp, shell->unparsed_com, ft_strlen(shell->unparsed_com));
+	// printf("[%s]\n", shell->tmp);
 	return (1);
 }

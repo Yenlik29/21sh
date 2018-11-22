@@ -87,12 +87,11 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 			break ;
 		ch = 0;
 	}
-	
-
+	shell->start = 0;
+	shell->end = 0;
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	ft_strclr(shell->unparsed_com);
-
 	w_splited = split_word(shell->history->record);
 	w_splited = parsed_word(w_splited, env);
 	ft_bzero(word, ft_strlen(word));
@@ -101,8 +100,8 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	while (shell->history->next != NULL)
 			shell->history = shell->history->next;
 
-
 	shell = add_history(shell);
+	ft_strclr(shell->buf);
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->tmp, ft_strlen(shell->tmp));
 	shell->length = ft_strlen(shell->history->record);
@@ -111,6 +110,7 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 		write(0, "\n", 1);
 	else
 	{
+		// printf("[%d,%d]\n", shell->position, shell->length);
 		end_key(shell);
 		set_cursor(shell);
 		write(0, "\n", 1);

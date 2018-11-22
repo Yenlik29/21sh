@@ -51,8 +51,8 @@ typedef struct 		s_history
 
 typedef struct 		s_shell
 {
-	// int 			start;
-	// int 			end;
+	int 			start;
+	int 			end;
 	char 			*buf;
 	char 			*tmp;
 	t_history		*history;
