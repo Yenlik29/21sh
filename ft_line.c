@@ -89,6 +89,7 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	}
 	shell->start = 0;
 	shell->end = 0;
+	// printf("\n\n[%s]\n", shell->buf);
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	ft_strclr(shell->unparsed_com);
