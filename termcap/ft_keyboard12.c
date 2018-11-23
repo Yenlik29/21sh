@@ -56,7 +56,6 @@ void				default_alt_left(t_shell *shell)
 
 void				multi_alt_left(t_shell *shell)
 {
-	// printf("*\n");
 	if (C_CHAR)
 		default_alt_left(shell);
 	else if (ACT_CHAR == ' ')

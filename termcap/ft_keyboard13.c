@@ -12,6 +12,25 @@
 
 #include "ft_21sh.h"
 
+void				buf_change_reverse(t_shell *shell)
+{
+	int i;
+	int end;
+	int start;
+
+	i = 0;
+	start = shell->end;
+	end = shell->start;
+	ft_strclr(shell->buf);
+	while (start != end)
+	{
+		shell->buf[i] = shell->history->record[start];
+		i++;
+		start++;
+	}
+	shell->buf[i] = '\0';
+}
+
 void				default_alt_right(t_shell *shell)
 {
 	int 			row;

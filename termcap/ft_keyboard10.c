@@ -12,6 +12,28 @@
 
 #include "ft_21sh.h"
 
+void				selection(t_shell *shell)
+{
+	int end;
+	int start;
+
+	end = shell->end;
+	start = shell->start;
+	while (start != end)
+	{
+		tputs(tgetstr("mr", NULL), 1, re_putchar);
+		write(0, &shell->history->record[shell->position], 1);
+		shell->position++;
+		start--;
+	}
+	tputs(tgetstr("me", NULL), 1, re_putchar);
+	while (shell->position != shell->length)
+	{
+		write(0, &shell->history->record[shell->position], 1);
+		shell->position++;
+	}
+}
+
 void				shift_right_end(t_shell *shell)
 {
 	while (shell->position != shell->length)

@@ -101,11 +101,19 @@ void		norm_alt_right(t_shell *shell);
 void		multi_alt_right(t_shell *shell);
 void		space_alt_right(t_shell *shell);
 void		default_alt_right(t_shell *shell);
+void		buf_change_reverse(t_shell *shell);
 
 void		up_side(t_shell *shell);
 
 void		left_selection(t_shell *shell);
 void		right_selection(t_shell *shell);
+void		left_erase_selection(t_shell *shell, char *tmp);
+void		print_inverse(t_shell *shell, int position);
+void		left_inverse_selection(t_shell *shell, char *tmp);
+
+void		cut(t_shell *shell);
+char		*cutted_buf_creation(t_shell *shell, char *new);
+char 		*reversed_buf_create(t_shell *shell, char *new);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);
@@ -144,7 +152,9 @@ void		norm_home_key(t_shell *shell);
 void		multi_home_key(t_shell *shell);
 void		norm_end_key(t_shell *shell);
 void		multi_end_key(t_shell *shell);
+void		buf_change(t_shell *shell);
 
+void		selection(t_shell *shell);
 void		shift_right(t_shell *shell);
 void		shift_right_end(t_shell *shell);
 

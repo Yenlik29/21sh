@@ -87,6 +87,7 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 			break ;
 		ch = 0;
 	}
+	// printf("[%s]\n", shell->buf);
 	shell->start = 0;
 	shell->end = 0;
 	// printf("\n\n[%s]\n", shell->buf);

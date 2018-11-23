@@ -12,6 +12,25 @@
 
 #include "ft_21sh.h"
 
+void				buf_change(t_shell *shell)
+{
+	int i;
+	int end;
+	int start;
+
+	i = 0;
+	start = shell->start;
+	end = shell->end;
+	ft_strclr(shell->buf);
+	while (start != end)
+	{
+		shell->buf[i] = shell->history->record[start];
+		start++;
+		i++;
+	}
+	shell->buf[i] = '\0';
+}
+
 void				multi_end_key(t_shell *shell)
 {
 	int 			row;
