@@ -113,7 +113,6 @@ void				left_inverse_selection(t_shell *shell, char *tmp)
 	row = 0;
 	ioctl(0, TIOCGWINSZ, &sz);
 	row = row_find(row, shell);
-
 	shell->end--;
 	position = shell->end;
 	end_key(shell);
@@ -146,8 +145,10 @@ void				left_selection(t_shell *shell)
 	tmp = ft_strdup(shell->history->record);
 	if (shell->end > shell->start)
 		left_erase_selection(shell, tmp);
-	else if (shell->start >= shell->end)
+	else if (shell->start >= shell->end && shell->start && shell->end)
 		left_inverse_selection(shell, tmp);
+	else if (!shell->start && !shell->end)
+		left_default_selection(shell, tmps);
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, tmp, ft_strlen(tmp));
 	free(tmp);
