@@ -12,13 +12,14 @@
 
 #include "ft_21sh.h"
 
-char				*cutted_buf_creation(t_shell *shell, char *new)
+char				*cutted_buf_creation(t_shell *shell, char *new, int *cursor)
 {
 	int i;
 	int position;
 
 	i = 0;
 	position = shell->end;
+	*cursor = shell->start;
 	new = (char *)malloc(sizeof(char) * 2048);
 	while (i < shell->start)
 	{
@@ -36,13 +37,15 @@ char				*cutted_buf_creation(t_shell *shell, char *new)
 	return (new);
 }
 
-char 				*reversed_buf_create(t_shell *shell, char *new)
+char 				*reversed_buf_create(t_shell *shell, char *new, int *cursor)
 {
 	int i;
 	int position;
 	
 	i = 0;
 	position = shell->start;
+	*cursor = shell->end;
+	new = (char *)malloc(sizeof(char) * 2048);
 	while (i < shell->end)
 	{
 		new[i] = shell->history->record[i];
@@ -67,11 +70,10 @@ void				cut(t_shell *shell)
 
 	i = 0;
 	new = NULL;
-	position = shell->start;
 	if (shell->start <= shell->end)
-		new = cutted_buf_creation(shell, new);
-	else if (shell->start > shell->end)
-		new = reversed_buf_create(shell, new);
+		new = cutted_buf_creation(shell, new, &position);
+	if (shell->start > shell->end)
+		new = reversed_buf_create(shell, new, &position);
 	end_key(shell);
 	set_cursor(shell);
 	while (shell->position)

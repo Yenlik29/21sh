@@ -112,8 +112,8 @@ void		print_inverse(t_shell *shell, int position);
 void		left_inverse_selection(t_shell *shell, char *tmp);
 
 void		cut(t_shell *shell);
-char		*cutted_buf_creation(t_shell *shell, char *new);
-char 		*reversed_buf_create(t_shell *shell, char *new);
+char		*cutted_buf_creation(t_shell *shell, char *new, int *cursor);
+char 		*reversed_buf_create(t_shell *shell, char *new, int *cursor);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);
