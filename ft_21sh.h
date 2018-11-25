@@ -114,6 +114,7 @@ void		left_inverse_selection(t_shell *shell, char *tmp);
 void		cut(t_shell *shell);
 char		*cutted_buf_creation(t_shell *shell, char *new, int *cursor);
 char 		*reversed_buf_create(t_shell *shell, char *new, int *cursor);
+void		left_default_selection(t_shell *shell, char *tmp);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);

@@ -144,11 +144,16 @@ void				left_selection(t_shell *shell)
 		return ;
 	tmp = ft_strdup(shell->history->record);
 	if (shell->end > shell->start)
-		left_erase_selection(shell, tmp);
+	{	
+		// printf("*\n");
+		left_erase_selection(shell, tmp);}
+		// printf("[%d,%d]\n", shell->start, shell->end);
+	if (shell->start == 0 && shell->end == 0)
+	{	
+		// printf("!\n");
+		left_default_selection(shell, tmp);}
 	else if (shell->start >= shell->end && shell->start && shell->end)
 		left_inverse_selection(shell, tmp);
-	else if (!shell->start && !shell->end)
-		left_default_selection(shell, tmps);
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, tmp, ft_strlen(tmp));
 	free(tmp);

@@ -12,6 +12,57 @@
 
 #include "ft_21sh.h"
 
+void				print_left_inverse(t_shell *shell, int position)
+{
+	while (shell->position >= shell->start && shell->position < shell->end)
+	{
+		tputs(tgetstr("mr", NULL), 1, re_putchar);
+		write(0, &shell->history->record[shell->position], 1);
+		tputs(tgetstr("me", NULL), 1, re_putchar);
+		shell->position++;
+	}
+	while (shell->position <= shell->length)
+	{
+		write(0, &shell->history->record[shell->position], 1);
+		shell->position++;		
+	}
+	position--;
+	set_cursor(shell);
+	while (shell->position != position)
+	{
+		tputs(tgetstr("le", NULL), 1, re_putchar);
+		shell->position--;
+	}
+}
+
+void				left_default_selection(t_shell *shell, char *tmp)
+{
+	int position;
+
+	if (!shell->position)
+		return ;
+	if (!shell->start && !shell->end)
+	{
+		shell->end = shell->position;
+		shell->start = shell->position - 1;
+		// shell->position;
+	}
+	position = shell->start;
+	end_key(shell);
+	set_cursor(shell);
+	while (shell->position != position)
+		symbol_del(shell);
+	// tmp = NULL;
+	ft_strclr(shell->history->record);
+	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
+	shell->length = ft_strlen(shell->history->record);
+	// selection(shell);
+	print_left_inverse(shell, position);
+	shell->start--;
+	ft_strclr(shell->unparsed_com);
+	ft_strncat(shell->unparsed_com, tmp, ft_strlen(tmp));
+}
+
 char				*cutted_buf_creation(t_shell *shell, char *new, int *cursor)
 {
 	int i;
