@@ -112,7 +112,6 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 		write(0, "\n", 1);
 	else
 	{
-		// printf("[%d,%d]\n", shell->position, shell->length);
 		end_key(shell);
 		set_cursor(shell);
 		write(0, "\n", 1);

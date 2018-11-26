@@ -45,6 +45,10 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 		left_selection(shell);
 	else if (ch == 29)
 		right_selection(shell);
+	else if (ch == 5)
+		copy(shell);
+	else if (ch == 18)
+		paste(shell);
 	else
 		return (0);
 	// printf("[%lld]\n", ch);
