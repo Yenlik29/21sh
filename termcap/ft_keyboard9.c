@@ -76,6 +76,8 @@ void				shift_left(t_shell *shell)
 		else
 			shift_left_norm(shell);
 	}
+	shell->start = 0;
+	shell->end = 0;
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, shell->history->record, ft_strlen(shell->history->record));
 }
@@ -95,6 +97,8 @@ void				end_key(t_shell *shell)
 			// printf("!\n");
 			norm_end_key(shell);}
 	}
+	// shell->start = 0;
+	// shell->end = 0;
 }
 
 void				home_key(t_shell *shell)
@@ -112,4 +116,6 @@ void				home_key(t_shell *shell)
 			// printf("!\n");
 			norm_home_key(shell);}
 	}
+	shell->start = 0;
+	shell->end = 0;
 }

@@ -88,5 +88,7 @@ void				alt_right_key(t_shell *shell)
 			multi_alt_right(shell);
 		else
 			norm_alt_right(shell);
+		shell->start = 0;
+		shell->end = 0;
 	}
 }

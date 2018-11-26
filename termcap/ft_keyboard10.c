@@ -85,4 +85,6 @@ void				shift_right(t_shell *shell)
 		else
 			shift_right_norm(shell);
 	}
+	shell->start = 0;
+	shell->end = 0;
 }

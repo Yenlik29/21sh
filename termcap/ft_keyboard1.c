@@ -20,6 +20,8 @@ void				alt_left_key(t_shell *shell)
 			multi_alt_left(shell);
 		else
 			norm_alt_left(shell);
+		shell->start = 0;
+		shell->end = 0;
 	}
 }
 
@@ -33,25 +35,30 @@ void				symbol_del(t_shell *shell)
 	ioctl(0, TIOCGWINSZ, &sz);
 	if (!(shell->position))
 		return ;
-	if (shell->position == shell->length)
-	{
-		if (shell->position + 4 == row * sz.ws_col + 1)
+	// if (!shell->start && !shell->end)
+	// 	cut(shell);
+	// else
+	// {
+		if (shell->position == shell->length)
 		{
-			go_up(shell, sz);
-			tputs(tgetstr("nd", NULL), 1, re_putchar);
-			tputs(tgetstr("dc", NULL), 1, re_putchar);
+			if (shell->position + 4 == row * sz.ws_col + 1)
+			{
+				go_up(shell, sz);
+				tputs(tgetstr("nd", NULL), 1, re_putchar);
+				tputs(tgetstr("dc", NULL), 1, re_putchar);
+			}
+			else
+			{
+				tputs(tgetstr("le", NULL), 1, re_putchar);
+				tputs(tgetstr("dc", NULL), 1, re_putchar);
+				shell = symbol_remove(shell);
+				shell->position--;
+			}
+			shell->length--;
 		}
 		else
-		{
-			tputs(tgetstr("le", NULL), 1, re_putchar);
-			tputs(tgetstr("dc", NULL), 1, re_putchar);
-			shell = symbol_remove(shell);
-			shell->position--;
-		}
-		shell->length--;
-	}
-	else
-		symbol_middle_remove(shell);
+			symbol_middle_remove(shell);
+	// }
 }
 
 void				enter_ch(t_shell *shell, uint64_t ch)
@@ -80,6 +87,8 @@ void 				left_key(t_shell *shell)
 			tputs(tgetstr("le", NULL), 1, re_putchar);
 			(shell->position)--;
 		}
+		shell->start = 0;
+		shell->end = 0;
 	}
 }
 
@@ -94,6 +103,8 @@ void 				right_key(t_shell *shell)
 			tputs(tgetstr("nd", NULL), 1, re_putchar);
 			shell->position++;
 		}
+		shell->start = 0;
+		shell->end = 0;
 	}
 }
 
