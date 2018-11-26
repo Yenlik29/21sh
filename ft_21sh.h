@@ -113,6 +113,8 @@ void		left_inverse_selection(t_shell *shell, char *tmp);
 
 void		default_right_selection(t_shell *shell);
 void		right_inverse_selection(t_shell *shell);
+void		right_del_func(t_shell *shell, int position, char *tmp);
+void		print_n_cursor(t_shell *shell, int cursor);
 
 void		cut(t_shell *shell);
 char		*cutted_buf_creation(t_shell *shell, char *new, int *cursor);

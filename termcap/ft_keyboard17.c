@@ -95,10 +95,12 @@ void				cut(t_shell *shell)
 
 	i = 0;
 	new = NULL;
+	// printf("[%s]\n", shell->history->record);
 	if (shell->start <= shell->end)
 		new = cutted_buf_creation(shell, new, &position);
 	if (shell->start > shell->end)
 		new = reversed_buf_create(shell, new, &position);
+	// printf("[%s]\n", new);
 	end_key(shell);
 	set_cursor(shell);
 	while (shell->position)

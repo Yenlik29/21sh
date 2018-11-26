@@ -12,20 +12,8 @@
 
 #include "ft_21sh.h"
 
-void				right_inverse_selection(t_shell *shell)
+void				right_del_func(t_shell *shell, int position, char *tmp)
 {
-	char *tmp;
-	int cursor;
-	int position;
-	int 			row;
-	struct winsize 	sz;
-
-	row = 0;
-	ioctl(0, TIOCGWINSZ, &sz);
-	tmp = ft_strdup(shell->history->record);
-	position = shell->end;
-	shell->end++;
-	cursor = shell->end;
 	end_key(shell);
 	set_cursor(shell);
 	while (shell->position != position)
@@ -33,14 +21,12 @@ void				right_inverse_selection(t_shell *shell)
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, tmp, ft_strlen(tmp));
 	shell->length = ft_strlen(shell->history->record);
-	// shell->end--;
 	while (shell->position < shell->end)
 	{
 		tputs(tgetstr("me", NULL), 1, re_putchar);
 		write(0, &shell->history->record[shell->position], 1);
 		shell->position++;
 	}
-	// shell->end++;
 	position = shell->end;
 	while (position < shell->start)
 	{
@@ -49,13 +35,20 @@ void				right_inverse_selection(t_shell *shell)
 		position++;
 		shell->position++;
 	}
-	tputs(tgetstr("me", NULL), 1, re_putchar);
+}
+
+void				print_n_cursor(t_shell *shell, int cursor)
+{
+	int 			row;
+	struct winsize 	sz;
+
+	row = 0;
+	ioctl(0, TIOCGWINSZ, &sz);
 	while (shell->position != shell->length)
 	{
 		write(0, &shell->history->record[shell->position], 1);
 		shell->position++;
 	}
-	// printf("[%d,%c]\n", shell->position, shell->history->record[shell->position]);
 	while (shell->position != cursor - 1)
 	{
 		row = row_find(row, shell);
@@ -64,13 +57,25 @@ void				right_inverse_selection(t_shell *shell)
 		else
 			out_line_left(shell);
 	}
+}
+
+void				right_inverse_selection(t_shell *shell)
+{
+	char *tmp;
+	int cursor;
+	int position;
+	
+	tmp = ft_strdup(shell->history->record);
+	position = shell->end;
+	shell->end++;
+	cursor = shell->end;
+	right_del_func(shell, position, tmp);
+	tputs(tgetstr("me", NULL), 1, re_putchar);
+	print_n_cursor(shell, cursor);
+	// reversed_ubf_create(shell, &position);
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, tmp, ft_strlen(tmp));
 	free(tmp);
-	// shell->end--;
-	// printf("[%d->%c,%d]\n", shell->end, shell->history->record[shell->end], shell->start);
-	// shell->end++;
-	// printf("[%d,%c]\n", shell->position, shell->history->record[shell->position]);
 }
 
 void				default_right_selection(t_shell *shell)
