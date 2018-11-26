@@ -68,11 +68,11 @@ void				right_inverse_selection(t_shell *shell)
 	tmp = ft_strdup(shell->history->record);
 	position = shell->end;
 	shell->end++;
+	buf_change_reverse(shell);
 	cursor = shell->end;
 	right_del_func(shell, position, tmp);
 	tputs(tgetstr("me", NULL), 1, re_putchar);
 	print_n_cursor(shell, cursor);
-	// reversed_ubf_create(shell, &position);
 	ft_strclr(shell->unparsed_com);
 	ft_strncat(shell->unparsed_com, tmp, ft_strlen(tmp));
 	free(tmp);
