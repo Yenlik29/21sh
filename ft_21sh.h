@@ -111,6 +111,9 @@ void		left_erase_selection(t_shell *shell, char *tmp);
 void		print_inverse(t_shell *shell, int position);
 void		left_inverse_selection(t_shell *shell, char *tmp);
 
+void		default_right_selection(t_shell *shell);
+void		right_inverse_selection(t_shell *shell);
+
 void		cut(t_shell *shell);
 char		*cutted_buf_creation(t_shell *shell, char *new, int *cursor);
 char 		*reversed_buf_create(t_shell *shell, char *new, int *cursor);
