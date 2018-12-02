@@ -78,7 +78,8 @@ BUILT_INS_SRCF := ft_actions.c				\
 				  ft_setenv.c   			\
 				  ft_unsetenv.c 
 
-LEXER_SRCF		:= lexer_init.c
+LEXER_SRCF		:= 	lexer_init.c 			\
+					lexer_actions.c
 
 
 SOURCES 		:= $(SRCF) $(ERRORS_SRCF:%=$(ERRORS_DIR)/%)\

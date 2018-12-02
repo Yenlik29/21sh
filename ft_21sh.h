@@ -229,6 +229,8 @@ t_lexer		*lexer_init(t_lexer *tokens, t_shell *shell);
 t_lexer		*lexer_build(t_lexer *tokens, t_shell *shell);
 t_lexer		*lexer_allocation(t_lexer *tokens);
 
+t_lexer		*add_token(t_lexer *tokens);
+
 void		multi_right(t_shell *shell);
 void		in_line_right(t_shell *shell);
 void		out_line_right(t_shell *shell);
