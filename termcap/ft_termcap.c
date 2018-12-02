@@ -49,6 +49,8 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 		copy(shell);
 	else if (ch == 18)
 		paste(shell);
+	else if (ch == 4)
+		printf("CTRL+D\n");
 	else
 		return (0);
 	// printf("[%lld]\n", ch);

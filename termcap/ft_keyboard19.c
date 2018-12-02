@@ -126,5 +126,5 @@ void					paste(t_shell *shell)
 	ft_putstr(shell->history->record);
 	set_cursor(shell);
 	cursor_alignment(shell, cursor);
-	free_3var(new, tmp, end);
+	// free_3var(new, tmp, end);
 }

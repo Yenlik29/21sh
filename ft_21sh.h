@@ -27,6 +27,8 @@
 # include <term.h>
 # include <fcntl.h>
 # include <termios.h>
+# define PIPE '|'
+# define SEMI ';'
 # define IS_QUOTE(x) (x == '"' || x == '\'')
 # define ACT_CHAR shell->unparsed_com[shell->position]
 # define PRE_CHAR shell->unparsed_com[shell->position - 1]
@@ -42,12 +44,50 @@
 # define L_L shell->position + 4 == ((sz.ws_col * (row - 1)) + 1)
 # define R_L shell->position + 4 == sz.ws_col * row
 
+typedef enum
+{
+	T_PIPE = '|',
+	T_SEMI = ';',
+	T_SPACE = ' ',
+	T_ESC = '\\',
+	T_TAB = '\t',
+	T_AMPERSAND = '&',
+	T_QUOTE = '\'',
+	T_DOUBLE_Q = '\"',
+	T_N_LINE = '\n',
+	T_R_REDIR = '>',
+	T_L_REDIR = '<',
+	T_WORD = 0,
+} 			T_TYPE;
+
+typedef enum
+{
+	S_QUOTE,
+	S_DOUBLE_Q,
+	S_ESC,
+	S_WORD,
+}			T_STATE;
+
 typedef struct 		s_history
 {
 	char 	*record;
 	struct s_history *next;
 	struct s_history *prev;
 }					t_history;
+
+typedef struct 		s_tokens
+{
+	char 			*info;
+	int 			type;
+	struct s_tokens *next;
+	struct s_tokens *prev;
+}					t_tokens;
+
+typedef struct 		s_lexer
+{
+	t_tokens 		*t_tokens;
+	int 			quantity;
+}					t_lexer;
 
 typedef struct 		s_shell
 {
@@ -184,6 +224,10 @@ void		multi_left(t_shell *shell);
 int 		row_find(int row, t_shell *shell);
 void		in_line_left(t_shell *shell);
 void		out_line_left(t_shell *shell);
+
+t_lexer		*lexer_init(t_lexer *tokens, t_shell *shell);
+t_lexer		*lexer_build(t_lexer *tokens, t_shell *shell);
+t_lexer		*lexer_allocation(t_lexer *tokens);
 
 void		multi_right(t_shell *shell);
 void		in_line_right(t_shell *shell);

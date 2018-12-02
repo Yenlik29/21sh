@@ -94,8 +94,16 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	ft_strclr(shell->unparsed_com);
+
+	t_lexer *tokens;
+
+	tokens = NULL;
+	tokens = lexer_init(tokens, shell);
+
 	w_splited = split_word(shell->history->record);
 	w_splited = parsed_word(w_splited, env);
+
+
 	ft_bzero(word, ft_strlen(word));
 	(word != NULL) ? free(word) : NULL;
 
@@ -115,6 +123,7 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 		end_key(shell);
 		set_cursor(shell);
 		write(0, "\n", 1);
+		// printf("*\n");
 	}
 	return (w_splited);
 }
