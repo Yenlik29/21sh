@@ -95,10 +95,25 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	ft_strclr(shell->unparsed_com);
 
-	t_lexer *tokens;
+	t_lexer		*tokens;
+	// t_lexer 	*tmp;
+	t_tokens	*temp;
+	ASTnode		*syntax_tree;
 
 	tokens = NULL;
-	tokens = lexer_init(tokens, shell);
+	temp = NULL;
+	syntax_tree = (ASTnode *)malloc(sizeof(ASTnode) * 10);
+	// tokens->quantity = 0;
+	// temp = tokens->t_tokens;
+	tokens = lexer_init(tokens, shell, &temp);
+	// tmp = tokens;
+	// while (temp)
+	// {
+	// 	printf("*%s*\n", temp->info);
+	// 	temp = temp->next;
+	// }
+	parse_init(temp, &syntax_tree, tokens->quantity);
+
 
 	w_splited = split_word(shell->history->record);
 	w_splited = parsed_word(w_splited, env);

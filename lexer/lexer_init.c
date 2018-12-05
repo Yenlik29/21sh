@@ -154,19 +154,21 @@ t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
 	// printf("[%d]\n", nquant);
 	// int l = 0;
 	// printf("[%s]\n", temp->info);
-	while (temp)
-	{
-		printf("[%s]\n", temp->info);
-		temp = temp->next;
-	}
+	// while (temp)
+	// {
+	// 	printf("[%s]\n", temp->info);
+	// 	temp = temp->next;
+	// }
 	(tmp) ? free(tmp) : 0;
+	tokens->quantity = nquant;
 	return (tokens);
 }
 
-t_lexer				*lexer_init(t_lexer *tokens, t_shell *shell)
+t_lexer				*lexer_init(t_lexer *tokens, t_shell *shell, t_tokens **temp)
 {
 	if (!(tokens = lexer_allocation(tokens)))
 		return (NULL);
+	*temp = tokens->t_tokens;
 	tokens = lexer_build(tokens, shell);
 	return (tokens);
 }

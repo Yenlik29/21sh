@@ -62,6 +62,18 @@ typedef enum
 
 typedef enum
 {
+	N_PIPE = 1,
+	N_AMPERSAND = 2,
+	N_SEMI = 4,
+	N_REDIR_IN = 8,
+	N_REDIR_OUT = 16,
+	N_PATH = 32,
+	N_ARGV = 64,
+	N_DATA = 128,
+}			N_TYPE;
+
+typedef enum
+{
 	S_QUOTE,
 	S_DOUBLE_Q,
 	S_ESC,
@@ -88,6 +100,14 @@ typedef struct 		s_lexer
 	t_tokens 		*t_tokens;
 	int 			quantity;
 }					t_lexer;
+
+typedef struct 		ASTnode
+{
+	int 			type;
+	char 			*data;
+	struct ASTnode 	*left;
+	struct ASTnode 	*right;
+}					ASTnode;
 
 typedef struct 		s_shell
 {
@@ -225,11 +245,40 @@ int 		row_find(int row, t_shell *shell);
 void		in_line_left(t_shell *shell);
 void		out_line_left(t_shell *shell);
 
-t_lexer		*lexer_init(t_lexer *tokens, t_shell *shell);
+t_lexer		*lexer_init(t_lexer *tokens, t_shell *shell, t_tokens **temp);
 t_lexer		*lexer_build(t_lexer *tokens, t_shell *shell);
 t_lexer		*lexer_allocation(t_lexer *tokens);
 
 t_lexer		*add_token(t_lexer *tokens);
+
+ASTnode		*command_line(t_tokens **tokens);
+
+ASTnode		*command_line1(t_tokens **tokens);
+
+ASTnode		*job(t_tokens **tokens);
+
+ASTnode		*job1(t_tokens **tokens);
+
+ASTnode		*command(t_tokens **tokens);
+
+ASTnode		*command1(t_tokens **tokens);
+
+ASTnode		*simple_cmd(t_tokens **tokens);
+
+ASTnode		*simple_cmd1(t_tokens **tokens);
+
+ASTnode		*tokenlist(t_tokens **tokens);
+
+ASTnode		*tokenlist1(t_tokens **tokens);
+ASTnode		*tokenlist2(void);
+
+void		ASTnodeType(ASTnode *node, N_TYPE NodeType);
+void		ASTnodeData(ASTnode *node, char *data);
+void		ASTnodeAttach(ASTnode *root, ASTnode *left, ASTnode *right);
+
+int			term_(int toketype, char **buf, t_tokens ** tokens);
+
+int 		parse_init(t_tokens *tokens, ASTnode **syntax_tree, int quantity);
 
 void		multi_right(t_shell *shell);
 void		in_line_right(t_shell *shell);

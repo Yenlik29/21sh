@@ -16,6 +16,7 @@ ERRORS_DIR		:= error
 TERMCAP_DIR		:= termcap
 BUILT_INS_DIR	:= built_ins
 LEXER_DIR		:= lexer
+PARSER_DIR		:= parser
 
 OBJS_DIR_BASE	:= objs
 
@@ -23,7 +24,8 @@ OBJS_DIR 		:= $(OBJS_DIR_BASE)\
          		   $(OBJS_DIR_BASE)/$(ERRORS_DIR)\
          		   $(OBJS_DIR_BASE)/$(TERMCAP_DIR)\
          		   $(OBJS_DIR_BASE)/$(BUILT_INS_DIR)\
-         		   $(OBJS_DIR_BASE)/$(LEXER_DIR)
+         		   $(OBJS_DIR_BASE)/$(LEXER_DIR)\
+         		   $(OBJS_DIR_BASE)/$(PARSER_DIR)
 
 FLAGS			:= -Wall -Wextra -Werror
 
@@ -81,11 +83,14 @@ BUILT_INS_SRCF := ft_actions.c				\
 LEXER_SRCF		:= 	lexer_init.c 			\
 					lexer_actions.c
 
+PARSER_SRCF		:=	parser_init.c
+
 
 SOURCES 		:= $(SRCF) $(ERRORS_SRCF:%=$(ERRORS_DIR)/%)\
 							$(TERMCAP_SRCF:%=$(TERMCAP_DIR)/%)\
 								$(BUILT_INS_SRCF:%=$(BUILT_INS_DIR)/%)\
-									$(LEXER_SRCF:%=$(LEXER_DIR)/%)
+									$(LEXER_SRCF:%=$(LEXER_DIR)/%)\
+										$(PARSER_SRCF:%=$(PARSER_DIR)/%)
 
 OBJ				:= $(SOURCES:%.c=$(OBJS_DIR_BASE)/%.o)
 HEADER			:= ft_21sh.h
