@@ -245,9 +245,18 @@ int 		row_find(int row, t_shell *shell);
 void		in_line_left(t_shell *shell);
 void		out_line_left(t_shell *shell);
 
+int 		get_token_type(char c);
 t_lexer		*lexer_init(t_lexer *tokens, t_shell *shell, t_tokens **temp);
 t_lexer		*lexer_build(t_lexer *tokens, t_shell *shell);
 t_lexer		*lexer_allocation(t_lexer *tokens);
+
+void		s_word_quote(int *state, t_lexer **tokens, int *j);
+void		s_word_double_q(int *state, t_lexer **tokens, int *j);
+void		s_word_esc(t_lexer **tokens, int *j, int *i, t_shell *shell);
+void		s_word_word(t_lexer **tokens, int *j, char c);
+
+void		s_word_space(t_lexer **tokens, int *nquant, int *j);
+void		s_word_operator(t_lexer **tokens, int *nquant, int *j, char c);
 
 t_lexer		*add_token(t_lexer *tokens);
 

@@ -81,7 +81,8 @@ BUILT_INS_SRCF := ft_actions.c				\
 				  ft_unsetenv.c 
 
 LEXER_SRCF		:= 	lexer_init.c 			\
-					lexer_actions.c
+					lexer_actions.c 		\
+					lexer_token.c
 
 PARSER_SRCF		:=	parser_init.c
 

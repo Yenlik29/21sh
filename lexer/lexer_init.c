@@ -77,92 +77,145 @@ t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
 	tmp = ft_strdup(shell->history->record);
 	temp = tokens->t_tokens;
 	tokens->t_tokens = new_token(tokens->t_tokens);
-	printf("\n");
+	write(1, "\n", 1);
 	while (shell->history->record[i])
 	{
 		type = get_token_type(shell->history->record[i]);
 		if (state == S_WORD)
 		{
+			// printf("[%c->%d]\n", shell->history->record[(i)], get_token_type(shell->history->record[i]));
 			if (type == T_QUOTE)
-			{
-				// printf("Quote found\n");
-				state = S_QUOTE;
-				tokens->t_tokens->info[j++] = T_QUOTE;
-				// printf("[%s]\n", tokens->t_tokens->info);
-				tokens->t_tokens->type = -1;
-			}
+				s_word_quote(&state, &tokens, &j);
 			else if (type == T_DOUBLE_Q)
 			{
-				// printf("Double Quote found\n");
-				state = S_DOUBLE_Q;
-				tokens->t_tokens->info[j++] = T_DOUBLE_Q;
-				tokens->t_tokens->type = -1;
-			}
+				// printf("?\n");
+				s_word_double_q(&state, &tokens, &j);}
 			else if (type == T_ESC)
 			{
-				// printf("Esc\n");
-				tokens->t_tokens->info[j++] = shell->history->record[++i];
-				tokens->t_tokens->type = -1;
-			}
+				// printf("!\n");
+				s_word_esc(&tokens, &j, &i, shell);}
 			else if (type == T_WORD)
 			{
-				// printf("Ch->%c\n", shell->history->record[i]);
-				tokens->t_tokens->info[j++] = shell->history->record[i];
-				tokens->t_tokens->type = -1;
-			}
+				// printf("*\n");
+				s_word_word(&tokens, &j, shell->history->record[i]);}
 			else if (type == T_SPACE)
 			{
-				// printf("Space->%c\n", shell->history->record[i]);
-				if (j > 0)
-				{
-					
-					tokens->t_tokens->info[j] = 0;
-					tokens = add_token(tokens);
-					nquant++;
-					tokens->t_tokens = tokens->t_tokens->next;
-					j = 0;
-				}
-			}
+				// printf("*\n");
+				s_word_space(&tokens, &nquant, &j);}
 			else if (type == T_SEMI || type == T_R_REDIR || type == T_L_REDIR || type == T_AMPERSAND || type == T_PIPE)
 			{
-				// printf("Oper->%c\n", shell->history->record[i]);
-				if (j > 0)
-				{
-					
-					tokens->t_tokens->info[j] = 0;
-					tokens = add_token(tokens);
-					nquant++;
-					tokens->t_tokens = tokens->t_tokens->next;
-					j = 0;
-				}
-			}
+				// printf("^\n");
+				s_word_operator(&tokens, &nquant, &j, shell->history->record[i]);}
 		}
 		else if (state == S_QUOTE)
 		{
 			tokens->t_tokens->info[j++] = shell->history->record[i];
 			if (type == T_QUOTE)
+			{
 				state = S_WORD;
+				tokens->t_tokens->info[j++] = 0;
+				tokens = add_token(tokens);
+				nquant++;
+				tokens->t_tokens = tokens->t_tokens->next;
+				j = 0;
+			}
 		}
 		else if (state == S_DOUBLE_Q)
 		{
 			tokens->t_tokens->info[j++] = shell->history->record[i];
 			if (type == T_DOUBLE_Q)
+			{
 				state = S_WORD;
+				tokens->t_tokens->info[j++] = 0;
+				tokens = add_token(tokens);
+				nquant++;
+				tokens->t_tokens = tokens->t_tokens->next;
+				j = 0;
+			}
 		}
 		i++;
 	}
-	// printf("[%d]\n", nquant);
-	// int l = 0;
-	// printf("[%s]\n", temp->info);
-	// while (temp)
-	// {
-	// 	printf("[%s]\n", temp->info);
-	// 	temp = temp->next;
-	// }
 	(tmp) ? free(tmp) : 0;
 	tokens->quantity = nquant;
 	return (tokens);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
+// {
+// 	return (tokens);
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 t_lexer				*lexer_init(t_lexer *tokens, t_shell *shell, t_tokens **temp)
 {

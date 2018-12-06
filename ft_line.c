@@ -107,12 +107,12 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	// temp = tokens->t_tokens;
 	tokens = lexer_init(tokens, shell, &temp);
 	// tmp = tokens;
-	// while (temp)
-	// {
-	// 	printf("*%s*\n", temp->info);
-	// 	temp = temp->next;
-	// }
-	parse_init(temp, &syntax_tree, tokens->quantity);
+	while (temp)
+	{
+		printf("[%s->%d]\n", temp->info, temp->type);
+		temp = temp->next;
+	}
+	// parse_init(temp, &syntax_tree, tokens->quantity);
 
 
 	w_splited = split_word(shell->history->record);
