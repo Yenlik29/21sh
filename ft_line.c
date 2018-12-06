@@ -98,20 +98,21 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	t_lexer		*tokens;
 	// t_lexer 	*tmp;
 	t_tokens	*temp;
-	ASTnode		*syntax_tree;
+	// ASTnode		*syntax_tree;
 
 	tokens = NULL;
 	temp = NULL;
-	syntax_tree = (ASTnode *)malloc(sizeof(ASTnode) * 10);
+	// syntax_tree = (ASTnode *)malloc(sizeof(ASTnode) * 10);
 	// tokens->quantity = 0;
 	// temp = tokens->t_tokens;
 	tokens = lexer_init(tokens, shell, &temp);
 	// tmp = tokens;
-	while (temp)
-	{
-		printf("[%s->%d]\n", temp->info, temp->type);
-		temp = temp->next;
-	}
+	// while (temp)
+	// {
+	// 	printf("[%s]\n", temp->info);
+	// 	temp = temp->next;
+	// }
+	parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 	// parse_init(temp, &syntax_tree, tokens->quantity);
 
 

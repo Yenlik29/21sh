@@ -57,6 +57,7 @@ typedef enum
 	T_N_LINE = '\n',
 	T_R_REDIR = '>',
 	T_L_REDIR = '<',
+	// T_LL_REDIR = '>>',
 	T_WORD = 0,
 } 			T_TYPE;
 
@@ -260,34 +261,36 @@ void		s_word_operator(t_lexer **tokens, int *j, char c);
 
 t_lexer		*add_token(t_lexer *tokens);
 
-ASTnode		*command_line(t_tokens **tokens);
+void		parse(t_tokens *tokens);
 
-ASTnode		*command_line1(t_tokens **tokens);
+// ASTnode		*command_line(t_tokens **tokens);
 
-ASTnode		*job(t_tokens **tokens);
+// ASTnode		*command_line1(t_tokens **tokens);
 
-ASTnode		*job1(t_tokens **tokens);
+// ASTnode		*job(t_tokens **tokens);
 
-ASTnode		*command(t_tokens **tokens);
+// ASTnode		*job1(t_tokens **tokens);
 
-ASTnode		*command1(t_tokens **tokens);
+// ASTnode		*command(t_tokens **tokens);
 
-ASTnode		*simple_cmd(t_tokens **tokens);
+// ASTnode		*command1(t_tokens **tokens);
 
-ASTnode		*simple_cmd1(t_tokens **tokens);
+// ASTnode		*simple_cmd(t_tokens **tokens);
 
-ASTnode		*tokenlist(t_tokens **tokens);
+// ASTnode		*simple_cmd1(t_tokens **tokens);
 
-ASTnode		*tokenlist1(t_tokens **tokens);
-ASTnode		*tokenlist2(void);
+// ASTnode		*tokenlist(t_tokens **tokens);
 
-void		ASTnodeType(ASTnode *node, N_TYPE NodeType);
-void		ASTnodeData(ASTnode *node, char *data);
-void		ASTnodeAttach(ASTnode *root, ASTnode *left, ASTnode *right);
+// ASTnode		*tokenlist1(t_tokens **tokens);
+// ASTnode		*tokenlist2(void);
 
-int			term_(int toketype, char **buf, t_tokens ** tokens);
+// void		ASTnodeType(ASTnode *node, N_TYPE NodeType);
+// void		ASTnodeData(ASTnode *node, char *data);
+// void		ASTnodeAttach(ASTnode *root, ASTnode *left, ASTnode *right);
 
-int 		parse_init(t_tokens *tokens, ASTnode **syntax_tree, int quantity);
+// int			term_(int toketype, char **buf, t_tokens ** tokens);
+
+// int 		parse_init(t_tokens *tokens, ASTnode **syntax_tree, int quantity);
 
 void		multi_right(t_shell *shell);
 void		in_line_right(t_shell *shell);
