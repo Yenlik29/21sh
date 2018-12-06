@@ -18,7 +18,7 @@ t_lexer				*lexer_allocation(t_lexer *tokens)
 		return (NULL);
 	if (!(tokens->t_tokens = (t_tokens *)malloc(sizeof(t_tokens) * 2048)))
 		return (NULL);
-	tokens->quantity = 0;
+	tokens->quantity = 1;
 	return (tokens);
 }
 
@@ -65,17 +65,10 @@ t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
 	int j;
 	int state;
 	int type;
-	char *tmp;
-	int nquant;
-	t_tokens *temp;
 
 	i = 0;
 	j = 0;
-	nquant = 1;
 	state = S_WORD;
-	tmp = NULL;
-	tmp = ft_strdup(shell->history->record);
-	temp = tokens->t_tokens;
 	tokens->t_tokens = new_token(tokens->t_tokens);
 	write(1, "\n", 1);
 	while (shell->history->record[i])
@@ -83,29 +76,18 @@ t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
 		type = get_token_type(shell->history->record[i]);
 		if (state == S_WORD)
 		{
-			// printf("[%c->%d]\n", shell->history->record[(i)], get_token_type(shell->history->record[i]));
 			if (type == T_QUOTE)
 				s_word_quote(&state, &tokens, &j);
 			else if (type == T_DOUBLE_Q)
-			{
-				// printf("?\n");
-				s_word_double_q(&state, &tokens, &j);}
+				s_word_double_q(&state, &tokens, &j);
 			else if (type == T_ESC)
-			{
-				// printf("!\n");
-				s_word_esc(&tokens, &j, &i, shell);}
+				s_word_esc(&tokens, &j, &i, shell);
 			else if (type == T_WORD)
-			{
-				// printf("*\n");
-				s_word_word(&tokens, &j, shell->history->record[i]);}
+				s_word_word(&tokens, &j, shell->history->record[i]);
 			else if (type == T_SPACE)
-			{
-				// printf("*\n");
-				s_word_space(&tokens, &nquant, &j);}
+				s_word_space(&tokens, &j);
 			else if (type == T_SEMI || type == T_R_REDIR || type == T_L_REDIR || type == T_AMPERSAND || type == T_PIPE)
-			{
-				// printf("^\n");
-				s_word_operator(&tokens, &nquant, &j, shell->history->record[i]);}
+				s_word_operator(&tokens, &j, shell->history->record[i]);
 		}
 		else if (state == S_QUOTE)
 		{
@@ -115,7 +97,7 @@ t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
 				state = S_WORD;
 				tokens->t_tokens->info[j++] = 0;
 				tokens = add_token(tokens);
-				nquant++;
+				tokens->quantity++;
 				tokens->t_tokens = tokens->t_tokens->next;
 				j = 0;
 			}
@@ -128,15 +110,13 @@ t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
 				state = S_WORD;
 				tokens->t_tokens->info[j++] = 0;
 				tokens = add_token(tokens);
-				nquant++;
+				tokens->quantity++;
 				tokens->t_tokens = tokens->t_tokens->next;
 				j = 0;
 			}
 		}
 		i++;
 	}
-	(tmp) ? free(tmp) : 0;
-	tokens->quantity = nquant;
 	return (tokens);
 }
 

@@ -12,13 +12,13 @@
 
 #include "ft_21sh.h"
 
-void				s_word_operator(t_lexer **tokens, int *nquant, int *j, char c)
+void				s_word_operator(t_lexer **tokens, int *j, char c)
 {
 	if ((*j) > 0)
 	{
 		(*tokens)->t_tokens->info[(*j)] = 0;
 		*tokens = add_token(*tokens);
-		(*nquant)++;
+		(*tokens)->quantity++;
 		(*tokens)->t_tokens = (*tokens)->t_tokens->next;
 		*j = 0;
 	}
@@ -26,18 +26,18 @@ void				s_word_operator(t_lexer **tokens, int *nquant, int *j, char c)
 	(*tokens)->t_tokens->info[1] = '\0';
 	(*tokens)->t_tokens->type = get_token_type(c);
 	*tokens = add_token(*tokens);
-	(*nquant)++;
+	(*tokens)->quantity++;
 	(*tokens)->t_tokens = (*tokens)->t_tokens->next;
 	
 }
 
-void				s_word_space(t_lexer **tokens, int *nquant, int *j)
+void				s_word_space(t_lexer **tokens, int *j)
 {
 	if ((*j) > 0)
 	{
 		(*tokens)->t_tokens->info[(*j)] = 0;
 		*tokens = add_token(*tokens);
-		(*nquant)++;
+		(*tokens)->quantity++;
 		(*tokens)->t_tokens = (*tokens)->t_tokens->next;
 		(*j) = 0;
 	}

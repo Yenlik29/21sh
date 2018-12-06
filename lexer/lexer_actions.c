@@ -16,7 +16,6 @@
 
 void					s_word_quote(int *state, t_lexer **tokens, int *j)
 {
-	// printf("*->%d,%c\n", T_QUOTE, T_QUOTE);
 	*state = S_QUOTE;
 	(*tokens)->t_tokens->info[(*j)++] = T_QUOTE;
 	(*tokens)->t_tokens->type = -1;
@@ -37,10 +36,6 @@ void					s_word_esc(t_lexer **tokens, int *j, int *i, t_shell *shell)
 
 void					s_word_word(t_lexer **tokens, int *j, char c)
 {
-	// if (*j > 0)
-	// 	printf("!\n");
-	// printf("[%c,%c->%d]\n", (*tokens)->t_tokens->info[(*j)++], shell->history->record[(*i)], *j);
-	// printf("[%c]\n", shell->history->record[(*i)]);
 	(*tokens)->t_tokens->info[(*j)++] = c;
 	(*tokens)->t_tokens->type = -1;
 }

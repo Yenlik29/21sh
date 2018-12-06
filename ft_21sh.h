@@ -255,8 +255,8 @@ void		s_word_double_q(int *state, t_lexer **tokens, int *j);
 void		s_word_esc(t_lexer **tokens, int *j, int *i, t_shell *shell);
 void		s_word_word(t_lexer **tokens, int *j, char c);
 
-void		s_word_space(t_lexer **tokens, int *nquant, int *j);
-void		s_word_operator(t_lexer **tokens, int *nquant, int *j, char c);
+void		s_word_space(t_lexer **tokens, int *j);
+void		s_word_operator(t_lexer **tokens, int *j, char c);
 
 t_lexer		*add_token(t_lexer *tokens);
 
