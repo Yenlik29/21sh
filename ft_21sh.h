@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/07 20:52:24 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/08 00:27:46 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -266,6 +266,7 @@ void		s_word_space(t_lexer **tokens, int *j);
 void		s_word_operator(t_lexer **tokens, int *j, char c);
 void		s_word_double_r_redir(t_lexer **tokens, t_shell *shell, int *j, int *i);
 void		s_word_double_l_redir(t_lexer **tokens, t_shell *shell, int *j, int *i);
+void		s_word_heredoc(t_lexer **tokens, t_shell *shell, int *j, int *i);
 
 t_lexer		*add_token(t_lexer *tokens);
 
