@@ -107,11 +107,11 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	// temp = tokens->t_tokens;
 	tokens = lexer_init(tokens, shell, &temp);
 	// tmp = tokens;
-	// while (temp)
-	// {
-	// 	printf("[%s]\n", temp->info);
-	// 	temp = temp->next;
-	// }
+	while (temp)
+	{
+		printf("[%s]\n", temp->info);
+		temp = temp->next;
+	}
 	parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 	// parse_init(temp, &syntax_tree, tokens->quantity);
 

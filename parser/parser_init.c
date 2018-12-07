@@ -31,7 +31,7 @@ void				parse(t_tokens *tokens)
 	t_tokens	*temp;
 
 	temp = tokens;
-	printf("*\n");
+	// printf("*\n");
 	if (!(correct_operators(temp)))
 		return ;
 }

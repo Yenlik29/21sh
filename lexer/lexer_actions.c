@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer_actions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybokina <ybokina@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 18:00:39 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/02 18:00:48 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/07 20:51:48 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 // hello \"world              '   " ; echo 'hello$'
 
-void					s_word_quote(int *state, t_lexer **tokens, int *j)
+void					s_word_quote(t_lexer **tokens, int *j)
 {
-	*state = S_QUOTE;
+	// *state = S_QUOTE;
 	(*tokens)->t_tokens->info[(*j)++] = T_QUOTE;
 	(*tokens)->t_tokens->type = -1;
 }
 
-void					s_word_double_q(int *state, t_lexer **tokens, int *j)
+void					s_word_double_q(t_lexer **tokens, int *j)
 {
-	*state = S_DOUBLE_Q;
+	// *state = S_DOUBLE_Q;
 	(*tokens)->t_tokens->info[(*j)++] = T_DOUBLE_Q;
 	(*tokens)->t_tokens->type = -1;
 }

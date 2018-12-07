@@ -1,14 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_minishell.h                                     :+:      :+:    :+:   */
+/*   ft_21sh.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybokina <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/08/23 12:12:07 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/07 20:52:24 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/* поменяй хедер!!!!!!!!!!!!  */
 
 #ifndef FT_21SH_H
 # define FT_21SH_H
@@ -185,6 +187,9 @@ void		left_default_selection(t_shell *shell, char *tmp);
 void		copy(t_shell *shell);
 void		paste(t_shell *shell);
 
+void        play_music(void);
+void        stop_music(void);
+
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);
 char 		*char_record(char ch, char *tmp);
@@ -251,15 +256,21 @@ t_lexer		*lexer_init(t_lexer *tokens, t_shell *shell, t_tokens **temp);
 t_lexer		*lexer_build(t_lexer *tokens, t_shell *shell);
 t_lexer		*lexer_allocation(t_lexer *tokens);
 
-void		s_word_quote(int *state, t_lexer **tokens, int *j);
-void		s_word_double_q(int *state, t_lexer **tokens, int *j);
+void        s_word(t_lexer **tokens, int *j, int *i, t_shell *shell);
+void		s_word_quote(t_lexer **tokens, int *j);
+void		s_word_double_q(t_lexer **tokens, int *j);
 void		s_word_esc(t_lexer **tokens, int *j, int *i, t_shell *shell);
 void		s_word_word(t_lexer **tokens, int *j, char c);
 
 void		s_word_space(t_lexer **tokens, int *j);
 void		s_word_operator(t_lexer **tokens, int *j, char c);
+void		s_word_double_r_redir(t_lexer **tokens, t_shell *shell, int *j, int *i);
+void		s_word_double_l_redir(t_lexer **tokens, t_shell *shell, int *j, int *i);
 
 t_lexer		*add_token(t_lexer *tokens);
+
+void        s_double_q_(t_lexer **tokens, int *j, char c, int *state);
+void        s_quote(t_lexer **tokens, int *j, char c, int *state);
 
 void		parse(t_tokens *tokens);
 

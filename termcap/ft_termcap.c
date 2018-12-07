@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_termcap.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybokina <ybokina@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/26 13:20:08 by ybokina           #+#    #+#             */
-/*   Updated: 2018/10/26 13:20:08 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/07 17:53:44 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,10 @@ int					key_hooker(uint64_t ch, int ret, t_shell *shell)
 		paste(shell);
 	else if (ch == 4)
 		printf("CTRL+D\n");
+	else if (ch == 16)
+		play_music();
+	else if (ch == 12)
+		stop_music();
 	else
 		return (0);
 	// printf("[%lld]\n", ch);

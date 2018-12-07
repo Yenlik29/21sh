@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    21sh.mk                                            :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ybokina <marvin@42.fr>                     +#+  +:+       +#+         #
+#    By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/04 09:23:53 by ybokina           #+#    #+#              #
-#    Updated: 2018/11/04 09:39:32 by ybokina          ###   ########.fr        #
+#    Updated: 2018/12/07 20:13:28 by ybokina          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -67,7 +67,8 @@ TERMCAP_SRCF   := ft_termcap.c  			\
                   ft_keyboard16.c 			\
                   ft_keyboard17.c 			\
                   ft_keyboard18.c 			\
-                  ft_keyboard19.c
+                  ft_keyboard19.c			\
+				  ft_keyboard20.c
 
 BUILT_INS_SRCF := ft_actions.c				\
 				  ft_build_in.c 			\
@@ -82,7 +83,8 @@ BUILT_INS_SRCF := ft_actions.c				\
 
 LEXER_SRCF		:= 	lexer_init.c 			\
 					lexer_actions.c 		\
-					lexer_token.c
+					lexer_token.c			\
+					lexer_src.c
 
 PARSER_SRCF		:=	parser_init.c
 
