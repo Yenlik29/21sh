@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 20:13:04 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/08 00:26:39 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/09 18:07:36 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void                s_word(t_lexer **tokens, int *j, int *i, t_shell *shell)
     else if (get_token_type(shell->history->record[(*i)]) == T_ESC)
         s_word_esc(tokens, j, i, shell);
     else if (get_token_type(shell->history->record[(*i)]) == T_WORD)
-        s_word_word(tokens, j, shell->history->record[*i]);
+        s_word_word(tokens, shell, j, i);
     else if (get_token_type(shell->history->record[(*i)]) == T_SPACE)
         s_word_space(tokens, j);
     else if (get_token_type(shell->history->record[(*i)]) == T_SEMI || get_token_type(shell->history->record[(*i)]) == T_R_REDIR || get_token_type(shell->history->record[(*i)]) == T_L_REDIR || get_token_type(shell->history->record[(*i)]) == T_AMPERSAND || get_token_type(shell->history->record[(*i)]) == T_PIPE)

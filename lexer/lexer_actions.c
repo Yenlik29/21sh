@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 18:00:39 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/07 20:51:48 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/09 18:09:08 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,11 @@ void					s_word_esc(t_lexer **tokens, int *j, int *i, t_shell *shell)
 	(*tokens)->t_tokens->type = -1;
 }
 
-void					s_word_word(t_lexer **tokens, int *j, char c)
+void					s_word_word(t_lexer **tokens, t_shell *shell, int *j, int *i)
 {
-	(*tokens)->t_tokens->info[(*j)++] = c;
+	if (shell->history->record[(*i)] >= '1' && shell->history->record[(*i)] <= '9' && get_token_type(shell->history->record[((*i) + 1)]) == T_L_REDIR && get_token_type(shell->history->record[((*i) + 2)]) == T_AMPERSAND && shell->history->record[((*i) + 3)] >= '1' && shell->history->record[((*i) + 3)] <= '9')
+		printf("NEEEW TOOOOKEEEN\n");
+	(*tokens)->t_tokens->info[(*j)++] = shell->history->record[(*i)];
 	(*tokens)->t_tokens->type = -1;
 }
 
