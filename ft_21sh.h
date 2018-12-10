@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/10 22:29:25 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/10 23:26:31 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct 		s_tokens
 {
 	char 			*info;
 	int 			type;
+	int				mistake;
 	struct s_tokens *next;
 	struct s_tokens *prev;
 }					t_tokens;
@@ -267,6 +268,8 @@ void		s_word_operator(t_lexer **tokens, int *j, char c);
 void		s_word_double_r_redir(t_lexer **tokens, t_shell *shell, int *j, int *i);
 void		s_word_double_l_redir(t_lexer **tokens, t_shell *shell, int *j, int *i);
 void		s_word_heredoc(t_lexer **tokens, t_shell *shell, int *j, int *i);
+
+void        s_word_mistake(t_lexer **tokens, t_shell *shell, int *j, int *i);
 
 t_lexer		*add_token(t_lexer *tokens);
 

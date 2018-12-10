@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 18:00:39 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/10 22:21:03 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/10 23:00:06 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void					s_word_word(t_lexer **tokens, t_shell *shell, int *j, int *i)
 		(*tokens)->t_tokens->info[2] = shell->history->record[(*i + 2)];
 		(*tokens)->t_tokens->info[3] = shell->history->record[(*i + 3)];
 		(*tokens)->t_tokens->info[4] = '\0';
-		(*tokens)->t_tokens->type = 144;
+		(*tokens)->t_tokens->type = 146;
 		*tokens = add_token(*tokens);
 		(*tokens)->quantity++;
 		(*tokens)->t_tokens = (*tokens)->t_tokens->next;
