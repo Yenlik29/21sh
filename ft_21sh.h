@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/10 23:34:52 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/10 23:54:19 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -277,6 +277,8 @@ void        s_double_q_(t_lexer **tokens, int *j, char c, int *state);
 void        s_quote(t_lexer **tokens, int *j, t_shell *shell, int *i);
 
 void		parse(t_tokens *tokens);
+int			correct_pre_post(t_tokens *tokens);
+int 		correct_operators(t_tokens *tokens);
 
 // ASTnode		*command_line(t_tokens **tokens);
 

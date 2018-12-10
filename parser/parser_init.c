@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 13:06:12 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/10 23:25:42 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/10 23:55:31 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,13 @@
 
 int 				correct_operators(t_tokens *tokens)
 {
+	t_tokens *ret;
 	t_tokens *tmp;
 
+	ret = tokens;
 	tmp = tokens;
-	// printf("?\n");
-	// printf("[%s]\n", tmp->info);
 	while (tmp)
 	{
-		// printf("[%s]\n", tmp->info);
 		if (!(ft_strncmp(tmp->info, "&&", ft_strlen("&&"))) \
 		|| !(ft_strncmp(tmp->info, "||", ft_strlen("||"))) \
 		|| !(ft_strncmp(tmp->info, ";;", ft_strlen(";;"))) \
@@ -35,7 +34,31 @@ int 				correct_operators(t_tokens *tokens)
 			tmp->mistake = 0;
 		tmp = tmp->next;
 	}
-	return (1);
+	while (ret)
+	{
+		if (ret->mistake == 1)
+			return (1);
+		ret = ret->next;
+	}
+	return (0);
+}
+
+int					correct_pre_post(t_tokens *tokens)
+{
+	t_tokens *temp;
+
+	temp = tokens;
+	while (temp)
+	{
+		printf("[%s->%d]\n", temp->info, temp->type);
+		if ((temp->type == 124 && !temp->prev))
+		{
+			ft_putstr_fd("21sh: syntax error\n", 1);
+			return (1);
+		}
+		temp = temp->next;
+	}
+	return (0);
 }
 
 void				parse(t_tokens *tokens)
@@ -43,7 +66,6 @@ void				parse(t_tokens *tokens)
 	t_tokens	*temp;
 
 	temp = tokens;
-	// printf("*\n");
-	if (!(correct_operators(temp)))
+	if (!(correct_operators(temp)) || !(correct_pre_post(temp)))
 		return ;
 }
