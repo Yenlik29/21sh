@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 20:13:04 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/09 18:07:36 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/10 22:34:49 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,11 @@ void                s_word(t_lexer **tokens, int *j, int *i, t_shell *shell)
     }
 }
 
-void                s_quote(t_lexer **tokens, int *j, char c, int *state)
+void                s_quote(t_lexer **tokens, int *j, t_shell *shell, int *i)
 {
-    (*tokens)->t_tokens->info[(*j)++] = c;
-    if (get_token_type(c) == T_QUOTE)
+    (*tokens)->t_tokens->info[(*j)++] = shell->history->record[(*i)];
+    if (get_token_type(shell->history->record[(*i)]) == T_QUOTE && shell->history->record[(*i) + 1] == ' ')
     {
-        *state = S_WORD;
         (*tokens)->t_tokens->info[(*j)++] = 0;
         *tokens = add_token(*tokens);
         (*tokens)->quantity++;

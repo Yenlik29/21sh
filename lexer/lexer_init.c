@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 16:51:10 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/07 20:52:36 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/10 22:34:53 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,10 @@ t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
 			(get_token_type(shell->history->record[i]) == T_DOUBLE_Q) ? state = S_DOUBLE_Q : 0;
 		}
 		else if (state == S_QUOTE)
-			s_quote(&tokens, &j, shell->history->record[i], &state);
+		{
+			s_quote(&tokens, &j, shell, &i);
+			(get_token_type(shell->history->record[i]) == T_QUOTE && shell->history->record[(i) + 1] == ' ') ? state = S_WORD : 0;
+		}
 		else if (state == S_DOUBLE_Q)
 			s_double_q_(&tokens, &j, shell->history->record[i], &state);
 		i++;
