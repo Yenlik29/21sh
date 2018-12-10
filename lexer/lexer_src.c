@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/07 20:13:04 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/10 23:31:56 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/10 23:36:31 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,13 @@ void                s_word(t_lexer **tokens, int *j, int *i, t_shell *shell)
         s_word_space(tokens, j);
     else if (get_token_type(shell->history->record[(*i)]) == T_SEMI || get_token_type(shell->history->record[(*i)]) == T_R_REDIR || get_token_type(shell->history->record[(*i)]) == T_L_REDIR || get_token_type(shell->history->record[(*i)]) == T_AMPERSAND || get_token_type(shell->history->record[(*i)]) == T_PIPE)
     {
-        // printf("->%c\n", shell->history->record[(*i)]);
-        if (get_token_type(shell->history->record[(*i)]) == T_PIPE && get_token_type(shell->history->record[(*i) + 1]) == T_PIPE)
+        if (get_token_type(shell->history->record[(*i)]) == T_L_REDIR && get_token_type(shell->history->record[(*i) + 1]) == T_R_REDIR)
+            s_word_mistake(tokens, shell, j, i);
+        else if (get_token_type(shell->history->record[(*i)]) == T_R_REDIR && get_token_type(shell->history->record[(*i) + 1]) == T_PIPE)
+            s_word_mistake(tokens, shell, j, i);
+        else if (get_token_type(shell->history->record[(*i)]) == T_SEMI && get_token_type(shell->history->record[(*i) + 1]) == T_SEMI)
+            s_word_mistake(tokens, shell, j, i);
+        else if (get_token_type(shell->history->record[(*i)]) == T_PIPE && get_token_type(shell->history->record[(*i) + 1]) == T_PIPE)
             s_word_mistake(tokens, shell, j, i);
         else if (get_token_type(shell->history->record[(*i)]) == T_AMPERSAND && get_token_type(shell->history->record[(*i) + 1]) == T_AMPERSAND)
             s_word_mistake(tokens, shell, j, i);

@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/10 23:25:47 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/10 23:36:53 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,12 +107,12 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	// temp = tokens->t_tokens;
 	tokens = lexer_init(tokens, shell, &temp);
 	// tmp = tokens;
-	while (temp)
-	{
-		printf("[%s]\n", temp->info);
-		temp = temp->next;
-	}
-	// parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+	// while (temp)
+	// {
+	// 	printf("[%s]\n", temp->info);
+	// 	temp = temp->next;
+	// }
+	parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 	// parse_init(temp, &syntax_tree, tokens->quantity);
 
 
