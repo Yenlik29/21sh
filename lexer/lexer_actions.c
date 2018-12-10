@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 18:00:39 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/09 18:09:08 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/10 22:21:03 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,53 @@ void					s_word_esc(t_lexer **tokens, int *j, int *i, t_shell *shell)
 
 void					s_word_word(t_lexer **tokens, t_shell *shell, int *j, int *i)
 {
-	if (shell->history->record[(*i)] >= '1' && shell->history->record[(*i)] <= '9' && get_token_type(shell->history->record[((*i) + 1)]) == T_L_REDIR && get_token_type(shell->history->record[((*i) + 2)]) == T_AMPERSAND && shell->history->record[((*i) + 3)] >= '1' && shell->history->record[((*i) + 3)] <= '9')
-		printf("NEEEW TOOOOKEEEN\n");
-	(*tokens)->t_tokens->info[(*j)++] = shell->history->record[(*i)];
-	(*tokens)->t_tokens->type = -1;
+	if (shell->history->record[(*i)] >= '1' && shell->history->record[(*i)] <= '9' && get_token_type(shell->history->record[((*i) + 1)]) == T_L_REDIR && get_token_type(shell->history->record[((*i) + 2)]) == T_AMPERSAND && shell->history->record[((*i) + 3)] >= '1' && shell->history->record[((*i) + 3)] <= '9' && (shell->history->record[(*i) + 4] == '\0' || shell->history->record[(*i) + 4] == ' '))
+	{
+		if ((*j) > 0)
+		{
+			(*tokens)->t_tokens->info[(*j)] = 0;
+			*tokens = add_token(*tokens);
+			(*tokens)->quantity++;
+			(*tokens)->t_tokens = (*tokens)->t_tokens->next;
+			*j = 0;
+		}
+		(*tokens)->t_tokens->info[0] = shell->history->record[(*i)];
+		(*tokens)->t_tokens->info[1] = shell->history->record[(*i + 1)];
+		(*tokens)->t_tokens->info[2] = shell->history->record[(*i + 2)];
+		(*tokens)->t_tokens->info[3] = shell->history->record[(*i + 3)];
+		(*tokens)->t_tokens->info[4] = '\0';
+		(*tokens)->t_tokens->type = 144;
+		*tokens = add_token(*tokens);
+		(*tokens)->quantity++;
+		(*tokens)->t_tokens = (*tokens)->t_tokens->next;
+		(*i) = (*i) + 3;
+	}
+	else if (shell->history->record[(*i)] >= '1' && shell->history->record[(*i)] <= '9' && get_token_type(shell->history->record[((*i) + 1)]) == T_R_REDIR && get_token_type(shell->history->record[((*i) + 2)]) == T_AMPERSAND && shell->history->record[((*i) + 3)] >= '1' && shell->history->record[((*i) + 3)] <= '9' && (shell->history->record[(*i) + 4] == '\0' || shell->history->record[(*i) + 4] == ' '))
+	{
+		if ((*j) > 0)
+		{
+			(*tokens)->t_tokens->info[(*j)] = 0;
+			*tokens = add_token(*tokens);
+			(*tokens)->quantity++;
+			(*tokens)->t_tokens = (*tokens)->t_tokens->next;
+			*j = 0;
+		}
+		(*tokens)->t_tokens->info[0] = shell->history->record[(*i)];
+		(*tokens)->t_tokens->info[1] = shell->history->record[(*i + 1)];
+		(*tokens)->t_tokens->info[2] = shell->history->record[(*i + 2)];
+		(*tokens)->t_tokens->info[3] = shell->history->record[(*i + 3)];
+		(*tokens)->t_tokens->info[4] = '\0';
+		(*tokens)->t_tokens->type = 144;
+		*tokens = add_token(*tokens);
+		(*tokens)->quantity++;
+		(*tokens)->t_tokens = (*tokens)->t_tokens->next;
+		(*i) = (*i) + 3;
+	}
+	else
+	{
+		(*tokens)->t_tokens->info[(*j)++] = shell->history->record[(*i)];
+		(*tokens)->t_tokens->type = -1;
+	}
 }
 
 t_lexer					*add_token(t_lexer *tokens)
