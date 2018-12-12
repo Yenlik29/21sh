@@ -6,13 +6,13 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 13:06:12 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/11 14:29:15 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/12 21:59:29 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
-void 				correct_operators(t_tokens *tokens)
+int 				correct_operators(t_tokens *tokens)
 {
 	t_tokens *ret;
 	t_tokens *tmp;
@@ -29,11 +29,13 @@ void 				correct_operators(t_tokens *tokens)
 		{
 			ft_putstr_fd("21sh: syntax error\n", 1);
 			tmp->mistake = 1;
+			return (1);
 		}
 		else
 			tmp->mistake = 0;
 		tmp = tmp->next;
 	}
+	return (0);
 }
 
 int						correct_pre_post(t_tokens *tokens)
@@ -67,10 +69,12 @@ int						correct_pre_post(t_tokens *tokens)
 
 void				parse(t_tokens *tokens)
 {
+	t_ast 		*ast;
 	t_tokens	*temp;
 
 	temp = tokens;
-	correct_operators(temp);
-	if (correct_pre_post(temp) == 1)
+	if (correct_operators(temp) == 1 || correct_pre_post(temp) == 1)
 		return ;
+	ast = create_ast(&tokens);
+	// print_ast(ast, "root", 0);
 }

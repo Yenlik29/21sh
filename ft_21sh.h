@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/11 14:10:14 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/12 22:13:43 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,25 @@ typedef struct 		s_lexer
 	int 			quantity;
 }					t_lexer;
 
-typedef struct 		ASTnode
+typedef struct 		s_ast
 {
 	int 			type;
 	char 			*data;
-	struct ASTnode 	*left;
-	struct ASTnode 	*right;
-}					ASTnode;
+	struct s_ast	*parent;
+	struct s_ast 	*left;
+	struct s_ast 	*right;
+	t_tokens 		*tokens;
+}					t_ast;
+
+// typedef struct	s_ast
+// {
+// 	struct s_ast	*parent;
+// 	struct s_ast	*left;
+// 	struct s_ast	*right;
+// 	int				node_type;
+// 	int				operator_type;
+// 	t_token			*token;
+// }				t_ast;
 
 typedef struct 		s_shell
 {
@@ -278,7 +290,20 @@ void        s_quote(t_lexer **tokens, int *j, t_shell *shell, int *i);
 
 void		parse(t_tokens *tokens);
 int			correct_pre_post(t_tokens *tokens);
-void 		correct_operators(t_tokens *tokens);
+int 		correct_operators(t_tokens *tokens);
+
+t_ast       *create_ast(t_tokens **tokens);
+
+void		ft_padding(int padd);
+void		print_ast(t_ast *ast, char *side, int lvl);
+void		ft_print_node(t_ast *ast, char *side, int lvl);
+
+// void        create_ast(t_tokens *tokens);
+t_ast       *create_command(t_tokens **tokens);
+
+int         next_operator(t_tokens *tokens, int del);
+t_ast	    *create_node(t_ast *left, t_ast *node, t_ast *right);
+t_ast      	*leaf_creation_(t_tokens **tokens, int del, int del2);
 
 // ASTnode		*command_line(t_tokens **tokens);
 

@@ -6,7 +6,7 @@
 #    By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/04 09:23:53 by ybokina           #+#    #+#              #
-#    Updated: 2018/12/10 23:10:15 by ybokina          ###   ########.fr        #
+#    Updated: 2018/12/12 21:26:07 by ybokina          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -87,7 +87,10 @@ LEXER_SRCF		:= 	lexer_init.c 			\
 					lexer_src.c				\
 					lexer_src2.c
 
-PARSER_SRCF		:=	parser_init.c
+PARSER_SRCF		:=	parser_init.c			\
+					create_ast.c			\
+					ast_print.c				\
+					ast_src.c
 
 
 SOURCES 		:= $(SRCF) $(ERRORS_SRCF:%=$(ERRORS_DIR)/%)\
