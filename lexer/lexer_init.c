@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/02 16:51:10 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/13 19:28:26 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/13 20:14:17 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
 	write(1, "\n", 1);
 	while (shell->history->record[i])
 	{
-		printf("[%c]\n", shell->history->record[i]);
+		// printf("[%c]\n", shell->history->record[i]);
 		type = get_token_type(shell->history->record[i]);
 		if (state == S_WORD)
 		{
@@ -90,6 +90,8 @@ t_lexer				*lexer_build(t_lexer *tokens, t_shell *shell)
 			s_double_q_(&tokens, &j, shell->history->record[i], &state);
 		i++;
 	}
+	if (!(shell->history->record[i]))
+		printf("DOBAV' TOKEN \\0\n");
 	return (tokens);
 }
 
