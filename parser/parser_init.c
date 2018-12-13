@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/05 13:06:12 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/12 21:59:29 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/13 18:54:37 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,15 @@ void				parse(t_tokens *tokens)
 	temp = tokens;
 	if (correct_operators(temp) == 1 || correct_pre_post(temp) == 1)
 		return ;
-	ast = create_ast(&tokens);
+	// temp = tokens;
+	// while (temp)
+	// {
+	// 	printf("[%s]\n", temp->info);
+	// 	if (temp->next)
+	// 		temp = temp->next;
+	// 	else
+	// 		break ;
+	// }
+	ast = create_ast(&temp);
 	// print_ast(ast, "root", 0);
 }
