@@ -6,7 +6,7 @@
 #    By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/04 09:23:53 by ybokina           #+#    #+#              #
-#    Updated: 2018/12/14 19:16:27 by ybokina          ###   ########.fr        #
+#    Updated: 2018/12/14 20:01:38 by ybokina          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRCF			:= main.c					\
 				   ft_execution.c			\
 				   ft_terminal.c			\
 				   ft_history1.c 			\
-				   ft_history2.c
+				   ft_history2.c			\
+				   ft_line_src.c
 
 ERRORS_SRCF	   := ft_error1.c				\
                   ft_error2.c   			\

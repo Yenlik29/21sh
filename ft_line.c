@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/14 19:30:37 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/14 20:02:15 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,42 +83,30 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	word = ft_strnew(4096);
 	while ((ret = read(0, &ch, 6) && ch != '\n') > 0)
 	{
-		// printf("[%s]\n", shell->unparsed_com);
-		// printf("");
 		if (key_hooker(ch, ret, shell) == 0)
 			break ;
 		ch = 0;
 	}
+
+	/* ДОБАВЬ ЭТО ВСЕ В ФАЙЛ ft_line_src.c */
+
 	quotes = shell_quotes(shell);
 	printf("[%d]\n", quotes);
 	shell->start = 0;
 	shell->end = 0;
-	// printf("\n\n[%s]\n", shell->buf);
 	ft_strclr(shell->history->record);
 	ft_strncat(shell->history->record, shell->unparsed_com, ft_strlen(shell->unparsed_com));
 	ft_strclr(shell->unparsed_com);
 
 	t_lexer		*tokens;
-	// t_lexer 	*tmp;
 	t_tokens	*temp;
 	t_ast		*syntax_tree;
 
 	tokens = NULL;
 	temp = NULL;
-	// syntax_tree = (ASTnode *)malloc(sizeof(ASTnode) * 10);
-	// tokens->quantity = 0;
-	// temp = tokens->t_tokens;
 	tokens = lexer_init(tokens, shell, &temp);
-	// tmp = tokens;
-	// while (temp)
-	// {
-	// 	printf("[%s]\n", temp->info);
-	// 	temp = temp->next;
-	// }
 	syntax_tree = parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 	print_ast(syntax_tree, "root", 0);
-	// parse_init(temp, &syntax_tree, tokens->quantity);
-
 
 	w_splited = split_word(shell->history->record);
 	w_splited = parsed_word(w_splited, env);
@@ -143,7 +131,6 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 		end_key(shell);
 		set_cursor(shell);
 		write(0, "\n", 1);
-		// printf("*\n");
 	}
 	return (w_splited);
 }
