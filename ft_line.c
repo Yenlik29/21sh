@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/14 11:16:21 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/14 11:35:03 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	t_lexer		*tokens;
 	// t_lexer 	*tmp;
 	t_tokens	*temp;
-	// ASTnode		*syntax_tree;
+	t_ast		*syntax_tree;
 
 	tokens = NULL;
 	temp = NULL;
@@ -112,7 +112,8 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	// 	printf("[%s]\n", temp->info);
 	// 	temp = temp->next;
 	// }
-	parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+	syntax_tree = parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+	print_ast(syntax_tree, "root", 0);
 	// parse_init(temp, &syntax_tree, tokens->quantity);
 
 

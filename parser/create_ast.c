@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/12 13:38:25 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/14 11:31:20 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/14 11:34:27 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,5 @@ t_ast                *create_ast(t_tokens **tokens)
         // else
         //     root = create_node(root, leaf_creation_(tokens, -1), create_command(tokens));
     }
-    print_ast(root, "root", 0);
     return (root);
 }

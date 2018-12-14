@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/14 11:15:52 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/14 11:35:53 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,7 +289,7 @@ t_lexer		*add_token(t_lexer *tokens);
 void        s_double_q_(t_lexer **tokens, int *j, char c, int *state);
 void        s_quote(t_lexer **tokens, int *j, t_shell *shell, int *i);
 
-void		parse(t_tokens *tokens);
+t_ast		*parse(t_tokens *tokens);
 int			correct_pre_post(t_tokens *tokens);
 int 		correct_operators(t_tokens *tokens);
 
