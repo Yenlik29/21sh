@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/13 19:27:29 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/14 11:16:21 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	// 	printf("[%s]\n", temp->info);
 	// 	temp = temp->next;
 	// }
-	// parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+	parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 	// parse_init(temp, &syntax_tree, tokens->quantity);
 
 
