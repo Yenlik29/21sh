@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/14 11:35:53 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/14 19:19:40 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,6 +146,10 @@ t_shell		*shell_set_settings(t_shell *shell, char *begin);
 t_shell 	*init_shell(t_shell *shell);
 t_shell		*shell_reset(t_shell *shell);
 
+void		key_hooker2(uint64_t ch, t_shell *shell);
+void		key_hooker3(uint64_t ch, t_shell *shell);
+int			key_hooker4(uint64_t ch, t_shell *shell);
+
 void		enter_ch(t_shell *shell, uint64_t ch);
 void 		left_key(t_shell *shell);
 void 		right_key(t_shell *shell);
@@ -202,6 +206,8 @@ void		paste(t_shell *shell);
 
 void        play_music(void);
 void        stop_music(void);
+
+int	        shell_quotes(t_shell *shell);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);

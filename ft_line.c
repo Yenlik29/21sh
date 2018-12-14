@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/14 11:35:03 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/14 19:30:37 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,19 +75,22 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	uint64_t		ch;
 	ssize_t			ret;
 	char			*word;
-	int				i;
+	int				quotes;
 
-	i = 0;
+	quotes = 0;
 	ret = 0;
 	ch = 0;
 	word = ft_strnew(4096);
 	while ((ret = read(0, &ch, 6) && ch != '\n') > 0)
 	{
+		// printf("[%s]\n", shell->unparsed_com);
+		// printf("");
 		if (key_hooker(ch, ret, shell) == 0)
 			break ;
 		ch = 0;
 	}
-	// printf("[%s]\n", shell->buf);
+	quotes = shell_quotes(shell);
+	printf("[%d]\n", quotes);
 	shell->start = 0;
 	shell->end = 0;
 	// printf("\n\n[%s]\n", shell->buf);

@@ -6,7 +6,7 @@
 #    By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/04 09:23:53 by ybokina           #+#    #+#              #
-#    Updated: 2018/12/12 21:26:07 by ybokina          ###   ########.fr        #
+#    Updated: 2018/12/14 19:16:27 by ybokina          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,8 @@ TERMCAP_SRCF   := ft_termcap.c  			\
                   ft_keyboard17.c 			\
                   ft_keyboard18.c 			\
                   ft_keyboard19.c			\
-				  ft_keyboard20.c
+				  ft_keyboard20.c			\
+				  ft_quotes.c
 
 BUILT_INS_SRCF := ft_actions.c				\
 				  ft_build_in.c 			\
