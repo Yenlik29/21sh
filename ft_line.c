@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/14 20:02:15 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:46:45 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ char			**split_word(char *word)
 	return (command);
 }
 
-char			**read_line(char **env, char **w_splited, t_shell *shell)
+void			read_line(char **env, t_shell *shell)
 {
 	uint64_t		ch;
 	ssize_t			ret;
@@ -106,10 +106,17 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 	temp = NULL;
 	tokens = lexer_init(tokens, shell, &temp);
 	syntax_tree = parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
-	print_ast(syntax_tree, "root", 0);
+	
 
-	w_splited = split_word(shell->history->record);
-	w_splited = parsed_word(w_splited, env);
+	char **w_splited;
+	
+	w_splited = NULL;
+	execution(syntax_tree, shell, env, w_splited);
+	// printf("[%d]\n", syntax_tree->type);
+	// print_ast(syntax_tree, "root", 0);
+
+	// w_splited = split_word(shell->history->record);
+	// w_splited = parsed_word(w_splited, env);
 
 
 	ft_bzero(word, ft_strlen(word));
@@ -132,5 +139,5 @@ char			**read_line(char **env, char **w_splited, t_shell *shell)
 		set_cursor(shell);
 		write(0, "\n", 1);
 	}
-	return (w_splited);
+	return ;
 }

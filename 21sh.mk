@@ -6,7 +6,7 @@
 #    By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/04 09:23:53 by ybokina           #+#    #+#              #
-#    Updated: 2018/12/14 20:01:38 by ybokina          ###   ########.fr        #
+#    Updated: 2018/12/15 13:18:25 by ybokina          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ TERMCAP_DIR		:= termcap
 BUILT_INS_DIR	:= built_ins
 LEXER_DIR		:= lexer
 PARSER_DIR		:= parser
+EXEC_DIR		:= executor
 
 OBJS_DIR_BASE	:= objs
 
@@ -25,7 +26,8 @@ OBJS_DIR 		:= $(OBJS_DIR_BASE)\
          		   $(OBJS_DIR_BASE)/$(TERMCAP_DIR)\
          		   $(OBJS_DIR_BASE)/$(BUILT_INS_DIR)\
          		   $(OBJS_DIR_BASE)/$(LEXER_DIR)\
-         		   $(OBJS_DIR_BASE)/$(PARSER_DIR)
+         		   $(OBJS_DIR_BASE)/$(PARSER_DIR)\
+				   $(OBJS_DIR_BASE)/$(EXEC_DIR)
 
 FLAGS			:= -Wall -Wextra -Werror
 
@@ -94,12 +96,15 @@ PARSER_SRCF		:=	parser_init.c			\
 					ast_print.c				\
 					ast_src.c
 
+EXEC_SRCF		:=	execution.c
+
 
 SOURCES 		:= $(SRCF) $(ERRORS_SRCF:%=$(ERRORS_DIR)/%)\
 							$(TERMCAP_SRCF:%=$(TERMCAP_DIR)/%)\
 								$(BUILT_INS_SRCF:%=$(BUILT_INS_DIR)/%)\
 									$(LEXER_SRCF:%=$(LEXER_DIR)/%)\
-										$(PARSER_SRCF:%=$(PARSER_DIR)/%)
+										$(PARSER_SRCF:%=$(PARSER_DIR)/%)\
+											$(EXEC_SRCF:%=$(EXEC_DIR)/%)
 
 OBJ				:= $(SOURCES:%.c=$(OBJS_DIR_BASE)/%.o)
 HEADER			:= ft_21sh.h

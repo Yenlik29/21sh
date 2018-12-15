@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:42 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/14 16:28:44 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:46:14 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,21 +42,21 @@ t_shell 		*init_shell(t_shell *shell)
 void			loop(char **env)
 {
 	t_shell *shell;
-	char	**w_splited;
+	// char	**w_splited;
 
 	shell = NULL;
 	shell = init_shell(shell);
 	new_history(shell);
 	while (42)
 	{
-		w_splited = NULL;
+		// w_splited = NULL;
 		display_prompt();
 		signal(SIGINT, sighandler);
-		w_splited = read_line(env, w_splited, shell);
+		read_line(env, shell);
 		shell = shell_reset(shell);
-		if (w_splited[0] != NULL)
-			env = ft_core(w_splited, env);
-		free_2darray(&w_splited);
+		// if (w_splited[0] != NULL)
+		// 	env = ft_core(w_splited, env);
+		// free_2darray(&w_splited);
 	}
 }
 

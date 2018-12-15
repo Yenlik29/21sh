@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/14 19:19:40 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/15 13:45:28 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -341,6 +341,9 @@ t_ast      	*leaf_creation_(t_tokens **tokens, int del, int del2);
 
 // int 		parse_init(t_tokens *tokens, ASTnode **syntax_tree, int quantity);
 
+void        execution(t_ast *ast, t_shell *shell, char **env, char **w_splited);
+void        exec_semi(t_ast *ast, t_shell *shell, char **env, char **w_splited);
+
 void		multi_right(t_shell *shell);
 void		in_line_right(t_shell *shell);
 void		out_line_right(t_shell *shell);
@@ -438,7 +441,7 @@ char		**ft_word(char **word, char **env);
 char		**parsed_word(char **word, char **env);
 char		**str_split(char *s, char c);
 char		**split_word(char *word);
-char		**read_line(char **env, char **w_splited, t_shell *shell);
+void		read_line(char **env, t_shell *shell);
 
 char		**ft_path(char **env);
 int			ft_if_path(char **command);
