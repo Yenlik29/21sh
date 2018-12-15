@@ -16,3 +16,9 @@ void			ft_error_tcsetattr(void)
 {
 	ft_putstr_fd("tcsetattr() error\n", 2);
 }
+
+void			pipe_fd_error()
+{
+	ft_putstr_fd("pipe() mistake\n", 2);
+	exit(1);
+}

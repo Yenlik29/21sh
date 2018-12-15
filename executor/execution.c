@@ -6,21 +6,33 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:17:22 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/15 13:55:12 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/15 14:50:35 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
+void                    pipeline(t_ast *left, t_ast *right)
+{
+    pid_t   pid;
+    int     pfd[2];
+
+    if (pipe(pfd) < 0)
+        pipe_fd_error();
+    pid = fork();
+    // printf("[%s->%s]\n", left->tokens->info, right->tokens->info);
+    left = NULL;
+    right = NULL;
+}
+
 void                    exec_pipe(t_ast *ast, t_shell *shell, char **w_splited)
 {
-    printf("heey PIPE!\n");
-    ast = NULL;
-    shell = NULL;
-    w_splited = NULL;
-    // if (!ast->left)
-    //     pipeline(ast, ast->parent->right);
-    // exec_pipe(ast->left, shell, w_splited);
+    if (!ast->left)
+    {
+        pipeline(ast, ast->parent->right);
+        return ;
+    }
+    exec_pipe(ast->left, shell, w_splited);
 }
 
 void                    exec_semi(t_ast *ast, t_shell *shell, char **env, char **w_splited)
