@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/15 13:46:45 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/16 18:02:07 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char			**ft_word(char **word, char **env)
 	j = 0;
 	while (word[j])
 	{
+		printf("*\n");
 		if ((word[j][0] == '~' && word[j][1] == '\0') ||
 			(word[j][0] == '~' && word[j][1] == '/'))
 			word[j] = ft_tilda(env, word[j]);
@@ -70,17 +71,17 @@ char			**split_word(char *word)
 	return (command);
 }
 
-void			read_line(char **env, t_shell *shell)
+char			**read_line(char **env, t_shell *shell)
 {
 	uint64_t		ch;
 	ssize_t			ret;
-	char			*word;
+	// char			*word;
 	int				quotes;
 
 	quotes = 0;
 	ret = 0;
 	ch = 0;
-	word = ft_strnew(4096);
+	// word = ft_strnew(4096);
 	while ((ret = read(0, &ch, 6) && ch != '\n') > 0)
 	{
 		if (key_hooker(ch, ret, shell) == 0)
@@ -91,7 +92,7 @@ void			read_line(char **env, t_shell *shell)
 	/* ДОБАВЬ ЭТО ВСЕ В ФАЙЛ ft_line_src.c */
 
 	quotes = shell_quotes(shell);
-	printf("[%d]\n", quotes);
+	// printf("[%d]\n", quotes);
 	shell->start = 0;
 	shell->end = 0;
 	ft_strclr(shell->history->record);
@@ -111,17 +112,18 @@ void			read_line(char **env, t_shell *shell)
 	char **w_splited;
 	
 	w_splited = NULL;
-	execution(syntax_tree, shell, env, w_splited);
+	env = execution(syntax_tree, shell, env, w_splited);
 	// printf("[%d]\n", syntax_tree->type);
 	// print_ast(syntax_tree, "root", 0);
 
 	// w_splited = split_word(shell->history->record);
 	// w_splited = parsed_word(w_splited, env);
+	// ft_bzero(word, ft_strlen(word));
+	// (word != NULL) ? free(word) : NULL;
+	// printf("->%s", w_splited);
+	// if (w_splited)
 
-
-	ft_bzero(word, ft_strlen(word));
-	(word != NULL) ? free(word) : NULL;
-
+		// free_2darray(&w_splited);
 	while (shell->history->next != NULL)
 			shell->history = shell->history->next;
 
@@ -139,5 +141,8 @@ void			read_line(char **env, t_shell *shell)
 		set_cursor(shell);
 		write(0, "\n", 1);
 	}
-	return ;
+	return (env);
+	// env = NULL;
 }
+
+// echo $PWD; pwd; ls ; echo $HOME; ls -a ~/Desktop

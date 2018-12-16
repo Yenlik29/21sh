@@ -6,7 +6,7 @@
 #    By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/04 09:23:53 by ybokina           #+#    #+#              #
-#    Updated: 2018/12/15 13:18:25 by ybokina          ###   ########.fr        #
+#    Updated: 2018/12/16 15:23:04 by ybokina          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,7 +96,8 @@ PARSER_SRCF		:=	parser_init.c			\
 					ast_print.c				\
 					ast_src.c
 
-EXEC_SRCF		:=	execution.c
+EXEC_SRCF		:=	execution.c				\
+					exec_src.c
 
 
 SOURCES 		:= $(SRCF) $(ERRORS_SRCF:%=$(ERRORS_DIR)/%)\

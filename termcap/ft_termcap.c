@@ -58,7 +58,7 @@ int				key_hooker4(uint64_t ch, t_shell *shell)
 		stop_music();
 	else
 	{
-		printf("hey\n");
+		// printf("hey\n");
 		shell = NULL;
 		// printf("[%2c]", (char)ch);
 		// printf("[%2c]", (char)ch + 1);

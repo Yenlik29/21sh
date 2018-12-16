@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:42 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/15 13:46:14 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/16 17:26:55 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void			loop(char **env)
 		// w_splited = NULL;
 		display_prompt();
 		signal(SIGINT, sighandler);
-		read_line(env, shell);
+		env = read_line(env, shell);
 		shell = shell_reset(shell);
 		// if (w_splited[0] != NULL)
 		// 	env = ft_core(w_splited, env);
