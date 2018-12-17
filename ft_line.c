@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/16 18:02:07 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/17 15:31:58 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,13 @@ char			**ft_word(char **word, char **env)
 	j = 0;
 	while (word[j])
 	{
-		printf("*\n");
+		// printf("*[%s]", word[j]);
 		if ((word[j][0] == '~' && word[j][1] == '\0') ||
 			(word[j][0] == '~' && word[j][1] == '/'))
 			word[j] = ft_tilda(env, word[j]);
 		if (ft_env_check(word[j]) == 1)
 			word[j] = ft_dollar(env, word[j]);
+		printf("!\n");
 		j++;
 	}
 	return (word);

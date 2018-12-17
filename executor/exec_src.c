@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 15:22:14 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/16 18:00:47 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/17 15:36:34 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,12 +26,19 @@ char                **array_assign(t_ast *ast, char **w_splited)
         ft_strclr(w_splited[i]);
         ft_strncpy(w_splited[i], ast->tokens->info, ft_strlen(ast->tokens->info));
         // printf("[%s]\n", w_splited[i]);
+        // printf("[%s]\n", w_splited[i]);
         if (ast->tokens->next)
             ast->tokens = ast->tokens->next;
         else
+        {
+            // printf("!!!\n");
+            i++;
+            w_splited[i] = NULL;
             return (w_splited);
+        }
         i++;
     }
-    // w_splited[i] = NULL;
+    w_splited[i] = NULL;
+    // printf("??\n");
     return (w_splited);
 }
