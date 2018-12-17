@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/17 17:19:12 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/18 00:18:55 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -337,7 +337,7 @@ t_ast      	*leaf_creation_(t_tokens **tokens, int del, int del2);
 // void		ASTnodeData(ASTnode *node, char *data);
 // void		ASTnodeAttach(ASTnode *root, ASTnode *left, ASTnode *right);
 
-// int			term_(int toketype, char **buf, t_tokens ** tokens);
+// int		term_(int toketype, char **buf, t_tokens ** tokens);
 
 // int 		parse_init(t_tokens *tokens, ASTnode **syntax_tree, int quantity);
 
@@ -480,3 +480,43 @@ char		**ft_unsetenv(char **w_splited, char **envp);
 void		sighandler(int signum);
 
 #endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// static int	ft_pipe_to_right(int fd[2], t_ast *node_right)
+// {
+// 	pid_t	pid_right;
+// 	int		status_right;
+
+// 	if ((pid_right = fork()) == -1)
+// 		ft_exit(STR_FORK_ERROR, 1);
+// 	if (pid_right == 0)
+// 	{
+// 		close(fd[1]);
+// 		ft_make_dup2(node_right->token->str, fd[0], STDIN_FILENO);
+// 		if (node_right->parent->parent\
+// 				&& node_right->parent->parent->operator_type == PIPE)
+// 			exit(ft_launch_pipeline(node_right,\
+// 						node_right->parent->parent->right));
+// 		else
+// 			exit(ft_launch_one_side(node_right));
+// 	}
+// 	else
+// 	{
+// 		close(fd[1]);
+// 		waitpid(pid_right, &status_right, 0);
+// 	}
+// 	return (ft_exit_status(status_right));
+// }
+

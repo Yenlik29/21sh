@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_core.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybokina <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:10:09 by ybokina           #+#    #+#             */
-/*   Updated: 2018/08/23 12:10:12 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/18 00:24:21 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ void		ft_available_command(char **command, char **envp)
 		path = (char **)malloc(sizeof(char *) * 100);
 		path = envp_create(path, command);
 	}
+	// printf("???\n");
 	ft_exec_sys(path, command, envp);
 	free_2darray(&path);
 }

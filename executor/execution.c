@@ -6,67 +6,60 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:17:22 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/17 18:27:14 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/18 00:30:15 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
 
+void                    right_pipe(int fd[2], t_ast *right, char **env)
+{
+    pid_t pid;
+
+    pid = fork();
+    if (pid == 0)
+    {
+        close(fd[1]);
+        dup2(fd[0], STDIN_FILENO);
+        char **w_splited;
+        w_splited = NULL;
+        w_splited = array_assign(right, w_splited);
+        w_splited = parsed_word(w_splited, env);
+        ft_available_command(w_splited, env);
+        exit(0);
+    }
+    else
+    {
+        close(fd[1]);
+        waitpid(pid, NULL, 0);
+    }
+}
+
 void                    pipeline(t_ast *left, t_ast *right, char **env)
 {
-    // printf("[%s]->[%s]-->%d\n", left->tokens->info, right->tokens->info, left->parent->type);
-    pid_t   pid1;
-    pid_t   pid2;
-    int     pfd[2];
-    int		stat_loc;
+    int     fd[2];
+    pid_t   pid;
 
-    // printf("!!!\n");
-    if (pipe(pfd) < 0)
+    if ((pipe(fd)) == -1)
         pipe_fd_error();
-    if ((pid1 = fork()) == -1)
+    if ((pid = fork()) == -1)
         fork_error();
-    else if (pid1 == 0)
+    if (pid == 0)
     {
-        printf("***\n");
-        dup2(pfd[1], STDOUT_FILENO);
-        close(pfd[1]);
-        close(pfd[0]);
-        printf("???\n");
+        close(fd[0]);
+        dup2(fd[1], STDOUT_FILENO);
         char **w_splited;
-
         w_splited = NULL;
         w_splited = array_assign(left, w_splited);
         w_splited = parsed_word(w_splited, env);
-        if (w_splited[0] != NULL)
-            env = ft_core(w_splited, env);
-        if (w_splited)
-            free_2darray(&w_splited);
+        ft_available_command(w_splited, env);
         exit(0);
-        // if_redir(t_ast *left);
     }
-    pid2 = fork();
-    if (pid2 == 0)
+    else
     {
-        dup2(pfd[0], STDIN_FILENO);
-        close(pfd[0]);
-        close(pfd[1]);
-        char **new;
-        
-        new = NULL;
-        new = array_assign(left, new);
-        new = parsed_word(new, env);
-        if (new[0] != NULL)
-            env = ft_core(new, env);
-        if (new)
-            free_2darray(&new);
-        exit(0);
+        waitpid(pid, NULL, WUNTRACED);
+        right_pipe(fd, right, env);
     }
-    waitpid(pid1, &stat_loc, WUNTRACED);
-    waitpid(pid2, NULL, WUNTRACED);
-    left = NULL;
-    right = NULL;
-    return ;
-    // // printf("[%s->%s]\n", left->tokens->info, right->tokens->info);
 }
 
 void                    exec_pipe(t_ast *ast, t_shell *shell, char **w_splited, char **env)
@@ -92,7 +85,10 @@ char                    **execution(t_ast *ast, t_shell *shell, char **env, char
     else if (ast->type == T_SEMI)
         exec_semi(ast, shell, env, w_splited);
     else if (ast->type == T_PIPE)
+    {
         exec_pipe(ast, shell, w_splited, env);
+        // printf("??????????????????????\n");
+    }
     else if (ast->type != T_PIPE && ast->type != T_SEMI)
     {
         w_splited = array_assign(ast, w_splited);

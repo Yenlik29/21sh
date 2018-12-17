@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/17 17:01:59 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/17 22:58:37 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,9 @@ char			**read_line(char **env, t_shell *shell)
 	char **w_splited;
 	
 	w_splited = NULL;
+	// printf("???\n");
 	env = execution(syntax_tree, shell, env, w_splited);
+	// printf("????\n");
 	// printf("[%d]\n", syntax_tree->type);
 	// print_ast(syntax_tree, "root", 0);
 
