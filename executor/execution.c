@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:17:22 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/18 00:30:15 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/18 00:33:40 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@ void                    right_pipe(int fd[2], t_ast *right, char **env)
 {
     pid_t pid;
 
-    pid = fork();
+    if ((pid = fork()) == -1)
+        fork_error();
     if (pid == 0)
     {
         close(fd[1]);
         dup2(fd[0], STDIN_FILENO);
+        close(fd[0]);
         char **w_splited;
         w_splited = NULL;
         w_splited = array_assign(right, w_splited);
@@ -48,6 +50,7 @@ void                    pipeline(t_ast *left, t_ast *right, char **env)
     {
         close(fd[0]);
         dup2(fd[1], STDOUT_FILENO);
+        close(fd[1]);
         char **w_splited;
         w_splited = NULL;
         w_splited = array_assign(left, w_splited);

@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/18 00:18:55 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/18 00:32:22 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -493,30 +493,4 @@ void		sighandler(int signum);
 
 
 
-
-// static int	ft_pipe_to_right(int fd[2], t_ast *node_right)
-// {
-// 	pid_t	pid_right;
-// 	int		status_right;
-
-// 	if ((pid_right = fork()) == -1)
-// 		ft_exit(STR_FORK_ERROR, 1);
-// 	if (pid_right == 0)
-// 	{
-// 		close(fd[1]);
-// 		ft_make_dup2(node_right->token->str, fd[0], STDIN_FILENO);
-// 		if (node_right->parent->parent\
-// 				&& node_right->parent->parent->operator_type == PIPE)
-// 			exit(ft_launch_pipeline(node_right,\
-// 						node_right->parent->parent->right));
-// 		else
-// 			exit(ft_launch_one_side(node_right));
-// 	}
-// 	else
-// 	{
-// 		close(fd[1]);
-// 		waitpid(pid_right, &status_right, 0);
-// 	}
-// 	return (ft_exit_status(status_right));
-// }
 
