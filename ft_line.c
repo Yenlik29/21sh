@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:59 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/17 16:12:22 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/17 17:01:59 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,13 @@ char			**read_line(char **env, t_shell *shell)
 	tokens = NULL;
 	temp = NULL;
 	tokens = lexer_init(tokens, shell, &temp);
+
+	// int l = 0;
+	// while (temp->next)
+	// {
+	// 	printf("[%s]\n", temp->info);
+	// 	temp = temp->next;
+	// }
 	syntax_tree = parse(temp); /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WORKING HEEEREEE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
 	
 

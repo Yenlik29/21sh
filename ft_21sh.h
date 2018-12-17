@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/16 17:59:51 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/17 17:19:12 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -343,8 +343,8 @@ t_ast      	*leaf_creation_(t_tokens **tokens, int del, int del2);
 
 char        **execution(t_ast *ast, t_shell *shell, char **env, char **w_splited);
 void        exec_semi(t_ast *ast, t_shell *shell, char **env, char **w_splited);
-void        exec_pipe(t_ast *ast, t_shell *shell, char **w_splited);
-void        pipeline(t_ast *left, t_ast *right);
+void        exec_pipe(t_ast *ast, t_shell *shell, char **w_splited, char **env);
+void        pipeline(t_ast *left, t_ast *right, char **env);
 
 char       	**array_assign(t_ast *ast, char **w_splited);
 
@@ -469,7 +469,8 @@ void		ft_error_noterm(void);
 void		ft_error_isatty(void);
 
 void		ft_error_tcsetattr(void);
-void		pipe_fd_error();
+void		pipe_fd_error(void);
+void		fork_error(void);
 
 char		**ft_new_envp1(char **new_envp, char **envp, char *w_splited);
 char		**ft_unsetenv_work(char *w_splited, char **envp);
