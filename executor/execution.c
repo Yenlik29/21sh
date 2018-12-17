@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:17:22 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/17 15:47:53 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/17 16:11:38 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,27 +51,12 @@ char                    **execution(t_ast *ast, t_shell *shell, char **env, char
         exec_pipe(ast, shell, w_splited);
     else if (ast->type != T_PIPE && ast->type != T_SEMI)
     {
-        printf("???\n");
         w_splited = array_assign(ast, w_splited);
-        // printf("!!!\n");
         w_splited = parsed_word(w_splited, env);
-        /* Сегфолт в parsed_word - посмотри как он обрабатывает переменные */
-        // int l = 0;
-        // while (w_splited[l])
-        // {
-        //     printf("\n[%s]\n", w_splited[l]);
-        //     l++;
-        // }
         if (w_splited[0] != NULL)
             env = ft_core(w_splited, env);
-
-        /// Либо зануляй, либо считай сколько i !!!
-
         if (w_splited)
-        {    free_2darray(&w_splited);
-            // printf("FREED\n");
-        }
+            free_2darray(&w_splited);
     }
     return (env);
-    // printf("?\n");
 }
