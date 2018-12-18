@@ -97,7 +97,8 @@ PARSER_SRCF		:=	parser_init.c			\
 					ast_src.c
 
 EXEC_SRCF		:=	execution.c				\
-					exec_src.c
+					exec_src.c 				\
+					exec_src2.c
 
 
 SOURCES 		:= $(SRCF) $(ERRORS_SRCF:%=$(ERRORS_DIR)/%)\

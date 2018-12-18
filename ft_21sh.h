@@ -348,7 +348,11 @@ void        pipeline(t_ast *left, t_ast *right, char **env);
 
 char       	**array_assign(t_ast *ast, char **w_splited);
 
+char		**cmd_create(t_ast *ast, char **cmd);
+void		simple_redir(t_ast *temp, char *file, char **env);
+
 int         check_redir(char **w_splited);
+int			redir_quant(t_ast *ast);
 void        stand_exec(char **w_splited, char **env, int fd[2]);
 void        redir_exec(char **w_splited, char **env, t_ast *left);
 

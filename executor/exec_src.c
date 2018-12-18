@@ -14,9 +14,11 @@
 
 void                redir_exec(char **w_splited, char **env, t_ast *left)
 {
-    t_ast *temp;
-    char **new;
+    int i;
 
+    t_ast *temp;
+
+    i = 0;
     temp = left;
     while (temp->tokens)
     {
@@ -25,40 +27,51 @@ void                redir_exec(char **w_splited, char **env, t_ast *left)
         else
             break ;
     }
+    int quant;
+    quant = 0;
+    quant = redir_quant(temp);
     while (temp->tokens)
     {
-        // write(0, temp->tokens->info, ft_strlen(temp->tokens->info));
-        // write(0, ft_itoa(temp->tokens->type), ft_strlen(ft_itoa(temp->tokens->type)));
-        // write(0, "\n", ft_strlen("\n"));
-        if (!ft_strcmp(temp->tokens->info, ">"))
-        {
-            int fd;
+        if (temp->tokens->prev)
+            temp->tokens = temp->tokens->prev;
+        else
+            break ;
+    }
+    char *red;
+    char *file;
 
-            fd = open(temp->tokens->next->info, O_CREAT|O_APPEND|O_RDWR, 0777);
-            new = (char **)malloc(sizeof(char *)*2048);
-            new[0] = ft_strdup(temp->tokens->prev->info);
-            new[1] = NULL;
-            write(0, new[0], ft_strlen(new[0]));
-            if (fd < 0)
-                exit(0);
-            dup2(fd, 1);
-            ft_available_command(new, env);
-            close(fd);
+    file = (char *)malloc(sizeof(char) * 2048);
+    red = (char *)malloc(sizeof(char) * 2048);
+    while (temp->tokens)
+    {
+        if (!(ft_strcmp(temp->tokens->info, ">")) || !(ft_strcmp(temp->tokens->info, ">>")) || !(ft_strcmp(temp->tokens->info, "<")) || !(ft_strcmp(temp->tokens->info, "<<")))
+        {
+            ft_strclr(red);
+            ft_strncpy(red, temp->tokens->info, ft_strlen(temp->tokens->info));
+            ft_strclr(file);
+            ft_strncpy(file, temp->tokens->next->info, ft_strlen(temp->tokens->next->info));
+            i++;
         }
         if (temp->tokens->next)
             temp->tokens = temp->tokens->next;
         else
             break ;
     }
+    simple_redir(temp, file, env);
+    while (temp->tokens)
+    {
+        if (temp->tokens->prev)
+            temp->tokens = temp->tokens->prev;
+        else
+            break ;
+    }
+    // write(0, ft_itoa(i), ft_strlen(ft_itoa(i)));
+    // write(0, "- ", ft_strlen("- "));
+    // write(0, red, ft_strlen(red));
+    // write(0, "- ", ft_strlen("- "));
+    // write(0, file, ft_strlen(file));
+    // write(0, "\n", ft_strlen("\n"));
     w_splited = NULL;
-    // l = 0;
-    // while (args[l])
-    // {
-    //     write(0, "[", ft_strlen("["));
-    //     write(0, args[l], ft_strlen(args[l]));
-    //     write(0, "]\n", ft_strlen("]\n"));
-    //     l++;
-    // }
     env = NULL;
 }
 
@@ -68,7 +81,7 @@ void                stand_exec(char **w_splited, char **env, int fd[2])
     dup2(fd[1], STDOUT_FILENO);
     close(fd[1]);
     ft_available_command(w_splited, env); 
-    exit(0);
+    // exit(0);
 }
 
 int                 check_redir(char **w_splited)
