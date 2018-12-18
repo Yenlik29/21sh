@@ -63,7 +63,6 @@ void                    pipeline(t_ast *left, t_ast *right, char **env)
         w_splited = parsed_word(w_splited, env);
         if (check_redir(w_splited))
         {    redir_exec(w_splited, env, left);
-            // exit(0);
         }
         else
             stand_exec(w_splited, env, fd);

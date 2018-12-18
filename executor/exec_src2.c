@@ -41,6 +41,8 @@ void				simple_redir(t_ast *temp, char *file, char **env)
     tmp = temp;
     // write(0, tmp->tokens->next->info, ft_strlen(tmp->tokens->next->info));
     fd = open(file, O_CREAT|O_APPEND|O_RDWR, 0777);
+    // fd2 = open("another", O_CREAT|O_APPEND|O_RDWR, 0777);
+    // wrtie(fd2, &a, sizeof(a));
     new = cmd_create(tmp, new);
     new = parsed_word(new, env);
     if (fd < 0)
