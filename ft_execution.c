@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:11:32 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/18 00:26:32 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/18 12:46:48 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,12 @@ char		*ft_read_dir(char *path, char **command, char **envp, char *c_p)
 		{
 			if (!(ft_strcmp(entry->d_name, command[0])))
 			{
-				// printf("!!!\n");
-				// printf("[%s]\n", command[0]);
 				c_p = ft_strjoin(path, "/");
 				c_p = ft_strncat(c_p, entry->d_name, ft_strlen(entry->d_name));
-				// printf("!!!\n");
+				// write(0, "[", ft_strlen("["));
+				// write(0, c_p, ft_strlen(c_p));
+				// write(0, "]\n", ft_strlen("]\n"));
 				execve(c_p, command, envp);
-				// printf("???\n");
-				// exit(0);
-				// printf("???\n");
 			}
 		}
 		closedir(dir);
@@ -46,21 +43,18 @@ void		ft_exec_sys(char **path, char **command, char **envp)
 
 	i = 0;
 	c_path = NULL;
-	// printf("[%s]\n", command[0]);
 	if (ft_if_path(command) == 1)
 	{
-		// printf("[s%s]\n", command[0]);
+		// printf("[%s]\n", command[0]);
 		if (execve(command[0], command, envp) == -1)
 		{
 			ft_putstr_fd("21sh: permission denied: ", 2);
 			ft_putstr_fd(command[0], 2);
 			ft_putchar_fd('\n', 2);
 		}
-		// printf("???\n");
 	}
 	else
 	{
-		// printf("[%s]\n", command[0]);
 		while (path[i])
 		{
 			c_path = ft_read_dir(path[i], command, envp, c_path);

@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/18 00:32:22 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/18 13:20:05 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -347,6 +347,10 @@ void        exec_pipe(t_ast *ast, t_shell *shell, char **w_splited, char **env);
 void        pipeline(t_ast *left, t_ast *right, char **env);
 
 char       	**array_assign(t_ast *ast, char **w_splited);
+
+int         check_redir(char **w_splited);
+void        stand_exec(char **w_splited, char **env, int fd[2]);
+void        redir_exec(char **w_splited, char **env, t_ast *left);
 
 void		multi_right(t_shell *shell);
 void		in_line_right(t_shell *shell);

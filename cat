@@ -1,14 +1,13 @@
 1
-2
 21sh
 21sh.mk
 Makefile
 author
 built_ins
+cat
 error
 errorfile
 executor
-file
 file2
 ft_21sh.h
 ft_core.c
@@ -28,6 +27,7 @@ libft
 ls
 main.c
 mercury.mp3
+nano
 objs
 parser
 termcap

@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:10:09 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/18 00:24:21 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/18 12:43:09 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void		ft_available_command(char **command, char **envp)
 	char			**path;
 
 	path = NULL;
+	// printf("[%s]\n", command[0]);
 	if ((ft_if_path(command)) == 0)
 		path = ft_path(envp);
 	else
@@ -51,7 +52,7 @@ void		ft_available_command(char **command, char **envp)
 		path = (char **)malloc(sizeof(char *) * 100);
 		path = envp_create(path, command);
 	}
-	// printf("???\n");
+	// printf("[%s]\n", path[0]);
 	ft_exec_sys(path, command, envp);
 	free_2darray(&path);
 }
