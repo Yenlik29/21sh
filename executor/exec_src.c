@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/16 15:22:14 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/18 14:25:10 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/19 19:49:43 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,9 @@
 
 void                redir_exec(char **w_splited, char **env, t_ast *left)
 {
-    int i;
+    point_back(left);
+    check_files(left);
 
-    t_ast *temp;
-
-    i = 0;
-    temp = left;
-    while (temp->tokens)
-    {
-        if (temp->tokens->prev)
-            temp->tokens = temp->tokens->prev;
-        else
-            break ;
-    }
-    int quant;
-    quant = 0;
-    quant = redir_quant(temp);
-    while (temp->tokens)
-    {
-        if (temp->tokens->prev)
-            temp->tokens = temp->tokens->prev;
-        else
-            break ;
-    }
-    char *red;
-    char *file;
-
-    file = (char *)malloc(sizeof(char) * 2048);
-    red = (char *)malloc(sizeof(char) * 2048);
-    while (temp->tokens)
-    {
-        if (!(ft_strcmp(temp->tokens->info, ">")) || !(ft_strcmp(temp->tokens->info, ">>")) || !(ft_strcmp(temp->tokens->info, "<")) || !(ft_strcmp(temp->tokens->info, "<<")))
-        {
-            ft_strclr(red);
-            ft_strncpy(red, temp->tokens->info, ft_strlen(temp->tokens->info));
-            ft_strclr(file);
-            ft_strncpy(file, temp->tokens->next->info, ft_strlen(temp->tokens->next->info));
-            i++;
-        }
-        if (temp->tokens->next)
-            temp->tokens = temp->tokens->next;
-        else
-            break ;
-    }
-    simple_redir(temp, file, env);
-    while (temp->tokens)
-    {
-        if (temp->tokens->prev)
-            temp->tokens = temp->tokens->prev;
-        else
-            break ;
-    }
     // write(0, ft_itoa(i), ft_strlen(ft_itoa(i)));
     // write(0, "- ", ft_strlen("- "));
     // write(0, red, ft_strlen(red));
@@ -91,7 +43,7 @@ int                 check_redir(char **w_splited)
     l = 0;
     while (w_splited[l])
     {
-        if (!(ft_strcmp(w_splited[l], ">")))
+        if (!(ft_strcmp(w_splited[l], ">")) || !(ft_strcmp(w_splited[l], ">>")))
             return (1);
         l++;
     }

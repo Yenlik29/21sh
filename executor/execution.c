@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 13:17:22 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/18 14:20:18 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/19 17:58:34 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void                    right_pipe(int fd[2], t_ast *right, char **env)
         //     l++;
         // }
         ft_available_command(w_splited, env);
-        exit(0);
+        // exit(0);
     }
     else
     {
@@ -48,6 +48,8 @@ void                    pipeline(t_ast *left, t_ast *right, char **env)
     int     fd[2];
     pid_t   pid;
 
+    write(0, left->tokens->info, ft_strlen(left->tokens->info));
+    write(0, right->tokens->info, ft_strlen(right->tokens->info));
     if ((pipe(fd)) == -1)
         pipe_fd_error();
     if ((pid = fork()) == -1)
@@ -87,17 +89,19 @@ void                    exec_pipe(t_ast *ast, t_shell *shell, char **w_splited, 
 {
     if (!ast->left)
     {
-        // while (ast->tokens)
-        // {
-        //     printf("[%s]\n", ast->tokens->info);
-        //     if (ast->tokens->next)
-        //         ast->tokens = ast->tokens->next;
-        //     else
-        //         break ;
-        // }
-        /* тут надо сделать парсинг на редайрекции !!! */
+    //     write(0, ast->tokens->info, ft_strlen(ast->left->tokens->info));
+    // write(0, "\n", ft_strlen("\n"));
+    //     // while (ast->tokens)
+    //     // {
+    //     //     printf("[%s]\n", ast->tokens->info);
+    //     //     if (ast->tokens->next)
+    //     //         ast->tokens = ast->tokens->next;
+    //     //     else
+    //     //         break ;
+    //     // }
+    //     /* тут надо сделать парсинг на редайрекции !!! */
         pipeline(ast, ast->parent->right, env);
-        // right = NULL;
+    //     // right = NULL;
         return ;
     }
     exec_pipe(ast->left, shell, w_splited, env);

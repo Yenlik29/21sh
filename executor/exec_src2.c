@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   exec_src2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ybokina <ybokina@student.unit.ua>          +#+  +:+       +#+        */
+/*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/18 15:58:56 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/18 15:59:10 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/19 19:33:01 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_21sh.h"
+
+void				point_back(t_ast *ast)
+{
+	while (ast->tokens)
+	{
+		if (ast->tokens->prev)
+			ast->tokens = ast->tokens->prev;
+		else
+			break ;
+	}
+}
 
 int					redir_quant(t_ast *ast)
 {
@@ -39,16 +50,14 @@ void				simple_redir(t_ast *temp, char *file, char **env)
 
     new = NULL;
     tmp = temp;
-    // write(0, tmp->tokens->next->info, ft_strlen(tmp->tokens->next->info));
     fd = open(file, O_CREAT|O_APPEND|O_RDWR, 0777);
-    // fd2 = open("another", O_CREAT|O_APPEND|O_RDWR, 0777);
-    // wrtie(fd2, &a, sizeof(a));
     new = cmd_create(tmp, new);
     new = parsed_word(new, env);
     if (fd < 0)
         exit(0);
     dup2(fd, STDOUT_FILENO);
     ft_available_command(new, env);
+    dup2(1, STDOUT_FILENO);
     close(fd);
     // exit(0);
 }

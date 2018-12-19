@@ -6,7 +6,7 @@
 /*   By: ybokina <ybokina@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/08/23 12:12:06 by ybokina           #+#    #+#             */
-/*   Updated: 2018/12/18 13:20:05 by ybokina          ###   ########.fr       */
+/*   Updated: 2018/12/19 19:58:01 by ybokina          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -208,6 +208,8 @@ void        play_music(void);
 void        stop_music(void);
 
 int	        shell_quotes(t_shell *shell);
+void		point_back(t_ast *ast);
+void        check_files(t_ast *ast);
 
 char 		*find_end(char *end, t_shell *shell);
 void		string_clear(t_shell *shell, int del);
@@ -479,6 +481,7 @@ void		ft_error_isatty(void);
 void		ft_error_tcsetattr(void);
 void		pipe_fd_error(void);
 void		fork_error(void);
+void		is_a_directory(char *str);
 
 char		**ft_new_envp1(char **new_envp, char **envp, char *w_splited);
 char		**ft_unsetenv_work(char *w_splited, char **envp);
